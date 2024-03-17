@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-	const [txn, setTxn] = useState({})
+	const [parsedTxn, setParsedTxn] = useState({})
 
 	// Using useEffect for single rendering
 	useEffect(() => {
@@ -11,7 +11,7 @@ function App() {
 		console.log('fetch: /data')
 		fetch("/data").then((res) =>
 			res.json().then((resp) => {
-				setTxn(resp.data.tx)
+				setParsedTxn(resp.data.tx)
 			})
 		);
 	},[]);
@@ -21,7 +21,7 @@ function App() {
 			<header className="App-header">
 				{/* <h1>React and flask</h1> */}
 				{/* Calling a data from setdata for showing */}
-				{ console.log('txn: ', txn)}
+				{ console.log('parsedTxn: ', parsedTxn)}
 				{/* <p>{data.name}</p>
 				<p>{data.age}</p>
 				<p>{data.date}</p>
