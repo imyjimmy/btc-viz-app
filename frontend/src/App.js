@@ -2,20 +2,25 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
+	const [inputTxn, setInputTxn] = useState()
 	const [parsedTxn, setParsedTxn] = useState({})
-	const [input, setInput] = useState()
 
 	// Using useEffect for single rendering
-	useEffect(() => {
-		// Using fetch to fetch the api from 
-		// flask server it will be redirected to proxy
-		console.log('fetch: /data')
-		fetch("/data").then((res) =>
-			res.json().then((resp) => {
-				setParsedTxn(resp.data.tx)
-			})
-		);
-	},[]);
+	// useEffect(() => {
+	// 	// Using fetch to fetch the api from 
+	// 	// flask server it will be redirected to proxy
+	// 	console.log('fetch: /data')
+	// 	fetch("/data").then((res) => {
+	// 		if (res.status === 200) {
+	// 			res.json().then((resp) => {
+	// 				setParsedTxn(resp.data.tx)
+	// 			})
+	// 		} else {
+	// 			console.error('fetch error')
+	// 		}
+	// 	}
+	// 	);
+	// },[]);
 
 	const displayKey = (key) => {
 		if (key === 'inputs') {
@@ -27,20 +32,33 @@ function App() {
 
 	const changeInput = (e) => {
 		e.preventDefault()
-		setInput(e.target.value)
+		setInputTxn(e.target.value)
 	}
 
-	const submit = (e) => {
-		e.preventDefault()
-		fetch("/data" + "?txn=" + input)
+	// source: https://www.freecodecamp.org/news/javascript-debounce-example/
+	function debounce(func, timeout = 1000){
+		let timer;
+		return (...args) => {
+			clearTimeout(timer);
+			timer = setTimeout(() => { func.apply(this, args); }, timeout);
+		};
 	}
+
+	const conditionalFetch = () => {
+		return inputTxn.length % 2 == 0 ? fetch("/data" + "?txn=" + inputTxn).then(resp => resp.json()) : ({})
+	}
+
+	// const submit = (e) => {
+	// 	e.preventDefault()
+	// 	fetch("/data" + "?txn=" + inputTxn)
+	// }
 
 	return (
 		<div className="App">
 			<nav className="nav">
-				<div class='menubutton'>
+				<div className='menubutton'>
 					<input type='checkbox' id='menubuttoninput'/>
-					<label for='menubuttoninput'>
+					<label htmlFor='menubuttoninput'>
 						<span></span>
 						<span></span>
 						<span></span>
@@ -54,13 +72,17 @@ function App() {
 				</div>
 				<div className="txn-column">
 					<div className="txn-input">
-						<label for="txn">bitcoin transaction</label>
-						<textarea name="txn" onChange={changeInput} cols="20" rows="8"></textarea>
-						<button onClick={submit}>Submit (temp)</button>
+						<label htmlFor="txn">bitcoin transaction</label>
+						<textarea name="txn" 
+							onChange={changeInput} 
+							onKeyUp={debounce(() => conditionalFetch())} 
+							cols="20" 
+							rows="8"
+						/>
 					</div>
 					<div className="txn-explainer">
 						{/* <h5>Breakdown</h5> */}
-						{ console.log('parsedTxn: ', parsedTxn)}				
+						{/* { console.log('parsedTxn: ', parsedTxn)}				 */}
 						{ parsedTxn && Object.keys(parsedTxn).map(key => {
 								return (<div><div>{key}</div>
 									<div>{displayKey(key)}</div>
