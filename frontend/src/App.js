@@ -37,26 +37,41 @@ function App() {
 
 	return (
 		<div className="App">
+			<nav className="nav">
+				<div class='menubutton'>
+					<input type='checkbox' id='menubuttoninput'/>
+					<label for='menubuttoninput'>
+						<span></span>
+						<span></span>
+						<span></span>
+					</label>
+					</div>
+			</nav>
 			{/* <header className="App-header"></header> */}
-			<div className="txn-input">
-				<h3>Input a Raw Transaction</h3>
-				<input type="text" onChange={changeInput}></input>
-				<button onClick={submit}>Submit (temp)</button>
-			</div>
-			<div className="txn-explainer">
-				{/* <h1>React and flask</h1> */}
-				{/* Calling a data from setdata for showing */}
-				{ console.log('parsedTxn: ', parsedTxn)}
-				{/* <p>{data.name}</p>
-				<p>{data.age}</p>
-				<p>{data.date}</p>
-				<p>{data.programming}</p> */}
-				{ parsedTxn && Object.keys(parsedTxn).map(key => {
-						return (<div><div>{key}</div>
-							<div>{displayKey(key)}</div>
-						</div>)
-					}
-				)}
+			{/* <h3>Bitcoin Transaction Anatomy</h3> */}
+			<div className="container">
+				<div className="sidebar-column">
+				</div>
+				<div className="txn-column">
+					<div className="txn-input">
+						<label for="txn">bitcoin transaction</label>
+						<textarea name="txn" onChange={changeInput} cols="20" rows="8"></textarea>
+						<button onClick={submit}>Submit (temp)</button>
+					</div>
+					<div className="txn-explainer">
+						{/* <h5>Breakdown</h5> */}
+						{ console.log('parsedTxn: ', parsedTxn)}				
+						{ parsedTxn && Object.keys(parsedTxn).map(key => {
+								return (<div><div>{key}</div>
+									<div>{displayKey(key)}</div>
+								</div>)
+							}
+						)}
+					</div>
+				</div>
+				<div className="details-column">
+
+				</div>
 			</div>
 		</div>
 	);
