@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { updateMatchers } from './matchers';
 import "./App.css";
 
 function App() {
@@ -44,14 +45,25 @@ function App() {
 		};
 	}
 
-	const conditionalFetch = () => {
-		return inputTxn.length % 2 == 0 ? fetch("/data" + "?txn=" + inputTxn).then(resp => resp.json()) : ({})
+	const conditionalFetch = async () => {
+		return inputTxn.length % 2 == 0 ? await fetch("/data" + "?txn=" + inputTxn).then((resp) => { if (!resp.ok) 
+			{ throw new Error(`HTTP Error: ${resp.status}`)} 
+			return resp.json() 
+		}) : (undefined)
 	}
 
-	// const submit = (e) => {
-	// 	e.preventDefault()
-	// 	fetch("/data" + "?txn=" + inputTxn)
-	// }
+	const fetchTxn = async () => {
+		const resp = await conditionalFetch()
+		console.log('resp:', resp)
+		if (resp !== undefined) {
+			setParsedTxn(resp.data.tx)
+		}
+	}
+
+	useEffect(() => {
+		const thing = updateMatchers(parsedTxn);
+		console.log('matchers: ', thing)
+	}, [parsedTxn])
 
 	return (
 		<div className="App">
@@ -75,7 +87,7 @@ function App() {
 						<label htmlFor="txn">bitcoin transaction</label>
 						<textarea name="txn" 
 							onChange={changeInput} 
-							onKeyUp={debounce(() => conditionalFetch())} 
+							onKeyUp={debounce(() => fetchTxn())}
 							cols="20" 
 							rows="8"
 						/>
