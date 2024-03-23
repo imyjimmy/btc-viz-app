@@ -1,28 +1,10 @@
 import React from "react";
 import { Txn } from './Txn';
 import "./App.css";
+import { CustomComponent } from "./CustomComponent";
 
 function App() {
-	const [inputTxn, setInputTxn] = useState()
-	const [parsedTxn, setParsedTxn] = useState({})
 
-	// Using useEffect for single rendering
-	// useEffect(() => {
-	// 	// Using fetch to fetch the api from 
-	// 	// flask server it will be redirected to proxy
-	// 	console.log('fetch: /data')
-	// 	fetch("/data").then((res) => {
-	// 		if (res.status === 200) {
-	// 			res.json().then((resp) => {
-	// 				setParsedTxn(resp.data.tx)
-	// 			})
-	// 		} else {
-	// 			console.error('fetch error')
-	// 		}
-	// 	}
-	// 	);
-	// },[]);
-	
 	return (
 		<div className="App">
 			<nav className="nav">
@@ -41,6 +23,7 @@ function App() {
 				<div className="sidebar-column">
 				</div>
 				<Txn />
+				<CustomComponent />
 				<div className="details-column">
 				</div>
 			</div>

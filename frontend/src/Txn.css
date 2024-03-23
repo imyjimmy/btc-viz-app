@@ -56,6 +56,10 @@ label[for=txn] {
   background: #a47d55;
 }
 
+.match-inputs-txid {
+  background: #d24b4b;
+}
+
 #highlighting {
   z-index: 0;
 }
