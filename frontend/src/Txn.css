@@ -1,0 +1,65 @@
+.txn-column {
+  border: 1px solid blue;
+  margin: 12px 24px;
+  flex-grow: 1;
+}
+
+label[for=txn] {
+  font-weight:bold;
+  text-transform: uppercase;
+}
+
+.txn-input {
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+  /* width: 60%; */
+  position: relative;
+}
+
+#editor, #highlighting {
+  /* Both elements need the same text and space styling so they are directly on top of each other */
+  margin: 12px 5px;
+  padding: 5px;
+  border: 0;
+  width: calc(100% - 12px);
+  height: 150px;
+}
+
+#editor, #highlighting, #highlighting * {
+  /* Also add text styles to highlighting tokens */
+  font-size: 15pt;
+  font-family: monospace;
+  line-height: 20pt;
+}
+
+#editor, #highlighting {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  transition: left 300ms;
+}
+
+#editor {
+  z-index: 1;
+  color: transparent;
+  background: transparent;
+  caret-color: white;
+}
+
+/* style when cursor */
+#editor:focus {
+
+}
+
+.match-version {
+  background: #a47d55;
+}
+
+#highlighting {
+  z-index: 0;
+}
+
+.txn-explainer {
+  margin-top: 180px;
+}

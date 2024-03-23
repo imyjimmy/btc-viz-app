@@ -4,48 +4,16 @@ body {
 
 * { box-sizing: border-box; }
 
+/* App Stuff */
 .App {
   /* text-align: center; */
   background-color: #282c34;
-  font-size: calc(10px + 2vmin);
+  font-size: medium; /*calc(10px + 2vmin); */
   color: white;
   padding: 24px;
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-
-.menubutton>input {
-  display: none;
-}
-
-.menubutton span {
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-  
-  background: #dddddd;
-  border-radius: 3px;
-  z-index: 1;
-}
-
-body:has(.menubutton > input:checked) .sidebar-column {
-  width: 10rem;
-}
-
-nav {
-  display: flex;
-  align-items: center;
-  color: white;
-  margin-bottom: 16px;
-}
-
-.container {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
 }
 
 .App-logo {
@@ -70,41 +38,6 @@ nav {
   color: white;
 }
 
-.sidebar-column {
-  border: 1px solid red;
-  /* width: 20%; */
-  width: 3rem;
-  transition: width 300ms;
-}
-
-.txn-column {
-  border: 1px solid blue;
-  margin: 12px 24px;
-  flex-grow: 1;
-}
-
-.txn-input {
-  display: flex;
-  flex-direction: column;
-  font-size: medium;
-  /* width: 60%; */
-}
-
-label[for=txn] {
-  font-weight:bold;
-  text-transform: uppercase;
-}
-
-.txn-explainer {
-  /* background-color; */
-  /* height: 100%; */
-}
-
-.details-column {
-  border: 1px dashed green;
-  width: 20%
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -116,4 +49,52 @@ label[for=txn] {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Header stuff */
+
+.menubutton>input {
+  display: none;
+}
+
+.menubutton span {
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: #dddddd;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  color: white;
+  margin-bottom: 16px;
+}
+
+/* Sidebar */
+body:has(.menubutton > input:checked) .sidebar-column {
+  width: 10rem;
+}
+
+.sidebar-column {
+  border: 1px solid red;
+  /* width: 20%; */
+  width: 3rem;
+  transition: width 300ms;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.details-column {
+  border: 1px dashed green;
+  width: 20%
 }
