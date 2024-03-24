@@ -1,7 +1,6 @@
 import React from "react";
 import { Txn } from './Txn';
 import "./App.css";
-import { CustomComponent } from "./CustomComponent";
 
 function App() {
 
@@ -23,7 +22,6 @@ function App() {
 				<div className="sidebar-column">
 				</div>
 				<Txn />
-				<CustomComponent />
 				<div className="details-column">
 				</div>
 			</div>

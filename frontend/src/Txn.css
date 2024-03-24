@@ -13,7 +13,6 @@ label[for=txn] {
   display: flex;
   flex-direction: column;
   font-size: medium;
-  /* width: 60%; */
   position: relative;
 }
 
@@ -45,6 +44,11 @@ label[for=txn] {
   color: transparent;
   background: transparent;
   caret-color: white;
+  resize: none;
+}
+
+#highlighting {
+  border: 1px solid rgb(190, 190, 190);
 }
 
 /* style when cursor */
@@ -56,8 +60,38 @@ label[for=txn] {
   background: #a47d55;
 }
 
+.match-num_inputs {
+  background: #4c9fdb;
+}
+
 .match-inputs-txid {
-  background: #d24b4b;
+  background: #217cbc;
+}
+
+.match-inputs-vout {
+  background: #6461c0;
+}
+
+.match-inputs-script_sig {
+  background: #d474d4;
+  /* */
+}
+
+.match-inputs-sequence {
+  background: #d58787;
+}
+
+.match-num_outputs {
+  background: #d16868;
+  /*darkgoldenrod; */
+}
+
+.match-outputs-amount {
+  background: #d1b068;
+}
+
+.match-outputs-scriptPubKey {
+  background: #8b8b26;
 }
 
 #highlighting {
