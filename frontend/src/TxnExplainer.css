@@ -1,0 +1,29 @@
+.explainer-Row {
+  display: grid;
+  grid-template-columns: 18% 1fr 1fr
+}
+
+.explainer-hex-value {
+  font-size: 15pt;
+  font-family: monospace;
+
+  margin: 4px 8px;
+  justify-self: end;
+}
+
+.explainer-key {
+  
+  /* display: flex;
+  align-items: center;
+  gap: 10px; */
+}
+
+.key-name {
+  font-size: 15pt;
+  font-family: monospace;
+  margin: 8px;
+}
+
+.interpreted-val {
+  font-size: 14pt;
+}

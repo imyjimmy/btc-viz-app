@@ -1,7 +1,9 @@
 import React, { createRef, useState, useEffect, useLayoutEffect, useRef } from "react";
+import { TxnExplainer } from './TxnExplainer';
 import { useResizeDetector } from 'react-resize-detector';
 import { format, updateMatchers } from './syntaxHighlighter';
 import "./Txn.css";
+
 
 /*
  700 / 58 ~= 12 
@@ -156,16 +158,7 @@ const Txn = () => {
           </code>
         </pre>
       </div>
-      <div className="txn-explainer">
-        { parsedTxn && Object.keys(parsedTxn).map((key, index) => {
-            return (
-              <div key={index}>
-              </div>
-            )
-          }
-        )}
-        {/* <div>Dimensions: {width}w {height}h</div> */}
-      </div>
+      <TxnExplainer txn={parsedTxn}/>
     </div>
   )
 }
