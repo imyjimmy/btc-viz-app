@@ -13,7 +13,7 @@ import "./Txn.css";
 */
 
 const Txn = () => {
-  const { width, height, ref } = useResizeDetector();
+  const { width, height, ref } = useResizeDetector(); // ref to <pre>
   const [inputTxn, setInputTxn] = useState()
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
@@ -35,9 +35,20 @@ const Txn = () => {
 		e.preventDefault()
 		setInputTxn(e.target.value)
 		codeRef.current.innerHTML = e.target.value
+    syncScroll()
     format(codeRef.current.innerText, matchers, setMarkupHtml) // can highlight codeRef
-
 	}
+
+  const syncScroll = () => {
+    /* Scroll result to scroll coords of event - sync with textarea */
+    let result_element = ref.current;
+    console.log('syncScroll, result_element:', result_element);
+    // Get and set x and y
+    if (textareaRef && textareaRef.current) {
+      result_element.scrollTop = textareaRef.current.scrollTop;
+      result_element.scrollLeft = textareaRef.current.scrollLeft;
+    }
+  }
 
 	// source: https://www.freecodecamp.org/news/javascript-debounce-example/
 	function debounce(func, timeout = 1000){
@@ -49,8 +60,9 @@ const Txn = () => {
 	}
 
 	const conditionalFetch = async () => {
-		return inputTxn && inputTxn.length % 2 === 0 ? await fetch("/data?txn=" + inputTxn).then((resp) => { if (!resp.ok) 
-			{ throw new Error(`HTTP Error: ${resp.status}`)} 
+		return inputTxn && inputTxn.length % 2 === 0 ? await fetch("/data?txn=" + inputTxn).then((resp) => { if (!resp.ok) { 
+        // throw new Error(`HTTP Error: ${resp.status}`)
+      } 
 			return resp.json() 
 		}) : (undefined)
 	}
@@ -64,7 +76,7 @@ const Txn = () => {
 
   const splitAt = (index, xs) => [xs.slice(0, index), xs.slice(index)]
 
-  /* jesus */
+  /* jesus 🤦‍♂️ */
   const composeHtml = (outputHtmlArr) => {
     var toReturn = ''
     toReturn = outputHtmlArr.reduce((resp, entry, index) => {
@@ -135,8 +147,9 @@ const Txn = () => {
           ref={textareaRef}
           onChange={changeInput} 
           onKeyUp={debounce(() => fetchTxn())}
+          onScroll={syncScroll}
           cols="20" 
-          rows="8"
+          rows="12"
         />
         <pre id="highlighting" aria-hidden="true" ref={ref}>
           <code ref={codeRef} className="language-html" id="highlighting-content" dangerouslySetInnerHTML={markupFn(markupHtml)}>

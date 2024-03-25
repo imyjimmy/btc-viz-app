@@ -22,7 +22,7 @@ label[for=txn] {
   padding: 5px;
   border: 0;
   width: calc(100% - 12px);
-  height: 150px;
+  height: 220px;
 }
 
 #editor, #highlighting, #highlighting * {
@@ -37,6 +37,9 @@ label[for=txn] {
   top: 20px;
   left: 0;
   transition: left 300ms;
+  overflow-y: scroll; 
+  /* white-space: nowrap; */
+  
 }
 
 #editor {
@@ -45,6 +48,13 @@ label[for=txn] {
   background: transparent;
   caret-color: white;
   resize: none;
+  scrollbar-color: red orange;
+  scrollbar-width: thin;
+}
+
+#editor, #highlighting-content {
+  /* overflow-y: scroll; */
+  /* white-space: nowrap; */
 }
 
 #highlighting {
