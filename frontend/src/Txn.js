@@ -44,7 +44,6 @@ const Txn = () => {
   const syncScroll = () => {
     /* Scroll result to scroll coords of event - sync with textarea */
     let result_element = ref.current;
-    console.log('syncScroll, result_element:', result_element);
     // Get and set x and y
     if (textareaRef && textareaRef.current) {
       result_element.scrollTop = textareaRef.current.scrollTop;

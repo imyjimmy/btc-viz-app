@@ -1,6 +1,6 @@
 .explainer-Row {
   display: grid;
-  grid-template-columns: 18% 1fr 1fr
+  grid-template-columns: 140px 1fr 1fr
 }
 
 .explainer-hex-value {

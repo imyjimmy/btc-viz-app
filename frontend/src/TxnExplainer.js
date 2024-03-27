@@ -5,33 +5,57 @@ const TxnExplainer = ({txn}) => {
 
   const nino = (key) => key !== 'inputs' && key !== 'outputs'
 
+  const breakdownInputs = (inputs) => {
+    const result = inputs.map((input) => {
+      // now there's one input
+      return (<>
+      {Object.keys(input).map((key) => {
+        const entry = input[key]
+        const hex = entry['hex'];
+        return (
+        <div className="explainer-Row">
+          
+          <span className={`match-inputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
+          <div className="explainer-key"><span className="key-name">{key}</span></div>
+          {/* {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
+            return (<span className="interpreted-val">{entry[k]}</span>)
+          })} */}
+        </div>
+        )
+      })}
+      </>)
+    })
+    
+    return (<div>{result}</div>)
+  }
+
+  const explainInputs = () => {
+    return (<div>inputs:</div>)
+  }
+
+
+  const explainOutput = (output) => {
+    return (<div></div>)
+  }
+
   const hexInput = (key) => {
     if (nino(key)) {
       return (<span className={`match-${key} explainer-hex-value`}>{txn[key]['hex']}</span>)
     }
     if (key === 'inputs') {
-      // const inputs = txn[key]
-      // //var hex = ''
+      const input = explainInputs(txn[key])
+      // var hex = ''
       // var thing = inputs.map((input) => {
       //   return Object.keys(input).map((inputKeys) => {
       //     return input[inputKeys]['hex']
       //   })
       // })
       // return thing;
+      return (<div>{input}</div>)
     }
   }
 
-  const explainInput = (input) => {
-    console.log('explaining input')
-    return (<div>derp</div>)
-  }
-
-  const explainOutput = (output) => {
-    console.log('explaining input')
-    return (<div></div>)
-  }
-
-  const interpretedValue = (key) => {
+  const interpretedValue = (txn, key) => {
     if (key !== 'inputs' && key !== 'outputs') {
       const entry = txn[key]
       return (
@@ -46,7 +70,7 @@ const TxnExplainer = ({txn}) => {
 
   const explainTxnKey = (key) => {
     if (key === 'inputs') {
-      return txn[key].map((input) => explainInput(input)) 
+      return txn[key].map((input) => explainInputs(input)) 
     } 
     else if (key === 'outputs') {
       return txn[key].map((output) => explainOutput(output))
@@ -61,17 +85,26 @@ const TxnExplainer = ({txn}) => {
   return (
     <div className="txn-explainer">
       { txn && Object.keys(txn).map((key, index) => {
+        if ( nino(key) ) {
           return (
             <div key={index} className="explainer-Row">
               {hexInput(key)}
               <div className="explainer-key">
-                <span className="key-name">{nino(key) ? key : ''}</span>{interpretedValue(key)}
+                <span className="key-name">{nino(key) ? key : ''}</span>{interpretedValue(txn, key)}
               </div>
-              {/* <div>{ explainTxnKey(key) }</div> */}
             </div>
           )
-        }
-      )}
+        } else if (key === 'inputs') {
+          return (
+          <>
+            <h3>{key}</h3>
+            <div>{breakdownInputs(txn[key])}</div>
+          </>)
+        } else {
+          return (<div>stuff</div>)
+        } 
+      })
+    }
     </div>
   )
 }
