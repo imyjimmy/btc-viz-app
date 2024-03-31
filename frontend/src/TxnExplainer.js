@@ -19,15 +19,16 @@ const TxnExplainer = ({txn}) => {
         <div className="explainer-Row">
           <span className={`match-inputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
           <div className="explainer-key"><span className="key-name">{key}</span></div>
-          {/* {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
-            return (<span className="interpreted-val">{entry[k]}</span>)
-          })} */}
+          {/* can put a more advanced script sig explainer component here */}
+          {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
+            return (<div className="explainer-val"><span className="interpreted-val">{entry[k]}</span></div>)
+          })}
         </div>
         )
       })}
       </>)
     })
-    return (<div>{result}</div>)
+    return (<>{result}</>)
   }
 
   /* 
@@ -44,9 +45,9 @@ const TxnExplainer = ({txn}) => {
         <div className="explainer-Row">
           <span className={`match-outputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
           <div className="explainer-key"><span className="key-name">{key}</span></div>
-          {/* {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
-            return (<span className="interpreted-val">{entry[k]}</span>)
-          })} */}
+          {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
+            return (<div className="explainer-val"><span className="interpreted-val">{entry[k]}</span></div>)
+          })}
         </div>
         )
       })}
@@ -112,7 +113,9 @@ const TxnExplainer = ({txn}) => {
               <div key={index} className="explainer-Row">
                 {hexOfKey(key)}
                 <div className="explainer-key">
-                  <span className="key-name">{nino(key) ? key : ''}</span>{interpretedValue(txn, key)}
+                  <span className="key-name">{key}</span>
+                </div>
+                <div className="explainer-val"><span className="interpreted-val">{interpretedValue(txn, key)}</span>
                 </div>
               </div>
             )
@@ -120,7 +123,7 @@ const TxnExplainer = ({txn}) => {
             return (
             <>
               <h3>{key}</h3>
-              <div>{breakdownInputs(txn[key])}</div>
+              <>{breakdownInputs(txn[key])}</>
             </>)
           } else if (key === 'outputs') {
             return (

@@ -14,7 +14,7 @@ function App() {
 						<span></span>
 						<span></span>
 					</label>
-					</div>
+				</div>
 			</nav>
 			{/* <header className="App-header"></header> */}
 			{/* <h3>Bitcoin Transaction Anatomy</h3> */}

@@ -1,6 +1,6 @@
 .explainer-Row {
   display: grid;
-  grid-template-columns: 140px 1fr 1fr
+  grid-template-columns: 140px 180px 1fr;
 }
 
 .explainer-hex-value {
@@ -12,10 +12,13 @@
 }
 
 .explainer-key {
-  
   /* display: flex;
   align-items: center;
   gap: 10px; */
+}
+
+.explainer-val {
+  overflow: hidden; 
 }
 
 .key-name {
@@ -26,4 +29,5 @@
 
 .interpreted-val {
   font-size: 14pt;
+  word-wrap: break-word;
 }
