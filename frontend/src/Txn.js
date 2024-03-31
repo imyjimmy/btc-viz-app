@@ -23,7 +23,7 @@ const Txn = () => {
   const textareaRef = useRef();
 	const codeRef = useRef();
 
-  const newLineRatio = 12;
+  const newLineRatio = 12.1;
   // const highlightRef = useRef()
   // const dimensions = useRefDimensions(highlightRef)
   // const [width, height] = useWindowSize(highlightRef);
@@ -98,8 +98,7 @@ const Txn = () => {
   }
 
   const markupFn = (outputHtml) => {
-    console.log('markupFn: ', outputHtml)
-    const maxChars = Math.floor(width / newLineRatio);
+    const maxChars = Math.floor(width / newLineRatio) + 1;
     var chars = 0;
     if (outputHtml) {
       for (var i = 0; i < outputHtml.length; i++) {
@@ -111,9 +110,7 @@ const Txn = () => {
           chars = 0;
         }
         if (chars > maxChars) {
-          console.log('current entry needs to be split: ', entry.text) 
           const twoEntries = splitAt(entry.text.length - (chars - maxChars), entry.text).map((e) => { return { element: entry['element'], className: entry['className'], text: e }} )
-          console.log('splicing!!', twoEntries[0], twoEntries[1], outputHtml)
           outputHtml.splice(i, 1, twoEntries[0], { element: 'br', className: '', text: ''}, twoEntries[1])
           chars = 0;
         }

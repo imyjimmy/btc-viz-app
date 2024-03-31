@@ -3,6 +3,9 @@ import './TxnExplainer.css';
 
 const TxnExplainer = ({txn}) => {
 
+  /*
+  nino: neither inputs nor outputs as those keys get special treatment since they need to be broken down further
+  */
   const nino = (key) => key !== 'inputs' && key !== 'outputs'
 
   const breakdownInputs = (inputs) => {
@@ -14,7 +17,6 @@ const TxnExplainer = ({txn}) => {
         const hex = entry['hex'];
         return (
         <div className="explainer-Row">
-          
           <span className={`match-inputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
           <div className="explainer-key"><span className="key-name">{key}</span></div>
           {/* {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
@@ -25,7 +27,31 @@ const TxnExplainer = ({txn}) => {
       })}
       </>)
     })
-    
+    return (<div>{result}</div>)
+  }
+
+  /* 
+  
+  */
+  const breakdownOutputs = (outputs) => {
+    const result = outputs.map((output) => {
+      // now there's one input
+      return (<>
+      {Object.keys(output).map((key) => {
+        const entry = output[key]
+        const hex = entry['hex'];
+        return (
+        <div className="explainer-Row">
+          <span className={`match-outputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
+          <div className="explainer-key"><span className="key-name">{key}</span></div>
+          {/* {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
+            return (<span className="interpreted-val">{entry[k]}</span>)
+          })} */}
+        </div>
+        )
+      })}
+      </>)
+    })
     return (<div>{result}</div>)
   }
 
@@ -38,20 +64,16 @@ const TxnExplainer = ({txn}) => {
     return (<div></div>)
   }
 
-  const hexInput = (key) => {
+  /* 
+    returns a hex representation of a key that isn't 'inputs' nor 'outputs'
+  */
+  const hexOfKey = (key) => {
     if (nino(key)) {
       return (<span className={`match-${key} explainer-hex-value`}>{txn[key]['hex']}</span>)
     }
-    if (key === 'inputs') {
-      const input = explainInputs(txn[key])
-      // var hex = ''
-      // var thing = inputs.map((input) => {
-      //   return Object.keys(input).map((inputKeys) => {
-      //     return input[inputKeys]['hex']
-      //   })
-      // })
-      // return thing;
-      return (<div>{input}</div>)
+    else {
+      // silently fail i guess
+      return (<></>)
     }
   }
 
@@ -68,43 +90,52 @@ const TxnExplainer = ({txn}) => {
     }
   }
 
-  const explainTxnKey = (key) => {
-    if (key === 'inputs') {
-      return txn[key].map((input) => explainInputs(input)) 
-    } 
-    else if (key === 'outputs') {
-      return txn[key].map((output) => explainOutput(output))
-    } else {
-      const entry = txn[key];
-      // return interpretedValue(entry)
-      return <div>hmm</div>
-    }
-
-  }
+  // const explainTxnKey = (key) => {
+  //   if (key === 'inputs') {
+  //     return txn[key].map((input) => explainInputs(input)) 
+  //   } 
+  //   else if (key === 'outputs') {
+  //     return txn[key].map((output) => explainOutput(output))
+  //   } else {
+  //     const entry = txn[key];
+  //     // return interpretedValue(entry)
+  //     return <div>hmm</div>
+  //   }
+  // }
 
   return (
     <div className="txn-explainer">
-      { txn && Object.keys(txn).map((key, index) => {
-        if ( nino(key) ) {
-          return (
-            <div key={index} className="explainer-Row">
-              {hexInput(key)}
-              <div className="explainer-key">
-                <span className="key-name">{nino(key) ? key : ''}</span>{interpretedValue(txn, key)}
+      <div className="parsing-breakdown">
+        { txn && Object.keys(txn).map((key, index) => {
+          if ( nino(key) ) {
+            return (
+              <div key={index} className="explainer-Row">
+                {hexOfKey(key)}
+                <div className="explainer-key">
+                  <span className="key-name">{nino(key) ? key : ''}</span>{interpretedValue(txn, key)}
+                </div>
               </div>
-            </div>
-          )
-        } else if (key === 'inputs') {
-          return (
-          <>
-            <h3>{key}</h3>
-            <div>{breakdownInputs(txn[key])}</div>
-          </>)
-        } else {
-          return (<div>stuff</div>)
-        } 
-      })
-    }
+            )
+          } else if (key === 'inputs') {
+            return (
+            <>
+              <h3>{key}</h3>
+              <div>{breakdownInputs(txn[key])}</div>
+            </>)
+          } else if (key === 'outputs') {
+            return (
+              <>
+                <h3>{key}</h3>
+                <div>{breakdownOutputs(txn[key])}</div>
+              </>)
+          } else {
+            return (<></>)
+          } 
+        })
+      }
+      </div>
+      <div className="details-column">
+			</div>
     </div>
   )
 }

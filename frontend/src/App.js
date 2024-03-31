@@ -22,8 +22,6 @@ function App() {
 				<div className="sidebar-column">
 				</div>
 				<Txn />
-				<div className="details-column">
-				</div>
 			</div>
 		</div>
 	);
