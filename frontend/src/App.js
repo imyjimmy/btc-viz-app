@@ -15,6 +15,7 @@ function App() {
 						<span></span>
 					</label>
 				</div>
+				<div className="node-env"><h3>{process.env.NODE_ENV}</h3></div>
 			</nav>
 			{/* <header className="App-header"></header> */}
 			{/* <h3>Bitcoin Transaction Anatomy</h3> */}

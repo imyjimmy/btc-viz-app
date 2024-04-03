@@ -75,6 +75,11 @@ nav {
   align-items: center;
   color: white;
   margin-bottom: 16px;
+  justify-content: space-between;
+}
+
+.node-env {
+  color: gray;
 }
 
 /* Sidebar */
