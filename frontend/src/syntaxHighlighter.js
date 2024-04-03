@@ -23,7 +23,17 @@ export const updateMatchers = (txn) => {
         // addMatcher(matchers, inOrOutArray[k], k)
         // console.log(k)
         Object.keys(k).map(innerKey => {
-          addMatcher(matchers, k, key, innerKey)
+          if (innerKey !== 'witness') { // handle witness later
+            addMatcher(matchers, k, key, innerKey)
+          } else { // witness
+            const witnessArr = k[innerKey]
+            witnessArr.map((witness, index) => {
+              addMatcher(matchers, witnessArr, 'witness', index)
+            })
+            // Object.keys(k[innerKey]).map((witness, index) => 
+            //   addMatcher(matchers, witness, 'witness', index)
+            // )
+          }
         })
       })
     } else {
@@ -66,6 +76,7 @@ export const format = (inputText, matchers, callback) => {
       console.log('if case: ', { element: 'span', className: nextClassName, text: matchText.replace(/\ /g, '')})
       outputHtmlArr.push({ element: 'span', className: nextClassName, text: matchText.replace(/\ /g, '')});
       sanitizedInputText = sanitizedInputText.substring(nextMatch.index + matchText.length);
+      // matchers.pop();
     } else {
       console.log('else case: ', { element: 'span', className: '', text: sanitizedInputText.replace(/\ /g, '')})
       outputHtmlArr.push({ element: 'span', className: '', text: sanitizedInputText.replace(/\ /g, '')});

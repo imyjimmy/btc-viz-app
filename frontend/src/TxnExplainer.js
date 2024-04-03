@@ -6,7 +6,9 @@ const TxnExplainer = ({txn}) => {
   /*
   nino: neither inputs nor outputs as those keys get special treatment since they need to be broken down further
   */
-  const nino = (key) => key !== 'inputs' && key !== 'outputs'
+  const nino = (key) => key !== 'inputs' && key !== 'outputs' && key
+
+  const nw = (key) => key !== 'witness'
 
   const breakdownInputs = (inputs) => {
     const result = inputs.map((input) => {
@@ -15,16 +17,18 @@ const TxnExplainer = ({txn}) => {
       {Object.keys(input).map((key) => {
         const entry = input[key]
         const hex = entry['hex'];
-        return (
-        <div className="explainer-Row">
-          <span className={`match-inputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
-          <div className="explainer-key"><span className="key-name">{key}</span></div>
-          {/* can put a more advanced script sig explainer component here */}
-          {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
-            return (<div className="explainer-val"><span className="interpreted-val">{entry[k]}</span></div>)
-          })}
-        </div>
-        )
+        if (nw(key)) {
+          return (
+          <div className="explainer-Row">
+            <span className={`match-inputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
+            <div className="explainer-key"><span className="key-name">{key}</span></div>
+            {/* can put a more advanced script sig explainer component here */}
+            {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
+              return (<div className="explainer-val"><span className="interpreted-val">{entry[k]}</span></div>)
+            })}
+          </div>
+          )
+        } else { return (<></>)} // ignore witness for now
       })}
       </>)
     })

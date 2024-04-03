@@ -43,20 +43,20 @@ label[for=txn] {
 
 #editor {
   z-index: 1;
-  color: transparent; /*white;*/
+  color: red;
   background: transparent;
   caret-color: white;
   resize: none;
-  scrollbar-color: red orange;
+  scrollbar-color: rgb(172, 172, 172);
   scrollbar-width: thin;
 }
 
 #editor, #highlighting-content {
-  /* overflow-y: scroll; */
-  /* white-space: nowrap; */
+
 }
 
 #highlighting {
+  /* overflow-x: clip; */
   border: 1px solid rgb(190, 190, 190);
 }
 
@@ -67,6 +67,10 @@ label[for=txn] {
 
 .match-version {
   background: #a47d55;
+}
+
+.match-segwit {
+  background: #a49455;
 }
 
 .match-num_inputs {
@@ -90,6 +94,10 @@ label[for=txn] {
   background: #d58787;
 }
 
+[class^="match-witness-"] {
+  background: red;
+}
+
 .match-num_outputs {
   background: #d16868;
   /*darkgoldenrod; */
@@ -101,6 +109,10 @@ label[for=txn] {
 
 .match-outputs-scriptPubKey {
   background: #8b8b26;
+}
+
+.match-locktime {
+  background: #6da040;
 }
 
 #highlighting {
