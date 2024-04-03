@@ -8,6 +8,8 @@ const TxnExplainer = ({txn}) => {
   */
   const nino = (key) => key !== 'inputs' && key !== 'outputs' && key
 
+  const numi_numo = (key) => key !== 'num_inputs' && key !== 'num_outputs' && key
+
   const nw = (key) => key !== 'witness'
 
   const breakdownInputs = (inputs) => {
@@ -95,24 +97,11 @@ const TxnExplainer = ({txn}) => {
     }
   }
 
-  // const explainTxnKey = (key) => {
-  //   if (key === 'inputs') {
-  //     return txn[key].map((input) => explainInputs(input)) 
-  //   } 
-  //   else if (key === 'outputs') {
-  //     return txn[key].map((output) => explainOutput(output))
-  //   } else {
-  //     const entry = txn[key];
-  //     // return interpretedValue(entry)
-  //     return <div>hmm</div>
-  //   }
-  // }
-
   return (
     <div className="txn-explainer">
       <div className="parsing-breakdown">
         { txn && Object.keys(txn).map((key, index) => {
-          if ( nino(key) ) {
+          if ( nino(key) && numi_numo(key)) {     
             return (
               <div key={index} className="explainer-Row">
                 {hexOfKey(key)}
@@ -123,18 +112,39 @@ const TxnExplainer = ({txn}) => {
                 </div>
               </div>
             )
+          } else if (key === 'num_inputs') {
+            return (<>
+            <h3>inputs</h3>
+              <div key={index} className="explainer-Row">
+                {hexOfKey(key)}
+                <div className="explainer-key">
+                  <span className="key-name">{key}</span>
+                </div>
+                <div className="explainer-val"><span className="interpreted-val">{interpretedValue(txn, key)}</span>
+                </div>
+              </div>
+            </>
+            )
           } else if (key === 'inputs') {
             return (
-            <>
-              <h3>{key}</h3>
-              <>{breakdownInputs(txn[key])}</>
+            <>{breakdownInputs(txn[key])}</>
+            )
+          } else if (key === 'num_outputs') {
+            return (<>
+            <h3>outputs</h3>
+            <div key={index} className="explainer-Row">
+                {hexOfKey(key)}
+                <div className="explainer-key">
+                  <span className="key-name">{key}</span>
+                </div>
+                <div className="explainer-val"><span className="interpreted-val">{interpretedValue(txn, key)}</span>
+                </div>
+              </div>
             </>)
           } else if (key === 'outputs') {
             return (
-              <>
-                <h3>{key}</h3>
-                <div>{breakdownOutputs(txn[key])}</div>
-              </>)
+              <div>{breakdownOutputs(txn[key])}</div>
+            )
           } else {
             return (<></>)
           } 

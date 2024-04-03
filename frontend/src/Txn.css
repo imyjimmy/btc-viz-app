@@ -1,5 +1,4 @@
 .txn-column {
-  border: 1px solid blue;
   margin: 0px 24px 12px;
   flex-grow: 1;
 }
@@ -43,21 +42,17 @@ label[for=txn] {
 
 #editor {
   z-index: 1;
-  color: red;
+  color: transparent;
   background: transparent;
   caret-color: white;
   resize: none;
-  scrollbar-color: rgb(172, 172, 172);
+  scrollbar-color: red;
   scrollbar-width: thin;
-}
-
-#editor, #highlighting-content {
-
 }
 
 #highlighting {
   /* overflow-x: clip; */
-  border: 1px solid rgb(190, 190, 190);
+  border: 1px solid rgb(117, 117, 117);
 }
 
 /* style when cursor */
@@ -117,12 +112,4 @@ label[for=txn] {
 
 #highlighting {
   z-index: 0;
-}
-
-.txn-explainer {
-  margin-top: 250px;
-  border: 1px solid yellow;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between; 
 }
