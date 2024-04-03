@@ -23,7 +23,7 @@ const Txn = () => {
   const textareaRef = useRef();
 	const codeRef = useRef();
 
-  const newLineRatio = 12.1;
+  const newLineRatio = 12;
   // const highlightRef = useRef()
   // const dimensions = useRefDimensions(highlightRef)
   // const [width, height] = useWindowSize(highlightRef);
@@ -97,8 +97,9 @@ const Txn = () => {
     return toReturn
   }
 
+  /* annotates text in <code> area with highlighted colors, breaks <br /> if needed */
   const markupFn = (outputHtml) => {
-    const maxChars = Math.floor(width / newLineRatio) + 1;
+    const maxChars = Math.floor((width-4) / newLineRatio); // width - total padding
     var chars = 0;
     if (outputHtml) {
       for (var i = 0; i < outputHtml.length; i++) {
