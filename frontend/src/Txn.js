@@ -112,7 +112,9 @@ const Txn = () => {
           chars = 0;
         }
         if (chars > maxChars) {
-          const twoEntries = splitAt(entry.text.length - (chars - maxChars), entry.text).map((e) => { return { element: entry['element'], className: entry['className'], text: e }})
+          const split = splitAt(entry.text.length - (chars - maxChars), entry.text);
+          // eslint-disable-next-line
+          const twoEntries = split.map((e) => { return { element: entry['element'], className: entry['className'], text: e }});
           outputHtml.splice(i, 1, twoEntries[0], { element: 'br', className: '', text: ''}, twoEntries[1])
           chars = 0;
         }
