@@ -12,8 +12,7 @@ const addMatcher = (matchers, txn, base, key) => {
 }
 
 export const updateMatchers = (txn) => {
-  const matchers = [];
-  console.log('updating matchers:', matchers)
+  const matchers = []
   Object.keys(txn).map((key) => {
     console.log(key)
     if (key === 'inputs' || key === 'outputs') {
@@ -64,21 +63,15 @@ export const format = (inputText, matchers, callback) => {
 
     if (nextMatch) {
       var token = sanitizedInputText.substring(0, nextMatch.index).replace(/\ /g, '');
-      // 
       if (token.length > 0) { 
-        console.log('token: ', token, token.length);
+        console.log('token: ', token);
         outputHtmlArr.push({ element: 'span', className: '', text: token})
       }
-      
       var matchText = nextMatch[0];
-      // console.log('matchText: ', matchText.replace(/\ /g, '&nbsp;') )
-      //'<span class="' + nextClassName + '">' + matchText.replace(/\ /g, '&nbsp;') + '</span>'
-      console.log('if case: ', { element: 'span', className: nextClassName, text: matchText.replace(/\ /g, '')})
       outputHtmlArr.push({ element: 'span', className: nextClassName, text: matchText.replace(/\ /g, '')});
       sanitizedInputText = sanitizedInputText.substring(nextMatch.index + matchText.length);
-      // matchers.pop();
+      matchers.shift();
     } else {
-      console.log('else case: ', { element: 'span', className: '', text: sanitizedInputText.replace(/\ /g, '')})
       outputHtmlArr.push({ element: 'span', className: '', text: sanitizedInputText.replace(/\ /g, '')});
       sanitizedInputText = "";
     }
