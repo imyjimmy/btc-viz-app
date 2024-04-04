@@ -1,5 +1,23 @@
 import React, { useState } from 'react';
 import './TxnExplainer.css';
+import { autoFormatAmt, toggleFormatAmt } from './utils/formatSats.js'
+
+const AmtSpan = ({val}) => {
+  const [amt, setAmt] = useState()
+
+  const toggleAmt = (e) => {
+    e.preventDefault()
+    if (amt) {
+      setAmt((amt) => toggleFormatAmt(amt))
+    } else {
+      setAmt(toggleFormatAmt(autoFormatAmt(val)));
+    }
+  }
+
+  return (
+    <span onClick={toggleAmt} className="interpreted-val">{amt ? (amt) : (autoFormatAmt(val))}</span>
+  )
+}
 
 const TxnExplainer = ({txn}) => {
 
@@ -52,7 +70,10 @@ const TxnExplainer = ({txn}) => {
           <span className={`match-outputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
           <div className="explainer-key"><span className="key-name">{key}</span></div>
           {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
-            return (<div className="explainer-val"><span className="interpreted-val">{entry[k]}</span></div>)
+            return (
+              <div className="explainer-val">
+              { key === 'amount' ? (<AmtSpan val={entry[k]}/>) : (<span>{entry[k]}</span>) }
+              </div>)
           })}
         </div>
         )

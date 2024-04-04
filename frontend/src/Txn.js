@@ -105,7 +105,6 @@ const Txn = () => {
     if (outputHtml) {
       for (var i = 0; i < outputHtml.length; i++) {
         var entry = outputHtml[i]
-        console.log('entry: ', entry)
         if (entry.element !== 'br') {
           chars += entry.text.length;
         } else {

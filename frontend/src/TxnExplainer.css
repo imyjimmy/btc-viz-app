@@ -8,6 +8,7 @@
 .explainer-Row {
   display: grid;
   grid-template-columns: 140px 180px 1fr;
+  overflow-wrap: break-word;
 }
 
 .explainer-hex-value {
