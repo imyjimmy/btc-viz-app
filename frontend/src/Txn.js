@@ -1,4 +1,4 @@
-import React, { createRef, useState, useEffect, useLayoutEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { TxnExplainer } from './TxnExplainer';
 import { useResizeDetector } from 'react-resize-detector';
 import { format, updateMatchers } from './syntaxHighlighter';
@@ -15,7 +15,7 @@ import "./Txn.css";
 */
 
 const Txn = () => {
-  const { width, height, ref } = useResizeDetector(); // ref to <pre>
+  const { width, ref } = useResizeDetector(); // ref to <pre>
   const [inputTxn, setInputTxn] = useState()
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
@@ -24,9 +24,6 @@ const Txn = () => {
 	const codeRef = useRef();
 
   const newLineRatio = 12;
-  // const highlightRef = useRef()
-  // const dimensions = useRefDimensions(highlightRef)
-  // const [width, height] = useWindowSize(highlightRef);
 
   // cursor focus to texarea immediately
   useEffect(() => {
@@ -86,11 +83,11 @@ const Txn = () => {
     var toReturn = ''
     toReturn = outputHtmlArr.reduce((resp, entry, index) => {
       if ( entry.element === 'br' ) {
-        resp += '<br \>';
+        resp += '<br \\>';
       }
       else { 
         if (entry.text) {
-          resp += '<'+ entry.element + ' ' + 'class="' + entry.className + '">' + entry.text + '</' + entry.element + '>'
+          resp += '<'+ entry.element + ' class="' + entry.className + '">' + entry.text + '</' + entry.element + '>'
         } else {
           resp += ''
         }
@@ -115,7 +112,7 @@ const Txn = () => {
           chars = 0;
         }
         if (chars > maxChars) {
-          const twoEntries = splitAt(entry.text.length - (chars - maxChars), entry.text).map((e) => { return { element: entry['element'], className: entry['className'], text: e }} )
+          const twoEntries = splitAt(entry.text.length - (chars - maxChars), entry.text).map((e) => { return { element: entry['element'], className: entry['className'], text: e }})
           outputHtml.splice(i, 1, twoEntries[0], { element: 'br', className: '', text: ''}, twoEntries[1])
           chars = 0;
         }
@@ -132,7 +129,6 @@ const Txn = () => {
 
 	useEffect(() => {
 		const matchers = updateMatchers(parsedTxn);
-		// console.log('matchers: ', matchers);
     if (matchers.length > 0) { 
       setMatchers(matchers);
       console.log('calling format from parsedTxn change. matchers: ', matchers)
