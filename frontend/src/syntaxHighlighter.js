@@ -51,6 +51,7 @@ export const format = (inputText, matchers, callback) => {
   while(sanitizedInputText.length) {
     var nextMatch = null;
     var nextClassName = null;
+    var matchedIndex = -1;
 
     for (var i = 0; i < matchers.length; i++) {
       const match = matchers[i].match.exec(sanitizedInputText);
@@ -58,6 +59,7 @@ export const format = (inputText, matchers, callback) => {
         nextMatch = match;
         // nextStyle = matchers[i].style;
         nextClassName = matchers[i].className;
+        matchedIndex = i;
       }
     }
 
@@ -70,7 +72,8 @@ export const format = (inputText, matchers, callback) => {
       var matchText = nextMatch[0];
       outputHtmlArr.push({ element: 'span', className: nextClassName, text: matchText.replace(/\ /g, '')});
       sanitizedInputText = sanitizedInputText.substring(nextMatch.index + matchText.length);
-      matchers.shift();
+      // matchers.shift();
+      matchers.splice(matchedIndex, 1);
     } else {
       outputHtmlArr.push({ element: 'span', className: '', text: sanitizedInputText.replace(/\ /g, '')});
       sanitizedInputText = "";

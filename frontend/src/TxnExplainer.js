@@ -72,7 +72,7 @@ const TxnExplainer = ({txn}) => {
           {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
             return (
               <div className="explainer-val">
-              { key === 'amount' ? (<AmtSpan val={entry[k]}/>) : (<span>{entry[k]}</span>) }
+              { key === 'amount' ? (<AmtSpan val={entry[k]}/>) : (<span className="interpreted-val">{entry[k]}</span>) }
               </div>)
           })}
         </div>
