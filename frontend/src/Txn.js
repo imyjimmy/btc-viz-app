@@ -62,7 +62,10 @@ const Txn = () => {
 
 	const conditionalFetch = async () => {
 		return inputTxn && inputTxn.length % 2 === 0 ? await fetch(
-      `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/data?txn=` + inputTxn).then((resp) => { if (!resp.ok) { 
+      `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/data?txn=` + inputTxn, {
+          method: 'GET',
+          headers: { 'Authorization': `Token ${process.env.REACT_APP_PUBLIC_BE_TOKEN}`}
+        }).then((resp) => { if (!resp.ok) { 
         // throw new Error(`HTTP Error: ${resp.status}`)
       } 
 			return resp.json() 
