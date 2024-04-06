@@ -2,6 +2,8 @@ import React from "react";
 import { Txn } from './Txn';
 import "./App.css";
 
+import { TransactionIcon } from './TxnIcon';
+
 function App() {
 
 	return (
@@ -21,6 +23,7 @@ function App() {
 			{/* <h3>Bitcoin Transaction Anatomy</h3> */}
 			<div className="container">
 				<div className="sidebar-column">
+					<TransactionIcon />
 				</div>
 				<Txn />
 			</div>
