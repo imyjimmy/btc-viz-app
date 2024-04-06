@@ -4,16 +4,6 @@ import { useResizeDetector } from 'react-resize-detector';
 import { format, updateMatchers } from './syntaxHighlighter';
 import "./Txn.css";
 
-
-/*
- 700 / 58 ~= 12 
-  floor (700 / 12 = 58
-
-  612 / 49 = 12.5 
-
-  floor (612 / 12)
-*/
-
 const Txn = () => {
   const { width, ref } = useResizeDetector(); // ref to <pre>
   const [inputTxn, setInputTxn] = useState()
@@ -33,6 +23,11 @@ const Txn = () => {
   const changeInput = (e) => {
 		e.preventDefault()
 		setInputTxn(e.target.value)
+
+    if (e.target.value === '') {
+      setParsedTxn({})
+    }
+
 		codeRef.current.innerHTML = e.target.value
     syncScroll()
     format(codeRef.current.innerText, matchers, setMarkupHtml) // can highlight codeRef
@@ -122,7 +117,6 @@ const Txn = () => {
     var result = ''
     if (outputHtml) {
       result = composeHtml(outputHtml)
-      console.log('composed: ', result);
     }
 
     return { __html: result }
