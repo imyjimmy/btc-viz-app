@@ -61,53 +61,53 @@ label[for=txn] {
 }
 
 .match-version {
-  background: #a47d55;
+  background: #748cab;
 }
 
 .match-segwit {
-  background: #a49455;
+  background: #3e5c76;
 }
 
 .match-num_inputs {
-  background: #4c9fdb;
+  background: #283f60;
 }
 
 .match-inputs-txid {
-  background: #217cbc;
+  background: #457b9d;
 }
 
 .match-inputs-vout {
-  background: #6461c0;
+  background: #217cbc;
 }
 
 .match-inputs-script_sig {
-  background: #d474d4;
-  /* */
+  background: #6461c0;
 }
 
 .match-inputs-sequence {
-  background: #d58787;
+  background: #d474d4;
+  /* background: #d58787; */
 }
 
 [class^="match-witness-"] {
-  background: red;
+  background: #2a5fd2;
 }
 
 .match-num_outputs {
   background: #d16868;
-  /*darkgoldenrod; */
 }
 
 .match-outputs-amount {
-  background: #d1b068;
+  /* background: #68d89b; */
+  background: #3e8853; 
 }
 
 .match-outputs-scriptPubKey {
-  background: #8b8b26;
+  background: #d1b068;
 }
 
 .match-locktime {
-  background: #6da040;
+  background: #85a040;
 }
 
 #highlighting {
