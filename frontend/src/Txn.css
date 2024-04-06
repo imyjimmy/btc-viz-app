@@ -77,7 +77,7 @@ label[for=txn] {
 }
 
 .match-inputs-vout {
-  background: #217cbc;
+  background: #1372b6;
 }
 
 .match-inputs-script_sig {
@@ -103,7 +103,7 @@ label[for=txn] {
 }
 
 .match-outputs-scriptPubKey {
-  background: #d1b068;
+  background: #bb9f64;
 }
 
 .match-locktime {

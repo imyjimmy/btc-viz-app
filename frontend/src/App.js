@@ -15,7 +15,7 @@ function App() {
 						<span></span>
 					</label>
 				</div>
-				<div className="node-env">{process.env.NODE_ENV !== 'production' ? (<h3>{process.env.NODE_ENV}</h3>):(<></>)}</div>
+				{ process.env.NODE_ENV !== 'production' ? (<div className="node-env">{process.env.NODE_ENV}</div>):(<></>)}
 			</nav>
 			{/* <header className="App-header"></header> */}
 			{/* <h3>Bitcoin Transaction Anatomy</h3> */}

@@ -80,6 +80,8 @@ nav {
 
 .node-env {
   color: gray;
+  margin: auto 4px;
+  font-weight: bold;
 }
 
 /* Sidebar */
