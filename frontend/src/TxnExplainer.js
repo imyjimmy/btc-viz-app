@@ -66,7 +66,7 @@ const TxnExplainer = ({txn}) => {
           const hex = entry['hex'];
           if (nw(key) && !DetailedExplanations[key]) {
             return (
-              <div className="explainer-Row">
+              <div className="explainer-row">
                 <span className={`match-inputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
                 <div className="explainer-key"><span className="key-name">{key}</span></div>
                 { Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
@@ -86,7 +86,7 @@ const TxnExplainer = ({txn}) => {
               return (
                 <ExpandableRow cssPrefix={'match'} id={`witness-${index}`} entry={witness_entry} hex={hex}/>
                 // <> 
-                //   <div className="explainer-Row">
+                //   <div className="explainer-row">
                 //     <span className={`match-witness-${index} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
                 //     <div className="explainer-key">
                 //       <span className="key-name">witness {index}</span>
@@ -116,7 +116,7 @@ const TxnExplainer = ({txn}) => {
         const entry = output[key]
         const hex = entry['hex'];
         return (
-        <div className="explainer-Row">
+        <div className="explainer-row">
           <span className={`match-outputs-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
           <div className="explainer-key"><span className="key-name">{key}</span></div>
           {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
@@ -168,7 +168,7 @@ const TxnExplainer = ({txn}) => {
         { txn && Object.keys(txn).map((key, index) => {
           if ( nino(key) && numi_numo(key)) {     
             return (
-              <div key={index} className="explainer-Row">
+              <div key={index} className="explainer-row">
                 {hexOfKey(key)}
                 <div className="explainer-key">
                   <div className="key-name">{key}</div>
@@ -181,7 +181,7 @@ const TxnExplainer = ({txn}) => {
           } else if (key === 'num_inputs') {
             return (<>
             <h3>inputs</h3>
-              <div key={index} className="explainer-Row">
+              <div key={index} className="explainer-row">
                 {hexOfKey(key)}
                 <div className="explainer-key">
                   <div className="key-name">{key}</div>
@@ -199,7 +199,7 @@ const TxnExplainer = ({txn}) => {
           } else if (key === 'num_outputs') {
             return (<>
             <h3>outputs</h3>
-            <div key={index} className="explainer-Row">
+            <div key={index} className="explainer-row">
                 {hexOfKey(key)}
                 <div className="explainer-key">
                   <div className="key-name">{key}</div>
