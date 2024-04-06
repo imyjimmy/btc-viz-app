@@ -20,19 +20,22 @@
 }
 
 .explainer-key {
-  /* display: flex;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: center;
   gap: 10px; */
 }
 
 .explainer-val {
-  overflow: hidden; 
+  overflow: hidden;
+  margin: 4px 8px;
 }
 
 .key-name {
   font-size: 15pt;
   font-family: monospace;
-  margin: 8px;
+  margin: 4px 8px;
 }
 
 .interpreted-val {
