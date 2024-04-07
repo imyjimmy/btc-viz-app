@@ -95,6 +95,11 @@ body:has(.menubutton > input:checked) .sidebar-column {
   transition: width 300ms;
 }
 
+.txnIcon {
+  fill: #dddddd;
+  height: 24px;
+}
+
 .container {
   display: flex;
   flex-direction: row;

@@ -23,7 +23,7 @@ function App() {
 			{/* <h3>Bitcoin Transaction Anatomy</h3> */}
 			<div className="container">
 				<div className="sidebar-column">
-					<TransactionIcon />
+					<TransactionIcon className="txnIcon" />
 				</div>
 				<Txn />
 			</div>

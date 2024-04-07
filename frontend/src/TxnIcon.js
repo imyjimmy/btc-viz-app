@@ -7,7 +7,7 @@ function TxnIcon({
 }, svgRef) {
   return React.createElement('svg', Object.assign({
     xmlns: 'http://www.w3.org/2000/svg',
-    viewbox: "0 0 24 24",
+    viewBox: "0 0 24 24",
     "aria-hidden": "true",
     "data-slot": "icon",
     ref: svgRef,
