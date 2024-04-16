@@ -22,8 +22,12 @@ function App() {
 			{/* <header className="App-header"></header> */}
 			{/* <h3>Bitcoin Transaction Anatomy</h3> */}
 			<div className="container">
-				<div className="sidebar-column">
-					<TransactionIcon className="txnIcon" />
+				<div className="sidebar-nav">
+					<div className="sidebar-item">
+						<TransactionIcon className="txnIcon" />
+						<div className="sidebar-item-name">Transactions</div>
+					</div>
+					
 				</div>
 				<Txn />
 			</div>
