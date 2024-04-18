@@ -26,7 +26,7 @@ const ExpandableRow = ({id, entry, hex, cssPrefix}) => {
   return (
     <>
     <div className="explainer-row">
-      <span className={`${cssPrefix}-${key} explainer-hex-value`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
+      <span className={`${cssPrefix}-${key} explainer-hex-value`}>{hex && hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
       <div className="explainer-key">
         <div className="key-name">{key}</div>
           <div className="chevron-icon" onClick={toggleExpand}>
@@ -34,7 +34,7 @@ const ExpandableRow = ({id, entry, hex, cssPrefix}) => {
           </div>
       </div>
       {/* can put a more advanced script sig explainer component here */}
-      {Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
+      {Object.keys(entry).filter((key) => key !== 'hex' && key !== 'length').map((k) => {
         return (<div className="explainer-val"><span className="interpreted-val">{entry[k]}</span></div>)
       })}
     </div>

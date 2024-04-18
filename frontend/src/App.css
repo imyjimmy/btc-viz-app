@@ -10,7 +10,7 @@ body {
   background-color: #191920; /* #282c34; */
   font-size: medium; /*calc(10px + 2vmin); */
   color: white;
-  padding: 24px 24px 24px 12px;
+  padding: 24px 24px 24px 18px;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -52,12 +52,6 @@ body {
   }
 }
 
-/* Header stuff */
-
-.menubutton>input {
-  display: none;
-}
-
 .menubutton span {
   display: block;
   width: 24px;
@@ -70,12 +64,13 @@ body {
   z-index: 1;
 }
 
+/* Header stuff */
 nav {
   display: flex;
   align-items: center;
   color: white;
   margin-bottom: 16px;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .node-env {
@@ -84,22 +79,35 @@ nav {
   font-weight: bold;
 }
 
-/* Sidebar */
-body:has(.menubutton > input:checked) .sidebar-column {
-  width: 10rem;
+/* Sliding Sidebar */
+.sidebar-item>input {
+  display: none;
+}
+
+body:has(.sidebar-item > input:checked) .nav-right {
+  width: 12rem;
+}
+
+.nav-right {
+  width: 1px;
+  transition: width 300ms;
 }
 
 .sidebar-nav {
-  /* width: 20%; */
-  width: 4rem;
   transition: width 300ms;
-  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
 }
 
 .sidebar-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 12px 0px;
+}
+
+.sidebar-item:first-child {
+  margin-top: 0px;
+  margin-bottom: 12px;
 }
 
 .sidebar-item-name {
@@ -109,8 +117,10 @@ body:has(.menubutton > input:checked) .sidebar-column {
 .txnIcon {
   fill: #dddddd;
   height: 24px;
+  width: 24px;
 }
 
+/* Overall container has sidebar-nav and <Txn />*/
 .container {
   display: flex;
   flex-direction: row;
