@@ -85,7 +85,8 @@ input[type="text"]:focus {
 }
 
 .match-num_inputs {
-  background: #283f60;
+  /* background: #283f60; */
+  background: #5a49c2;
 }
 
 .match-inputs-txid {

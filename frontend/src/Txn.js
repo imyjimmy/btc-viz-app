@@ -12,18 +12,10 @@ const Txn = () => {
   const textareaRef = useRef();
 	const codeRef = useRef();
 
-  const onResize = useCallback(async () => {
-    if (Object.keys(parsedTxn).length == 0) {
-      const resp = await conditionalFetch() // makes sure this shit gets highlighted
-      if (resp !== undefined) {
-        setParsedTxn(resp.data.tx)
-      }
-    }
+  const onResize = useCallback(() => {
     const matchers = updateMatchers(parsedTxn);
-    // console.log('onResize, matchers, parsedTxn: ', matchers, parsedTxn)
-
     format(codeRef.current.innerText, matchers, setMarkupHtml)
-  }, []);
+  }, [parsedTxn]);
 
   const { width, ref } = useResizeDetector({
     handleHeight: false,
@@ -33,8 +25,6 @@ const Txn = () => {
   }); // ref: ref to <pre>
 
   const newLineRatio = 12;
-
-  const maxChars = width / 4
 
   // cursor focus to texarea immediately
   useEffect(() => {

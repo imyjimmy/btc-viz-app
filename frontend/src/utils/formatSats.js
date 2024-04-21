@@ -7,7 +7,7 @@ const satsToBtc = (num) => {
   return (num / 100000000).toString() + ' btc';
 }
 
-const btcToSats = (num) => formatSats(num * 100000000)
+const btcToSats = (num) => formatSats(num * 1000000000/10) // addresses floating point weirdness
 
 
 const autoFormatAmt = (num) => {

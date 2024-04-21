@@ -29,9 +29,9 @@ const ExpandableRow = ({id, entry, hex, cssPrefix}) => {
       <span className={`${cssPrefix}-${key} explainer-hex-value`}>{hex && hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</span>
       <div className="explainer-key">
         <div className="key-name">{key}</div>
-          <div className="chevron-icon" onClick={toggleExpand}>
+        { process.env.NODE_ENV === 'development' ? (<div className="chevron-icon" onClick={toggleExpand}>
             <ChevronDoubleDownIcon/>
-          </div>
+          </div>) : (<></>)} {/* ghetto rollout toggle */}
       </div>
       {/* can put a more advanced script sig explainer component here */}
       {Object.keys(entry).filter((key) => key !== 'hex' && key !== 'length').map((k) => {

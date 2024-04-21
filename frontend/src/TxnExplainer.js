@@ -80,7 +80,6 @@ const TxnExplainer = ({txn}) => {
             )
           } else { 
             const witness = entry;
-            console.log('witness:', witness)
             return witness.map((witness_entry, index) => {
               const hex = witness_entry['hex']
               const str = witness_entry['str']
