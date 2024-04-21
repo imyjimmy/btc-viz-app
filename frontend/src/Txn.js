@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import { TxnExplainer } from './TxnExplainer';
 import { useResizeDetector } from 'react-resize-detector';
 import { format, updateMatchers } from './syntaxHighlighter';
 import "./Txn.css";
 
 const Txn = () => {
-  const { width, ref } = useResizeDetector(); // ref to <pre>
   const [inputTxn, setInputTxn] = useState()
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
@@ -13,7 +12,29 @@ const Txn = () => {
   const textareaRef = useRef();
 	const codeRef = useRef();
 
+  const onResize = useCallback(async () => {
+    if (Object.keys(parsedTxn).length == 0) {
+      const resp = await conditionalFetch() // makes sure this shit gets highlighted
+      if (resp !== undefined) {
+        setParsedTxn(resp.data.tx)
+      }
+    }
+    const matchers = updateMatchers(parsedTxn);
+    // console.log('onResize, matchers, parsedTxn: ', matchers, parsedTxn)
+
+    format(codeRef.current.innerText, matchers, setMarkupHtml)
+  }, []);
+
+  const { width, ref } = useResizeDetector({
+    handleHeight: false,
+    refreshMode: 'debounce',
+    refreshRate: 200,
+    onResize
+  }); // ref: ref to <pre>
+
   const newLineRatio = 12;
+
+  const maxChars = width / 4
 
   // cursor focus to texarea immediately
   useEffect(() => {
@@ -61,14 +82,17 @@ const Txn = () => {
         // throw new Error(`HTTP Error: ${resp.status}`)
       } 
 			return resp.json() 
-		}) : (undefined)
+		}) : ( inputTxn && inputTxn.length == 0 ? setParsedTxn({}) : (undefined))
 	}
 
-	const fetchTxn = async () => {
-		const resp = await conditionalFetch()
-		if (resp !== undefined) {
-			setParsedTxn(resp.data.tx)
-		}
+	const fetchTxn = async (e) => {
+    if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart != 0) { // dont fire on text selection, address special case of highlighting all and delete text
+      // console.log('fetching bruh:', e.target.selectionStart, e.target.selectionEnd, inputTxn)
+      const resp = await conditionalFetch()
+      if (resp !== undefined) {
+        setParsedTxn(resp.data.tx)
+      }
+    }
 	}
 
   const splitAt = (index, xs) => [xs.slice(0, index), xs.slice(index)]
@@ -126,7 +150,7 @@ const Txn = () => {
 		const matchers = updateMatchers(parsedTxn);
     if (matchers.length > 0) { 
       setMatchers(matchers);
-      console.log('calling format from parsedTxn change. matchers: ', matchers)
+      // console.log('calling format from parsedTxn change. matchers: ', matchers)
       format(codeRef.current.innerText, matchers, setMarkupHtml)
     }
 	}, [parsedTxn])
@@ -140,7 +164,7 @@ const Txn = () => {
           name="txn"
           ref={textareaRef}
           onChange={changeInput} 
-          onKeyUp={debounce(() => fetchTxn())}
+          onKeyUp={debounce((e) => fetchTxn(e))}
           onScroll={syncScroll}
           cols="20" 
           rows="12"
