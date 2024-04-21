@@ -10,9 +10,25 @@ label[for=txn] {
 
 .txn-input {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   font-size: medium;
   position: relative;
+}
+
+input[type="text"] {
+  margin-top: 3px;
+  margin-left: 8px;
+  padding-block: 0px;
+  padding-inline: 0px;
+  border: 0px;
+  background-color: #191920;
+  font-size: medium;
+  font-style: italic;
+  color: rgb(160, 160, 160);
+}
+
+input[type="text"]:focus {
+  font-style: normal;
 }
 
 #editor, #highlighting {

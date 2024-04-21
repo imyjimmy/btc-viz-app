@@ -158,7 +158,7 @@ const Txn = () => {
   return (
     <div className="txn-column">
       <div className="txn-input">
-        <label htmlFor="txn">bitcoin transaction</label>
+        <label htmlFor="txn">bitcoin transaction:</label><input type="text" value={"untitled"}/>
         <textarea 
           id="editor" 
           name="txn"
