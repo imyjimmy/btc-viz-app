@@ -12,7 +12,9 @@ function App() {
 	useEffect(() => {
 		const txns = JSON.parse(localStorage.getItem('btc-txns'));
 		if (txns) {
-			setTxns(txns);
+		setTxns(txns);
+		} else {
+			setTxns({})
 		}
 	}, []);
 
@@ -43,14 +45,6 @@ function App() {
 	return (
 		<div className="App">
 			<nav className="nav">
-				{/* <div className='menubutton'>
-					<input type='checkbox' id='menubuttoninput'/>
-					<label htmlFor='menubuttoninput'>
-						<span></span>
-						<span></span>
-						<span></span>
-					</label>
-				</div>  */}
 				{ process.env.NODE_ENV !== 'production' ? (<div className="node-env">{process.env.NODE_ENV}</div>):(<></>)}
 			</nav>
 			<div className="container">
@@ -69,7 +63,7 @@ function App() {
 						{ Object.keys(txns).map(key => <div><button onClick={selectTxn(key)}>{key}</button></div>) }
 					</div>
 				</div>
-				<Txn saveTxn={saveTxn} input={selectedTxn}/>
+				<Txn input={selectedTxn} saveTxn={saveTxn} />
 			</div>
 		</div>
 	);

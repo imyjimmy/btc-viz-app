@@ -89,6 +89,7 @@ const Txn = ({saveTxn, input}) => {
 		};
 	}
 
+  // @todo: inputTxn as a param to conditionalFetch fn
 	const conditionalFetch = async () => {
 		return inputTxn && inputTxn.length % 2 === 0 ? await fetch(
       `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/data?txn=` + inputTxn, {
@@ -183,6 +184,7 @@ const Txn = ({saveTxn, input}) => {
           onChange={changeInput} 
           onKeyUp={debounce((e) => fetchTxn(e))}
           onScroll={syncScroll}
+          value={inputTxn}
           cols="20" 
           rows="12"
         />
