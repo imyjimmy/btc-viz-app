@@ -8,6 +8,19 @@ label[for=txn] {
   text-transform: uppercase;
 }
 
+.saveButton {
+  background-color: #191920;
+  padding: 0px;
+  border: 0px;
+}
+
+.saveIcon {
+  fill: #dddddd;
+  height: 16px;
+  width: 16px;
+  vertical-align: middle;
+}
+
 .txn-input {
   display: flex;
   /* flex-direction: column; */

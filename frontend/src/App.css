@@ -91,6 +91,16 @@ body:has(.sidebar-item > input:checked) .nav-right {
 .nav-right {
   width: 1px;
   transition: width 300ms;
+  overflow-x: hidden;
+}
+
+.nav-right h4 {
+  margin: 4px 8px;
+}
+
+.nav-right > div {
+  /* border: 1px solid red; */
+  margin-left: 12px;
 }
 
 .sidebar-nav {

@@ -2,9 +2,13 @@ import React, { useCallback, useState, useEffect, useRef } from "react";
 import { TxnExplainer } from './TxnExplainer';
 import { useResizeDetector } from 'react-resize-detector';
 import { format, updateMatchers } from './syntaxHighlighter';
+import { SaveIcon } from './SaveIcon';
+// import { LiaSaveSolid } from "react-icons/lia";
+
 import "./Txn.css";
 
-const Txn = () => {
+const Txn = ({saveTxn, input}) => {
+  const [txnName, setTxnName] = useState('')
   const [inputTxn, setInputTxn] = useState()
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
@@ -26,10 +30,32 @@ const Txn = () => {
 
   const newLineRatio = 12;
 
+  // btc txn name
+  const changeTxnName = (e) => {
+    setTxnName(e.target.value)
+  }
+
   // cursor focus to texarea immediately
   useEffect(() => {
     textareaRef.current.focus()
   }, [])
+
+  /* Loads a Txn */
+  useEffect(() => {
+    async function fetchData() {
+      const resp = await conditionalFetch()
+      if (resp !== undefined) {
+        setParsedTxn(resp.data.tx)
+      }
+    }
+    // console.log('input:', input)
+    if (input !== '') {
+      setInputTxn(input)
+      fetchData()
+      codeRef.current.innerHTML = input
+      format(codeRef.current.innerText, matchers, setMarkupHtml)
+    }
+  }, [input])
 
   const changeInput = (e) => {
 		e.preventDefault()
@@ -148,7 +174,8 @@ const Txn = () => {
   return (
     <div className="txn-column">
       <div className="txn-input">
-        <label htmlFor="txn">bitcoin transaction:</label><input type="text" value={"untitled"}/>
+        <label htmlFor="txn">bitcoin transaction:</label><input type="text" placeholder={'untitled'} value={txnName} onChange={changeTxnName}/>
+        {txnName ? (<button className="saveButton" onClick={(e) => saveTxn(txnName,inputTxn)}><SaveIcon className="saveIcon"/></button>):(<></>)}
         <textarea 
           id="editor" 
           name="txn"
