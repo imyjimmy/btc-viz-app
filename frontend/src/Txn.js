@@ -7,9 +7,9 @@ import { SaveIcon } from './SaveIcon';
 
 import "./Txn.css";
 
-const Txn = ({saveTxn, input}) => {
+const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
   const [txnName, setTxnName] = useState('')
-  const [inputTxn, setInputTxn] = useState()
+  // const [inputTxn, setInputTxn] = useState()
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
   const [markupHtml, setMarkupHtml] = useState()
@@ -40,22 +40,22 @@ const Txn = ({saveTxn, input}) => {
     textareaRef.current.focus()
   }, [])
 
-  /* Loads a Txn */
+  // /* Loads a Txn */
   useEffect(() => {
     async function fetchData() {
-      const resp = await conditionalFetch()
+      const resp = await conditionalFetch(inputTxn)
       if (resp !== undefined) {
         setParsedTxn(resp.data.tx)
       }
     }
     // console.log('input:', input)
-    if (input !== '') {
-      setInputTxn(input)
+    if (inputTxn !== '') {
+      setInputTxn(inputTxn)
       fetchData()
-      codeRef.current.innerHTML = input
+      codeRef.current.innerHTML = inputTxn
       format(codeRef.current.innerText, matchers, setMarkupHtml)
     }
-  }, [input])
+  }, [inputTxn])
 
   const changeInput = (e) => {
 		e.preventDefault()
@@ -90,7 +90,7 @@ const Txn = ({saveTxn, input}) => {
 	}
 
   // @todo: inputTxn as a param to conditionalFetch fn
-	const conditionalFetch = async () => {
+	const conditionalFetch = async (inputTxn) => {
 		return inputTxn && inputTxn.length % 2 === 0 ? await fetch(
       `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/data?txn=` + inputTxn, {
           method: 'GET',
@@ -105,7 +105,7 @@ const Txn = ({saveTxn, input}) => {
 	const fetchTxn = async (e) => {
     if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart != 0) { // dont fire on text selection, address special case of highlighting all and delete text
       // console.log('fetching bruh:', e.target.selectionStart, e.target.selectionEnd, inputTxn)
-      const resp = await conditionalFetch()
+      const resp = await conditionalFetch(inputTxn)
       if (resp !== undefined) {
         setParsedTxn(resp.data.tx)
       }
@@ -136,7 +136,10 @@ const Txn = ({saveTxn, input}) => {
 
   /* annotates text in <code> area with highlighted colors, breaks <br /> if needed */
   const markupFn = (outputHtml) => {
-    const maxChars = Math.floor((width-4) / newLineRatio); // width - total padding
+    
+    let maxChars = Math.floor(width / newLineRatio); // width - total padding
+    if (width % newLineRatio == 0) { maxChars -= 1 }
+
     var chars = 0;
     if (outputHtml) {
       for (var i = 0; i < outputHtml.length; i++) {

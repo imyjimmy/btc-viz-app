@@ -7,7 +7,7 @@ import { TransactionIcon } from './TxnIcon';
 function App() {
 	/* Save Transactions */
 	const [txns, setTxns] = useState({})
-	const [selectedTxn, setSelectedTxn] = useState('')
+	const [inputTxn, setInputTxn] = useState()
 	
 	useEffect(() => {
 		const txns = JSON.parse(localStorage.getItem('btc-txns'));
@@ -39,7 +39,7 @@ function App() {
 
 	const selectTxn = (key) => (e) => {
 		console.log('hey: ', e, key, txns[key]);
-		setSelectedTxn(txns[key])
+		setInputTxn(txns[key])
 	}
 
 	return (
@@ -63,7 +63,7 @@ function App() {
 						{ Object.keys(txns).map(key => <div><button onClick={selectTxn(key)}>{key}</button></div>) }
 					</div>
 				</div>
-				<Txn input={selectedTxn} saveTxn={saveTxn} />
+				<Txn inputTxn={inputTxn} setInputTxn={setInputTxn} saveTxn={saveTxn} />
 			</div>
 		</div>
 	);
