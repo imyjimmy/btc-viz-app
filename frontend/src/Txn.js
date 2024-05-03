@@ -3,13 +3,11 @@ import { TxnExplainer } from './TxnExplainer';
 import { useResizeDetector } from 'react-resize-detector';
 import { format, updateMatchers } from './syntaxHighlighter';
 import { SaveIcon } from './SaveIcon';
-// import { LiaSaveSolid } from "react-icons/lia";
 
 import "./Txn.css";
 
 const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
   const [txnName, setTxnName] = useState('')
-  // const [inputTxn, setInputTxn] = useState()
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
   const [markupHtml, setMarkupHtml] = useState()
@@ -48,8 +46,7 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
         setParsedTxn(resp.data.tx)
       }
     }
-    // console.log('input:', input)
-    if (inputTxn !== '') {
+    if (inputTxn !== '' && inputTxn !== undefined) {
       setInputTxn(inputTxn)
       fetchData()
       codeRef.current.innerHTML = inputTxn
@@ -103,7 +100,7 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
 	}
 
 	const fetchTxn = async (e) => {
-    if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart != 0) { // dont fire on text selection, address special case of highlighting all and delete text
+    if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart !== 0) { // dont fire on text selection, address special case of highlighting all and delete text
       // console.log('fetching bruh:', e.target.selectionStart, e.target.selectionEnd, inputTxn)
       const resp = await conditionalFetch(inputTxn)
       if (resp !== undefined) {
@@ -138,7 +135,7 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
   const markupFn = (outputHtml) => {
     
     let maxChars = Math.floor(width / newLineRatio); // width - total padding
-    if (width % newLineRatio == 0) { maxChars -= 1 }
+    if (width % newLineRatio < 3) { maxChars -= 1 } // edge case bug
 
     var chars = 0;
     if (outputHtml) {

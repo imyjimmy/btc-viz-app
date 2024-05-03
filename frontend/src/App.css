@@ -100,7 +100,16 @@ body:has(.sidebar-item > input:checked) .nav-right {
 
 .nav-right > div {
   /* border: 1px solid red; */
-  margin-left: 12px;
+  margin-left: 16px;
+}
+
+.nav-right > div > button {
+  background: transparent;
+  color: white;
+  padding: 0px;
+  border: 0px;
+  font-size: medium;
+  white-space: nowrap;
 }
 
 .sidebar-nav {

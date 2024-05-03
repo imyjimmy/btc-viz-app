@@ -14,13 +14,10 @@ const addMatcher = (matchers, txn, base, key) => {
 export const updateMatchers = (txn) => {
   const matchers = []
   Object.keys(txn).map((key) => {
-    console.log(key)
     if (key === 'inputs' || key === 'outputs') {
       const inOrOutArray = txn[key]
       //  [{txid: {…}, vout: {…}, script_sig: {…}, sequence: {…}}]
       inOrOutArray.map((k) => {
-        // addMatcher(matchers, inOrOutArray[k], k)
-        // console.log(k)
         Object.keys(k).map(innerKey => {
           if (innerKey !== 'witness') { // handle witness later
             addMatcher(matchers, k, key, innerKey)
@@ -29,9 +26,6 @@ export const updateMatchers = (txn) => {
             witnessArr.map((witness, index) => {
               addMatcher(matchers, witnessArr, 'witness', index)
             })
-            // Object.keys(k[innerKey]).map((witness, index) => 
-            //   addMatcher(matchers, witness, 'witness', index)
-            // )
           }
         })
       })
@@ -65,7 +59,6 @@ export const format = (inputText, matchers, callback) => {
     if (nextMatch) {
       var token = sanitizedInputText.substring(0, nextMatch.index).replace(/\ /g, '');
       if (token.length > 0) { 
-        console.log('token: ', token);
         outputHtmlArr.push({ element: 'span', className: '', text: token})
       }
       var matchText = nextMatch[0];
@@ -78,6 +71,5 @@ export const format = (inputText, matchers, callback) => {
       sanitizedInputText = "";
     }
   }
-  console.log('outputHtmlArr:', outputHtmlArr)
   callback(outputHtmlArr)
 }

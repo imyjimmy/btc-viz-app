@@ -19,7 +19,6 @@ function App() {
 	}, []);
 
 	const saveTxn = (txnName, inputTxn) => {
-		// console.log('save txn:', txnName, inputTxn)
 		const _txns = localStorage.getItem('btc-txns')
 		let txns; 
 		if (_txns) {
@@ -38,7 +37,6 @@ function App() {
 	}
 
 	const selectTxn = (key) => (e) => {
-		console.log('hey: ', e, key, txns[key]);
 		setInputTxn(txns[key])
 	}
 
