@@ -38,7 +38,7 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
     textareaRef.current.focus()
   }, [])
 
-  // /* Loads a Txn */
+  /* Loads a Txn */
   useEffect(() => {
     async function fetchData() {
       const resp = await conditionalFetch(inputTxn)
@@ -101,7 +101,6 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
 
 	const fetchTxn = async (e) => {
     if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart !== 0) { // dont fire on text selection, address special case of highlighting all and delete text
-      // console.log('fetching bruh:', e.target.selectionStart, e.target.selectionEnd, inputTxn)
       const resp = await conditionalFetch(inputTxn)
       if (resp !== undefined) {
         setParsedTxn(resp.data.tx)
