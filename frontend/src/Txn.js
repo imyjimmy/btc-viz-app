@@ -6,7 +6,7 @@ import { SaveIcon } from './SaveIcon';
 
 import "./Txn.css";
 
-const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
+const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   const [txnName, setTxnName] = useState('')
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
@@ -38,7 +38,7 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
     textareaRef.current.focus()
   }, [])
 
-  /* Loads a Txn */
+  /* Loads a Txn When Selected Txn from localstorage changes*/
   useEffect(() => {
     async function fetchData() {
       const resp = await conditionalFetch(inputTxn)
@@ -52,10 +52,11 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
       codeRef.current.innerHTML = inputTxn
       format(codeRef.current.innerText, matchers, setMarkupHtml)
     }
-  }, [inputTxn])
+  }, [currentTxn])
 
   const changeInput = (e) => {
 		e.preventDefault()
+    syncScroll()
 		setInputTxn(e.target.value)
 
     if (e.target.value === '') {
@@ -63,18 +64,28 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
     }
 
 		codeRef.current.innerHTML = e.target.value
-    syncScroll()
+    
     format(codeRef.current.innerText, matchers, setMarkupHtml) // can highlight codeRef
 	}
 
   const syncScroll = () => {
     /* Scroll result to scroll coords of event - sync with textarea */
     let result_element = ref.current;
+    // let codeRef_element = codeRef.current;
     // Get and set x and y
     if (textareaRef && textareaRef.current) {
       result_element.scrollTop = textareaRef.current.scrollTop;
       result_element.scrollLeft = textareaRef.current.scrollLeft;
+
+      codeRef_element.scrollTop = textareaRef.current.scrollTop;
+      codeRef_element.scrollLeft = textareaRef.current.scrollLeft;
+      console.log('scrollTop: ', textareaRef.current.scrollTop)
     }
+
+    // if (codeRef && codeRef.current) {
+    //   result_element.scrollTop = codeRef.current.scrollTop;
+    //   result_element.scrollLeft = codeRef.current.scrollLeft;
+    // }
   }
 
 	// source: https://www.freecodecamp.org/news/javascript-debounce-example/
@@ -86,7 +97,6 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
 		};
 	}
 
-  // @todo: inputTxn as a param to conditionalFetch fn
 	const conditionalFetch = async (inputTxn) => {
 		return inputTxn && inputTxn.length % 2 === 0 ? await fetch(
       `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/data?txn=` + inputTxn, {
@@ -134,7 +144,7 @@ const Txn = ({saveTxn, inputTxn, setInputTxn}) => {
   const markupFn = (outputHtml) => {
     
     let maxChars = Math.floor(width / newLineRatio); // width - total padding
-    if (width % newLineRatio < 3) { maxChars -= 1 } // edge case bug
+    if (width % newLineRatio < 1) { maxChars -= 1 } // edge case bug
 
     var chars = 0;
     if (outputHtml) {

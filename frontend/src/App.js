@@ -8,6 +8,7 @@ function App() {
 	/* Save Transactions */
 	const [txns, setTxns] = useState({})
 	const [inputTxn, setInputTxn] = useState()
+	const [currentTxn, setCurrentTxn] = useState('')
 	
 	useEffect(() => {
 		const txns = JSON.parse(localStorage.getItem('btc-txns'));
@@ -38,6 +39,7 @@ function App() {
 
 	const selectTxn = (key) => (e) => {
 		setInputTxn(txns[key])
+		setCurrentTxn(key)
 	}
 
 	return (
@@ -61,7 +63,7 @@ function App() {
 						{ Object.keys(txns).map(key => <div><button onClick={selectTxn(key)}>{key}</button></div>) }
 					</div>
 				</div>
-				<Txn inputTxn={inputTxn} setInputTxn={setInputTxn} saveTxn={saveTxn} />
+				<Txn currentTxn={currentTxn} inputTxn={inputTxn} setInputTxn={setInputTxn} saveTxn={saveTxn} />
 			</div>
 		</div>
 	);
