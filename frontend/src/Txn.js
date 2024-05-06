@@ -56,30 +56,29 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
 
   const changeInput = (e) => {
 		e.preventDefault()
-    syncScroll()
 		setInputTxn(e.target.value)
 
     if (e.target.value === '') {
       setParsedTxn({})
     }
 
+    ref.current.scrollTop = textareaRef.current.scrollTop
 		codeRef.current.innerHTML = e.target.value
     
+    // codeRef.current.scrollTop = textareaRef.current.scrollTop;
+    // console.log('codearea scrolltop:', codeRef)
     format(codeRef.current.innerText, matchers, setMarkupHtml) // can highlight codeRef
 	}
 
   const syncScroll = () => {
     /* Scroll result to scroll coords of event - sync with textarea */
     let result_element = ref.current;
-    // let codeRef_element = codeRef.current;
+    let codeRef_element = codeRef.current;
     // Get and set x and y
-    if (textareaRef && textareaRef.current) {
+    if (textareaRef && textareaRef.current && textareaRef.current.scrollTop) {
       result_element.scrollTop = textareaRef.current.scrollTop;
       result_element.scrollLeft = textareaRef.current.scrollLeft;
-
-      codeRef_element.scrollTop = textareaRef.current.scrollTop;
-      codeRef_element.scrollLeft = textareaRef.current.scrollLeft;
-      console.log('scrollTop: ', textareaRef.current.scrollTop)
+      console.log(result_element.scrollTop, textareaRef.current.scrollTop, ref)
     }
 
     // if (codeRef && codeRef.current) {
@@ -190,8 +189,8 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           id="editor" 
           name="txn"
           ref={textareaRef}
-          onChange={changeInput} 
-          onKeyUp={debounce((e) => fetchTxn(e))}
+          onChange={(e) => { changeInput(e); setTimeout(() => { syncScroll() }, 100);}}
+          onKeyUp={debounce((e) => {fetchTxn(e)})}
           onScroll={syncScroll}
           value={inputTxn}
           cols="20" 
