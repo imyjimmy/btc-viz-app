@@ -213,7 +213,6 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
 
   return (
     <div className="txn-column">
-      matchers: {matchers.length}
       <div className="txn-input">
         <label htmlFor="txn">bitcoin transaction:</label><input type="text" placeholder={'untitled'} value={txnName} onChange={changeTxnName}/>
         {txnName ? (<button className="saveButton" onClick={(e) => saveTxn(txnName,inputTxn)}><SaveIcon className="saveIcon"/></button>):(<></>)}
