@@ -12,13 +12,11 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
 	const [matchers, setMatchers] = useState([])
   const [markupHtml, setMarkupHtml] = useState()
   const textareaRef = useRef();
-	const codeRef = useRef();
+	// const codeRef = useRef();
 
   const onResize = useCallback(() => {
     const matchers = updateMatchers(parsedTxn);
-    let _matchers = []
-    Object.assign(_matchers, matchers)
-    format(codeRef.current.innerText, _matchers, setMarkupHtml)
+    // format(codeRef.current.innerText, matchers, setMarkupHtml)
   }, [parsedTxn]);
 
   const { width, ref } = useResizeDetector({
@@ -51,23 +49,42 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
     if (inputTxn !== '' && inputTxn !== undefined) {
       setInputTxn(inputTxn)
       fetchData()
-      codeRef.current.innerHTML = inputTxn
-      let _matchers = []
-      Object.assign(_matchers, matchers)
-      format(codeRef.current.innerText, _matchers, setMarkupHtml)
+      // codeRef.current.innerHTML = inputTxn
+      // format(codeRef.current.innerText, matchers, setMarkupHtml)
     }
   }, [currentTxn])
+
+  const changeInput = (e) => {
+		e.preventDefault()
+		setInputTxn(e.target.value)
+
+    if (e.target.value === '') {
+      setParsedTxn({})
+    }
+
+    ref.current.scrollTop = textareaRef.current.scrollTop
+		// codeRef.current.innerHTML = e.target.value
+    
+    // codeRef.current.scrollTop = textareaRef.current.scrollTop;
+    // console.log('codearea scrolltop:', codeRef)
+    // format(codeRef.current.innerText, matchers, setMarkupHtml) // can highlight codeRef
+	}
 
   const syncScroll = () => {
     /* Scroll result to scroll coords of event - sync with textarea */
     let result_element = ref.current;
-    let codeRef_element = codeRef.current;
+    // let codeRef_element = codeRef.current;
     // Get and set x and y
     if (textareaRef && textareaRef.current && textareaRef.current.scrollTop) {
       result_element.scrollTop = textareaRef.current.scrollTop;
       result_element.scrollLeft = textareaRef.current.scrollLeft;
       console.log(result_element.scrollTop, textareaRef.current.scrollTop, ref)
     }
+
+    // if (codeRef && codeRef.current) {
+    //   result_element.scrollTop = codeRef.current.scrollTop;
+    //   result_element.scrollLeft = codeRef.current.scrollLeft;
+    // }
   }
 
 	// source: https://www.freecodecamp.org/news/javascript-debounce-example/
@@ -79,16 +96,6 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
 		};
 	}
 
-  /* Fetching and Parsing the input Txn 
-  * - conditionalFetch
-  * - fetchTxn
-  * - useEffect dep on parsedTxn
-  * - useEffect dep on markupHtml
-  * 
-  * conditionalFetch and fetchTxn are all about fetching when
-  * input hex is an even number (1 byte == 2 hexes)
-  * 
-  */
 	const conditionalFetch = async (inputTxn) => {
 		return inputTxn && inputTxn.length % 2 === 0 ? await fetch(
       `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/data?txn=` + inputTxn, {
@@ -109,28 +116,6 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
       }
     }
 	}
-
-  useEffect(() => {
-    // console.log('parsedTxn changed, updating matchers')
-		let _matchers = updateMatchers(parsedTxn);
-    if (_matchers.length > 0) { 
-      let matchers = [];
-      Object.assign(matchers, _matchers) // _matchers will eventually be consumed to 0 in format function
-      setMatchers(matchers);
-      console.log('calling format from parsedTxn change. matchers: ', matchers)
-      format(codeRef.current.innerText, _matchers, setMarkupHtml)
-    }
-	}, [parsedTxn])
-
-  useEffect(() => {
-    codeRef.current.innerHTML = markupFn(markupHtml, 1)
-    syncScroll()
-  }, [markupHtml])
-
-  /* Composing the HTML 
-  *   the following section has fn's related to composing the parsed HTML 
-  *   correctly in a way that contains syntax highlighting
-  */
 
   const splitAt = (index, xs) => [xs.slice(0, index), xs.slice(index)]
 
@@ -155,7 +140,7 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   }
 
   /* annotates text in <code> area with highlighted colors, breaks <br /> if needed */
-  const markupFn = (outputHtml, flag) => {
+  const markupFn = (outputHtml) => {
     
     let maxChars = Math.floor(width / newLineRatio); // width - total padding
     if (width % newLineRatio < 1) { maxChars -= 1 } // edge case bug
@@ -183,37 +168,20 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
       result = composeHtml(outputHtml)
     }
 
-    if (flag === 1) {
-      return result
-    }
-
     return { __html: result }
   }
 
-  /* Change Handler */
-  const changeInput = (e) => {
-		e.preventDefault()
-		setInputTxn(e.target.value)
-
-    if (e.target.value === '') {
-      setParsedTxn({})
+	useEffect(() => {
+		const matchers = updateMatchers(parsedTxn);
+    if (matchers.length > 0) { 
+      setMatchers(matchers);
+      // console.log('calling format from parsedTxn change. matchers: ', matchers)
+      // format(codeRef.current.innerText, matchers, setMarkupHtml)
     }
-
-    ref.current.scrollTop = textareaRef.current.scrollTop
-    /* problematic-- innertext gets completely replaced by e.target.value including the syntax highlighting */
-		codeRef.current.innerHTML = e.target.value
-    
-    // codeRef.current.scrollTop = textareaRef.current.scrollTop;
-    // console.log('codearea scrolltop:', codeRef)
-    console.log('changeInput, formatting: ', codeRef.current.innerText, matchers)
-    let _matchers = []
-    Object.assign(_matchers, matchers)
-    format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef
-	}
+	}, [parsedTxn])
 
   return (
     <div className="txn-column">
-      matchers: {matchers.length}
       <div className="txn-input">
         <label htmlFor="txn">bitcoin transaction:</label><input type="text" placeholder={'untitled'} value={txnName} onChange={changeTxnName}/>
         {txnName ? (<button className="saveButton" onClick={(e) => saveTxn(txnName,inputTxn)}><SaveIcon className="saveIcon"/></button>):(<></>)}
@@ -221,7 +189,7 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           id="editor" 
           name="txn"
           ref={textareaRef}
-          onChange={changeInput}
+          onChange={(e) => { changeInput(e); syncScroll();}}
           onKeyUp={debounce((e) => {fetchTxn(e)})}
           onScroll={syncScroll}
           value={inputTxn}
@@ -229,13 +197,10 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           rows="12"
         />
         <pre id="highlighting" aria-hidden="true" ref={ref}>
-          <code key="code-element" ref={codeRef} className="language-html" id="highlighting-content" 
-          //dangerouslySetInnerHTML={markupFn(markupHtml)}
-          >
+          <code className="language-html" id="highlighting-content">
           </code>
         </pre>
       </div>
-      <TxnExplainer txn={parsedTxn}/>
     </div>
   )
 }

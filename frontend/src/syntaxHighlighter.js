@@ -38,6 +38,7 @@ export const updateMatchers = (txn) => {
 }
 
 export const format = (inputText, matchers, callback) => {
+  console.log('format:', matchers);
   var sanitizedInputText = inputText.replace(/\n/g,'');
   var outputHtmlArr = [];
 
