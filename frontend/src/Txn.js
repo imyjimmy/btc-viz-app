@@ -228,8 +228,8 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           rows="12"
         />
         <pre id="highlighting" aria-hidden="true" ref={ref}>
-          <code key="code-element" ref={codeRef} className="language-html" id="highlighting-content" 
-          //dangerouslySetInnerHTML={markupFn(markupHtml)}
+          <code key="code-element" ref={codeRef} className="language-html"
+          id="highlighting-content" 
           >
           </code>
         </pre>
