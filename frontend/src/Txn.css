@@ -93,10 +93,10 @@ input[type="text"]:focus {
   background: #3e5c76;
 }
 
-.match-num_inputs {
+/* .match-num_inputs {
   /* background: #283f60; */
-  background: #5a49c2;
-}
+  /* background: #5a49c2; */
+/* }  */
 
 .match-inputs-txid {
   background: #457b9d;
@@ -119,9 +119,14 @@ input[type="text"]:focus {
   background: #2a5fd2;
 }
 
-.match-num_outputs {
-  background: #d16868;
+[class*="-num_"], [class*="-length"] {
+  /* background: #362fc1; */
+  background: #5a49c2;
 }
+
+/* .match-num_outputs {
+  background: #d16868;
+} */
 
 .match-outputs-amount {
   /* background: #68d89b; */

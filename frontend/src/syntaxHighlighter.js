@@ -9,6 +9,13 @@ const addMatcher = (matchers, txn, base, key) => {
       // className,
     })
   }
+  if (txn[key] && txn[key]['length']) {
+    matchers.push({
+      key: base ? base + '-' + key + '-length' : key + '-length',
+      match: new RegExp(txn[key]['length']),
+      className: base ? `match-${base}-${key}-length` : `match-${key}-length`
+    })
+  }
 }
 
 export const updateMatchers = (txn) => {
@@ -18,12 +25,13 @@ export const updateMatchers = (txn) => {
       const inOrOutArray = txn[key]
       //  [{txid: {…}, vout: {…}, script_sig: {…}, sequence: {…}}]
       inOrOutArray.map((k) => {
-        Object.keys(k).map(innerKey => {
+        Object.keys(k).map(innerKey => { // map over keys within an entry that exists in either input or output array
           if (innerKey !== 'witness') { // handle witness later
             addMatcher(matchers, k, key, innerKey)
           } else { // witness
-            const witnessArr = k[innerKey]
-            witnessArr.map((witness, index) => {
+            const witnessArr = k[innerKey] // [{length: 'xx', str: 'abc', hex: '16ae'}, ...]
+            console.log(witnessArr, k, innerKey)
+            witnessArr.map((witnessEntry, index) => { // {length: 'xx', str: 'abc', hex: '16ae'}
               addMatcher(matchers, witnessArr, 'witness', index)
             })
           }
