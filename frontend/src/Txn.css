@@ -51,6 +51,11 @@ input[type="text"]:focus {
   border: 0;
   width: calc(100% - 12px);
   height: 220px;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  transition: left 300ms;
+  overflow-y: scroll;
 }
 
 #editor, #highlighting, #highlighting * {
@@ -60,22 +65,13 @@ input[type="text"]:focus {
   line-height: 20pt;
 }
 
-#editor, #highlighting {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  transition: left 300ms;
-  overflow-y: scroll;
-  /* white-space: nowrap; */
-}
-
 #editor {
   z-index: 1;
   color: transparent;
   background: transparent;
   caret-color: white;
   resize: none;
-  scrollbar-color: red;
+  scrollbar-color: #ababab black;
   scrollbar-width: thin;
 }
 
