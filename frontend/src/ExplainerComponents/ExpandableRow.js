@@ -43,6 +43,11 @@ const ExpandableRow = ({id, entry, hex, cssPrefix}) => {
         height: isExpanded ? contentHeight : 0,
       }}
     className="explainer-row" ref={ref}>
+      {/* 
+        entry[k]: the intepreted value, 
+        hex: the original hex
+        key: the specific part of the transaction
+      */}
       { isExpanded ? ('stuff happens'): ('')}
     </div>
     </>
