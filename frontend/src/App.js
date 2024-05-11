@@ -43,9 +43,15 @@ function App() {
 	}
 
 	return (
+		<>
 		<div className="App">
 			<nav className="nav">
-				{ process.env.NODE_ENV !== 'production' ? (<div className="node-env">{process.env.NODE_ENV}</div>):(<></>)}
+				<h1>A Bit<span style={{ background: '#5a49c2'}}>coin</span> Transaction {' '} 
+					<span style={{ background: '#bb9f64'}}>Visualizer</span></h1>
+					{ process.env.NODE_ENV !== 'production' ? (<div className="header-links">
+						<a href="/bitcoin"><h4>bitcoin</h4></a>
+						<a href="/psbt"><h4>psbt</h4></a>
+					</div>):(<></>)}
 			</nav>
 			<div className="container">
 				<div className="sidebar-nav">
@@ -66,6 +72,10 @@ function App() {
 				<Txn currentTxn={currentTxn} inputTxn={inputTxn} setInputTxn={setInputTxn} saveTxn={saveTxn} />
 			</div>
 		</div>
+		<div className="footer">
+			{ process.env.NODE_ENV !== 'production' ? (<div className="node-env">{process.env.NODE_ENV}</div>):(<></>)}
+		</div>
+		</>
 	);
 }
 

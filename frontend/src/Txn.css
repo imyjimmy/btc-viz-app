@@ -1,11 +1,11 @@
 @media screen and (max-width: 319px) {
-  #editor, #highlighting {
-    position: absolute;
-    top: 50px;
-  }
-
   .txn-input {
     font-size: small;
+  }
+
+  #editor, #highlighting {
+    position: absolute;
+    top: 40px;
   }
 }
 
@@ -19,21 +19,10 @@
     font-size: small;
   }
 
-  #editor, #highlighting {
-    position: absolute;
-    top: 40px;
+  input[type="text"] {
+    margin: 0px 2px;
+    width: 72px;
   }
-}
-
-@media screen and (min-width: 480px) {
-  /* .txn-column {
-    margin: 0px 12px 12px 12px;
-    flex-grow: 1;
-  }
-
-  .txn-input {
-    font-size: small;
-  } */
 
   #editor, #highlighting {
     position: absolute;
@@ -41,7 +30,14 @@
   }
 }
 
-@media screen and (min-width: 641px) {
+@media screen and (min-width: 480px) {
+  input[type="text"] {
+    margin: 0px 4px;
+    width: 160px;
+  }
+}
+
+@media screen and (min-width: 640px) {
   .txn-column {
     margin: 0px 24px 12px 24px;
     flex-grow: 1;
@@ -51,9 +47,9 @@
     font-size: medium;
   }
 
-  #editor, #highlighting {
-    position: absolute;
-    top: 20px;
+  input[type="text"] {
+    margin: 0px 8px;
+    width: 180px;
   }
 }
 
