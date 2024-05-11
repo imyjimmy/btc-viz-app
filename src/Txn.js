@@ -1,5 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
 import { TxnExplainer } from './TxnExplainer';
+import { Welcome } from './Welcome';
 import { useResizeDetector } from 'react-resize-detector';
 import { format, updateMatchers } from './syntaxHighlighter';
 import { SaveIcon } from './SaveIcon';
@@ -234,7 +235,7 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           </code>
         </pre>
       </div>
-      <TxnExplainer txn={parsedTxn}/>
+      {inputTxn ? (<TxnExplainer txn={parsedTxn}/>) : (<Welcome />)}
     </div>
   )
 }

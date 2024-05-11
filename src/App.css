@@ -79,7 +79,7 @@ nav {
   gap: 16px;
 }
 
-.header-links a {
+* a {
   color: white;
 }
 
