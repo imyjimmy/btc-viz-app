@@ -1,6 +1,6 @@
 {
   "short_name": "Bitcoin Regex",
-  "name": "Bitcoin Transaction Highlighter",
+  "name": "Bitcoin Transaction Visualizer",
   "icons": [
     {
       "src": "favicon.ico",
