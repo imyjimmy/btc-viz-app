@@ -6,11 +6,9 @@ body {
 
 /* App Stuff */
 .App {
-  /* text-align: center; */
   background-color: #191920; /* #282c34; */
   font-size: medium; /*calc(10px + 2vmin); */
   color: white;
-  padding: 24px 24px 24px 18px;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -84,8 +82,44 @@ nav {
   display: none;
 }
 
-body:has(.sidebar-item > input:checked) .nav-right {
-  width: 12rem;
+/* TODO width 319 and lower */
+@media screen and (min-width: 320px) {
+  body:has(.sidebar-item > input:checked) .nav-right {
+    width: 6.2rem;
+  }
+  .nav-right h4 {
+    font-size: small;
+  }
+
+  .App {
+    padding: 24px 24px 24px 4px;
+  }
+}
+
+@media screen and (min-width: 641px) {
+  .App {
+    padding: 24px 24px 24px 12px;
+  }
+
+  body:has(.sidebar-item > input:checked) .nav-right {
+    width: 8rem;
+  }
+  .nav-right h4 {
+    font-size: medium;
+  }
+}
+
+@media screen and (min-width: 961px) {
+  .App {
+    padding: 24px 24px 24px 24px;
+  }
+  
+  body:has(.sidebar-item > input:checked) .nav-right {
+    width: 12rem;
+  }
+  .nav-right h4 {
+    font-size: medium;
+  }
 }
 
 .nav-right {

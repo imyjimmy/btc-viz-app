@@ -1,6 +1,72 @@
-.txn-column {
-  margin: 0px 24px 12px 32px;
-  flex-grow: 1;
+@media screen and (max-width: 319px) {
+  #editor, #highlighting {
+    position: absolute;
+    top: 50px;
+  }
+
+  .txn-input {
+    font-size: small;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .txn-column {
+    margin: 0px 12px 12px 12px;
+    flex-grow: 1;
+  }
+
+  .txn-input {
+    font-size: small;
+  }
+
+  #editor, #highlighting {
+    position: absolute;
+    top: 40px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  /* .txn-column {
+    margin: 0px 12px 12px 12px;
+    flex-grow: 1;
+  }
+
+  .txn-input {
+    font-size: small;
+  } */
+
+  #editor, #highlighting {
+    position: absolute;
+    top: 20px;
+  }
+}
+
+@media screen and (min-width: 641px) {
+  .txn-column {
+    margin: 0px 24px 12px 24px;
+    flex-grow: 1;
+  }
+
+  .txn-input {
+    font-size: medium;
+  }
+
+  #editor, #highlighting {
+    position: absolute;
+    top: 20px;
+  }
+}
+
+@media (min-width:961px) {
+  .txn-column {
+    margin: 0px 24px 12px 32px;
+    flex-grow: 1;
+  }
+
+  /* #editor, #highlighting {
+    position: absolute;
+    top: 20px;
+  } */
 }
 
 label[for=txn] {
@@ -22,9 +88,7 @@ label[for=txn] {
 }
 
 .txn-input {
-  display: flex;
-  /* flex-direction: column; */
-  font-size: medium;
+  /* font-size: medium; */
   position: relative;
 }
 
@@ -50,8 +114,8 @@ input[type="text"]:focus {
   border: 0;
   width: calc(100% - 12px);
   height: 220px;
-  position: absolute;
-  top: 20px;
+  /* position: absolute;
+  top: 20px; */
   left: 0;
   transition: left 300ms;
   overflow-y: scroll;
