@@ -7,6 +7,26 @@ body {
 
 * { box-sizing: border-box; }
 
+/* App Stuff */
+.App {
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
 /* 282c34 */
 /* .App-header {
   background-color: #191920; 
@@ -188,6 +208,13 @@ nav {
   fill: #dddddd;
   height: 24px;
   width: 24px;
+}
+
+/* Overall container has sidebar-nav and <Txn />*/
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
 }
 
 .details-column {

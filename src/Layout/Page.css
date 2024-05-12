@@ -1,0 +1,14 @@
+.App {
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+}
+
+/* Overall container has sidebar-nav and <Txn />*/
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
