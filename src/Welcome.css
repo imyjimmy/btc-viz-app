@@ -2,3 +2,9 @@
 .welcome-message {
   margin-top: 250px;
 }
+
+.up-arrow {
+  width: 45px;
+  height: 45px;
+  /* fill: white; */
+}
