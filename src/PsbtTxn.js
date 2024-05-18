@@ -46,7 +46,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
     async function fetchData() {
       const resp = await conditionalFetch(inputTxn)
       if (resp !== undefined) {
-        setParsedTxn(resp.data.tx)
+        setParsedTxn(resp.data.psbt)
       }
     }
     if (inputTxn !== '' && inputTxn !== undefined) {
@@ -55,7 +55,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
       codeRef.current.innerHTML = inputTxn
       let _matchers = []
       Object.assign(_matchers, matchers)
-      format(codeRef.current.innerText, _matchers, setMarkupHtml)
+      // format(codeRef.current.innerText, _matchers, setMarkupHtml)
     }
   }, [currentTxn])
 
@@ -92,7 +92,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   */
 	const conditionalFetch = async (inputTxn) => {
 		return inputTxn && inputTxn.length % 2 === 0 ? await fetch(
-      `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/data?txn=` + inputTxn, {
+      `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/psbt?txn=` + inputTxn, {
           method: 'GET',
           headers: { 'Authorization': `Token ${process.env.REACT_APP_PUBLIC_BE_TOKEN}`}
         }).then((resp) => { if (!resp.ok) { 
@@ -106,14 +106,15 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
     if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart !== 0) { // dont fire on text selection, address special case of highlighting all and delete text
       const resp = await conditionalFetch(inputTxn)
       if (resp !== undefined) {
-        setParsedTxn(resp.data.tx)
+        // let psbt = JSON.parse(resp.data.psbt)
+        setParsedTxn(resp.data.psbt)
       }
     }
 	}
 
   useEffect(() => {
     // console.log('parsedTxn changed, updating matchers')
-		let _matchers = updateMatchers(parsedTxn);
+		let _matchers = updateMatchers(parsedTxn, 'psbt');
     if (_matchers.length > 0) { 
       let matchers = [];
       Object.assign(matchers, _matchers) // _matchers will eventually be consumed to 0 in format function
@@ -209,7 +210,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
     console.log('changeInput, formatting: ', codeRef.current.innerText, matchers)
     let _matchers = []
     Object.assign(_matchers, matchers)
-    format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef
+    // format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef
 	}
 
   return (
@@ -235,7 +236,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           </code>
         </pre>
       </div>
-      <TxnExplainer txn={parsedTxn}/>
+      {/* <TxnExplainer txn={parsedTxn}/> */}
     </div>
   )
 }

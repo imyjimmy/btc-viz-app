@@ -7,10 +7,10 @@ import {
 
 import { PSBT } from './pages/PSBT';
 import { Bitcoin } from './pages/Bitcoin';
-import { Txn } from './BtcTxn';
+// import { Txn } from './BtcTxn';
 import "./App.css";
 
-import { TransactionIcon } from './TxnIcon';
+// import { TransactionIcon } from './TxnIcon';
 
 function App() {
 	/* Router */
