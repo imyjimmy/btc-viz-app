@@ -42,12 +42,17 @@ function App() {
 		setCurrentTxn(key)
 	}
 
+  /*
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em; 
+  */
 	return (
 		<>
 		<div className="App">
 			<nav className="nav">
-				<h1>A Bit<span style={{ background: '#5a49c2'}}>coin</span><span style={{ background: '#5f7aa1'}}> Transaction </span>
-					<span style={{ background: '#bb9f64'}}>Visualizer</span></h1>
+				<div className="nav-title">A Bit<span style={{ background: '#5a49c2'}}>coin</span><span style={{ background: '#5f7aa1'}}> Transaction </span>
+					<span style={{ background: '#bb9f64'}}>Visualizer</span></div>
 					{ process.env.NODE_ENV !== 'production' ? (<div className="header-links">
 						<a href="/bitcoin"><h4>bitcoin</h4></a>
 						<a href="/psbt"><h4>psbt</h4></a>

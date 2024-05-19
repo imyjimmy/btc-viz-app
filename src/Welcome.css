@@ -1,3 +1,41 @@
+@media screen and (min-width: 320px) {
+  .welcome-message h2 {
+    font-size: .95em;
+    margin-block-start: 0.43em;
+    margin-block-end: 0.43em;
+  }
+
+  .welcome-message p {
+    font-size: .9em;
+  }
+
+  .welcome-message li {
+    font-size: .9em;
+  }
+
+}
+
+@media screen and (min-width: 641px) {
+  .welcome-message h2 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-block-start: 0.63em;
+    margin-block-end: 0.63em;
+  }
+}
+
+@media screen and (min-width: 961px) {
+  .welcome-message h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+
+}
 
 .welcome-message {
   margin-top: 250px;
