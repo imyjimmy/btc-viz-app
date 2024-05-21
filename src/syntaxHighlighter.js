@@ -18,29 +18,36 @@ const addMatcher = (matchers, txn, base, key) => {
   }
 }
 
-export const updateMatchers = (txn) => {
+export const updateMatchers = (txn, mode='btc') => {
   const matchers = []
-  Object.keys(txn).map((key) => {
-    if (key === 'inputs' || key === 'outputs') {
-      const inOrOutArray = txn[key]
-      //  [{txid: {…}, vout: {…}, script_sig: {…}, sequence: {…}}]
-      inOrOutArray.map((k) => {
-        Object.keys(k).map(innerKey => { // map over keys within an entry that exists in either input or output array
-          if (innerKey !== 'witness') { // handle witness later
-            addMatcher(matchers, k, key, innerKey)
-          } else { // witness
-            const witnessArr = k[innerKey] // [{length: 'xx', str: 'abc', hex: '16ae'}, ...]
-            console.log(witnessArr, k, innerKey)
-            witnessArr.map((witnessEntry, index) => { // {length: 'xx', str: 'abc', hex: '16ae'}
-              addMatcher(matchers, witnessArr, 'witness', index)
-            })
-          }
+  if (mode === 'btc') {
+    Object.keys(txn).map((key) => {
+      if (key === 'inputs' || key === 'outputs') {
+        const inOrOutArray = txn[key]
+        //  [{txid: {…}, vout: {…}, script_sig: {…}, sequence: {…}}]
+        inOrOutArray.map((k) => {
+          Object.keys(k).map(innerKey => { // map over keys within an entry that exists in either input or output array
+            if (innerKey !== 'witness') { // handle witness later
+              addMatcher(matchers, k, key, innerKey)
+            } else { // witness
+              const witnessArr = k[innerKey] // [{length: 'xx', str: 'abc', hex: '16ae'}, ...]
+              console.log(witnessArr, k, innerKey)
+              witnessArr.map((witnessEntry, index) => { // {length: 'xx', str: 'abc', hex: '16ae'}
+                addMatcher(matchers, witnessArr, 'witness', index)
+              })
+            }
+          })
         })
-      })
-    } else {
-      addMatcher(matchers, txn, '', key)
-    }
-  })
+      } else {
+        console.log('else, add matcher,', matchers, txn, key)
+        addMatcher(matchers, txn, '', key)
+      }
+    })
+  }
+
+  if (mode === 'psbt') {
+    console.log('updating psbt matchers')
+  }
 
   return matchers
 }

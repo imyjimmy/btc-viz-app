@@ -7,7 +7,7 @@ import { SaveIcon } from './SaveIcon';
 
 import "./Txn.css";
 
-const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
+const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   const [txnName, setTxnName] = useState('')
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
@@ -240,4 +240,4 @@ const Txn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   )
 }
 
-export { Txn }
+export { BtcTxn }
