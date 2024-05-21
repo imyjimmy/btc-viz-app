@@ -6,7 +6,8 @@ import { format } from './syntaxHighlighter';
 import { traverseJson, updateMatchers } from "./highlighter/psbtHighlighter";
 import { SaveIcon } from './SaveIcon';
 
-import "./Txn.css";
+import './Txn.css';
+import './Psbt.css';
 
 const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   const [txnName, setTxnName] = useState('')
