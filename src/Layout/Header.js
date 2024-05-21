@@ -5,10 +5,10 @@ const Header = () => {
     <nav className="nav">
 				<h1>A Bit<span style={{ background: '#5a49c2'}}>coin</span><span style={{ background: '#5f7aa1'}}> Transaction </span>
 					<span style={{ background: '#bb9f64'}}>Visualizer</span></h1>
-					{ process.env.NODE_ENV !== 'production' ? (<div className="header-links">
+					<div className="header-links">
 						<a href="/bitcoin"><h4>bitcoin</h4></a>
 						<a href="/psbt"><h4>psbt</h4></a>
-					</div>):(<></>)}
+					</div>
 			</nav>
   )
 }
