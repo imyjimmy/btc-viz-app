@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 
 import { Page } from '../Layout/Page';
 import { PsbtTxn } from '../PsbtTxn';
@@ -6,6 +7,8 @@ import "./PSBT.css";
 import { TransactionIcon } from '../TxnIcon';
 
 const PSBT = ({}) => {
+  /* psbt from route*/
+  const { psbt } = useParams();
 	/* Save Transactions */
 	const [txns, setTxns] = useState({})
 	const [inputTxn, setInputTxn] = useState()
@@ -60,7 +63,7 @@ const PSBT = ({}) => {
 					{ Object.keys(txns).map(key => <div><button onClick={selectTxn(key)}>{key}</button></div>) }
 				</div>
 			</div>
-			<PsbtTxn currentTxn={currentTxn} inputTxn={inputTxn} setInputTxn={setInputTxn} saveTxn={saveTxn} />
+			<PsbtTxn currentTxn={currentTxn ?? ''} inputTxn={inputTxn ?? psbt} setInputTxn={setInputTxn} saveTxn={saveTxn} psbtParam={psbt}/>
 		</Page>
 	);
 }

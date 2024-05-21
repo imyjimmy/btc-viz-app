@@ -9,7 +9,7 @@ import { SaveIcon } from './SaveIcon';
 import './Txn.css';
 import './Psbt.css';
 
-const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
+const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   const [txnName, setTxnName] = useState('')
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
@@ -46,7 +46,9 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
     textareaRef.current.focus()
   }, [])
 
-  /* Loads a Txn When Selected Txn from localstorage changes*/
+  /* Loads a Txn When Selected Txn from localstorage changes
+      problem: it only works once, when currentTxn changes
+  */
   useEffect(() => {
     async function fetchData() {
       const resp = await conditionalFetch(inputTxn)
@@ -60,9 +62,9 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
       codeRef.current.innerHTML = inputTxn
       let _matchers = []
       Object.assign(_matchers, matchers)
-      // format(codeRef.current.innerText, _matchers, setMarkupHtml)
+      format(codeRef.current.innerText, _matchers, setMarkupHtml)
     }
-  }, [currentTxn])
+  }, [currentTxn, psbtParam])
 
   const syncScroll = () => {
     /* Scroll result to scroll coords of event - sync with textarea */

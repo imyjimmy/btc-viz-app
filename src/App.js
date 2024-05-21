@@ -21,21 +21,16 @@ function App() {
       element: <Bitcoin />,
     },
 		{
-      path: "/bitcoin",
+      path: "/bitcoin/:txn?",
       element: <Bitcoin />,
     },
     // other pages....
     {
-      path: "/psbt",
+      path: "/psbt/:psbt?",
       element: <PSBT />,
     },
   ])
 
-  /*
-    font-size: 1.5em;
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em; 
-  */
 	return (
 		<RouterProvider router={router} />
 	);
