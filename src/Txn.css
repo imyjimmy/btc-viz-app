@@ -134,6 +134,10 @@ input[type="text"]:focus {
   scrollbar-width: thin;
 }
 
+#editor:focus-visible {
+  outline: 1px solid cornflowerblue;
+}
+
 #highlighting {
   /* overflow-x: clip; */
   border: 1px solid rgb(117, 117, 117);
