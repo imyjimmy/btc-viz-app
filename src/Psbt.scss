@@ -1,0 +1,95 @@
+.psbt-magic{
+  &-magic_bytes, &-head_separator {
+    background: #d04444;
+  }
+}
+
+// .psbt-magic-head_separator {
+//   background:#b45959;
+// }
+
+.psbt-global {
+  &-type-b\'\\x00\' {
+    // &-key-len {
+    //   background:#6266d0;
+    // }
+    &-key {
+      background:#5858a0;
+    }
+    // &-val-len {
+    //   background: #6266d0;
+    // }
+    &-val {
+      background: #6586d4;
+    }
+  }
+
+  // todo: &-type-b\'\\x01\' etc
+}
+
+[class$="-separator"] {
+  background: #a349aa;
+}
+
+[class$="-len"] {
+  background:#4c50d0;
+}
+
+.psbt-input-maps-- {
+  &type-b\'\\x00\' { // PSBT_IN_NON_WITNESS_UTXO = 0x00	
+    &-key {
+      background: #60a058;
+    }
+    &-val {
+      background: #65bf5b;
+    }
+  }
+
+  &type-b\'\\x01\' { // PSBT_IN_WITNESS_UTXO = 0x01	
+    &-key {
+      background: #5875a0;
+    }
+    &-val {
+      background: #2b82ad;
+    }
+  }
+
+  &type-b\'\\x04\' { // PSBT_IN_REDEEM_SCRIPT = 0x04	
+    // &-key-len {
+    //   background:#d0d062;
+    // }
+    &-key {
+      background: #d0ba30;
+    }
+    // &-val-len {
+    //   background: #d0d062;
+    // }
+    &-val {
+      background: #d0ba30;
+    }
+  }
+}
+
+.psbt-output-maps-- {
+  &type-b\'\\x02\' { // PSBT_OUT_WITNESS_SCRIPT = 0x02	
+    &-key {
+      background: #5875a0;
+    }
+    &-val {
+      background: #2b82ad;
+    }
+  }
+}
+
+
+
+/* .match-num_inputs {
+  /* background: #283f60; */
+  /* background: #5a49c2; */
+/* }  */
+
+
+
+#highlighting {
+  z-index: 0;
+}

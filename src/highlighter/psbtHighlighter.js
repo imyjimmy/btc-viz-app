@@ -60,7 +60,7 @@ function isNestedEntry(obj) {
 */
 const traverseJson = (json, currKey, resultArr, strArr) => {
   if (!isNestedEntry(json)) {
-    resultArr.push({...json, 'key': currKey, 'className': strArr.join('-')})
+    resultArr.push({...json, 'key': currKey, 'className': strArr.filter((entries) => !entries.startsWith("b'\\")).join('-')})
     return
   } else {
     let objKeys = Object.keys(json).filter((k) => typeof json[k] === 'object' && json[k] !== null)
@@ -71,12 +71,22 @@ const traverseJson = (json, currKey, resultArr, strArr) => {
         filteredObject[key] = json[key];
         return filteredObject;
       }, {});
-      resultArr.push({...filteredObj, 'key': currKey, 'className': strArr.join('-') })
+      resultArr.push({...filteredObj, 'key': currKey, 'className': strArr.filter((entries) => !entries.startsWith("b'\\")).join('-') })
     }
 
     for (let i in objKeys) {
       let key = objKeys[i]
-      strArr.push(key)
+      if (!key.startsWith("b'\\") && !/^\d/.test(key)) {
+        strArr.push(key)
+      } else if (key.startsWith("b'\\") && json[key] && json[key]['key']) { // we are pushing a key--try to get its type and push that instead
+        let type = json[key]['key']['type']
+        if (type) { strArr.push('type-' + type) }
+      } else if (/^\d/.test(key)) { // key starts w a number, is an index
+        strArr.push('') // this makes the pop fn easier to deal with
+      } else {
+        console.log('yooo!!!!') // shouldnt get here lol
+      }
+      
       traverseJson(json[key], key, resultArr, strArr);
       strArr.pop()
     }
