@@ -257,7 +257,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
     console.log('changeInput, formatting: ', codeRef.current.innerText, matchers)
     let _matchers = []
     Object.assign(_matchers, matchers)
-    // format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef
+    format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef
 	}
 
   return (
