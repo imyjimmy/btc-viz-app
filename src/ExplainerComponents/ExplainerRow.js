@@ -8,7 +8,6 @@ const ExplainerRow = ({ colorCode, hex, keyName, entry }) => {
     <div className="explainer-key"><div className="key-name">{keyName}</div></div>
     <div className="explainer-val"><code>{entry.bytes}</code></div>
     
-    
     {/* { Object.keys(entry).filter((key) => key !== 'hex').map((k) => {
       return (<div className="explainer-val"><span className="interpreted-val">{entry[k]}</span></div>)
     })} */}
