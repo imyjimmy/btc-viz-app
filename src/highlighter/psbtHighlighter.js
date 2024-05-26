@@ -76,9 +76,9 @@ const traverseJson = (json, currKey, resultArr, strArr) => {
 
     for (let i in objKeys) {
       let key = objKeys[i]
-      if (!key.startsWith("b'\\") && !/^\d/.test(key)) {
+      if (!key.startsWith("b'\\") && !key.startsWith("b\"\\") && !/^\d/.test(key)) {
         strArr.push(key)
-      } else if (key.startsWith("b'\\") && json[key] && json[key]['key']) { // we are pushing a key--try to get its type and push that instead
+      } else if ((key.startsWith("b'\\") || key.startsWith("b\"\\")) && json[key] && json[key]['key']) { // we are pushing a key--try to get its type and push that instead
         let type = json[key]['key']['type']
         if (type) { strArr.push('type-' + type) }
       } else if (/^\d/.test(key)) { // key starts w a number, is an index

@@ -1,6 +1,6 @@
 .psbt-magic{
   &-magic_bytes, &-head_separator {
-    background: #d04444;
+    background: #62dd6aa8;
   }
 }
 
@@ -18,7 +18,14 @@
     }
   }
 
-  // todo: &-type-b\'\\x01\' etc
+  &-type-b\'\\x01\' { // PSBT_GLOBAL_XPUB = 0x01
+    &-key {
+      background:#7458a0;
+    }
+    &-val {
+      background: #6567d4;
+    }
+  }
 }
 
 [class$="-separator"] {
@@ -48,18 +55,48 @@
     }
   }
 
-  &type-b\'\\x04\' { // PSBT_IN_REDEEM_SCRIPT = 0x04	
-    // &-key-len {
-    //   background:#d0d062;
-    // }
+  &type-b\'\\x02\' { // PSBT_IN_PARTIAL_SIG = 0x02	
     &-key {
+      background: #cd5e5e;
+    }
+    &-val {
+      background: #d94444;
+    }
+  }
+
+  &type-b\'\\x03\' { // PSBT_IN_SIGHASH_TYPE = 0x03	
+    &-key {
+      background: #50aac6;
+    }
+    &-val {
+      background: #2d9fc0;
+    }
+  }
+
+  &type-b\'\\x04\' { // PSBT_IN_REDEEM_SCRIPT = 0x04	
+    &-key, &-val {
       background: #d0ba30;
     }
-    // &-val-len {
-    //   background: #d0d062;
-    // }
+  }
+
+  &type-b\'\\x05\' { // PSBT_IN_WITNESS_SCRIPT = 0x05
+    &-key, &-val {
+      background: #9ece44;
+    }
+  }
+
+  &type-b\'\\x06\' { // PSBT_IN_BIP32_DERIVATION = 0x06
+    &-key, &-val {
+      background: #62c990;
+    }
+  }
+
+  &type-b\'\\x07\' { // PSBT_IN_FINAL_SCRIPTSIG = 0x07
+    &-key {
+      background: #6461c0;
+    }
     &-val {
-      background: #d0ba30;
+      background: #6560ce;
     }
   }
 }
