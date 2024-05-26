@@ -11,6 +11,8 @@ import './Txn.css';
 import './Psbt.scss';
 import { PsbtExplainerStruct } from "./ExplainerStructure/PsbtExplainerStructure";
 
+import { getClassNameAtPosition, findAncestorWithId } from './utils/explainerUtils';
+
 const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   const [txnName, setTxnName] = useState('')
 	const [parsedTxn, setParsedTxn] = useState({})
@@ -18,6 +20,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   const [markupHtml, setMarkupHtml] = useState()
   const textareaRef = useRef();
 	const codeRef = useRef();
+  const explainerRef = useRef();
 
   const onResize = useCallback(() => {
     let resultArr = []
@@ -242,7 +245,12 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
 	}
 
   const handleTextClick = (e) => {
-    console.log('clicked, event:', e, 'selection start: ', e.target.selectionStart)
+    // console.log('clicked, event:', e, 'selection start: ', e.target.selectionStart, 'coderef: ', codeRef.current.innerHTML)
+
+    let cn = getClassNameAtPosition(codeRef.current.innerHTML, e.target.selectionStart)
+    console.log('className: ', cn, ' explainer ref: ', explainerRef.current)
+
+    findAncestorWithId(explainerRef, cn, "test")
   }
 
   return (
@@ -269,7 +277,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
           </code>
         </pre>
       </div>
-      <PsbtExplainerStruct json={parsedTxn}/>
+      <PsbtExplainerStruct ref={explainerRef} json={parsedTxn}/>
     </div>
   )
 }
