@@ -1,0 +1,6 @@
+.psbt-explainer {
+  margin-top: 250px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between;  */
+}

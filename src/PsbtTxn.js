@@ -8,6 +8,7 @@ import { SaveIcon } from './SaveIcon';
 
 import './Txn.css';
 import './Psbt.scss';
+import { PsbtExplainerStruct } from "./ExplainerStructure/PsbtExplainerStructure";
 
 const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   const [txnName, setTxnName] = useState('')
@@ -284,6 +285,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
         </pre>
       </div>
       {/* <TxnExplainer txn={parsedTxn}/> */}
+      <PsbtExplainerStruct json={parsedTxn}/>
     </div>
   )
 }

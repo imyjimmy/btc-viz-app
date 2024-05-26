@@ -1,0 +1,34 @@
+.explainer-row {
+  display: grid;
+  grid-template-columns: 140px 200px 1fr;
+  overflow-wrap: break-word;
+}
+
+.explainer-hex-value {
+  font-size: 15pt;
+  font-family: monospace;
+
+  margin: 4px 8px;
+  justify-self: end;
+}
+
+.explainer-key {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: center;
+  gap: 10px; */
+}
+
+.explainer-val {
+  overflow: hidden;
+  margin: 4px 8px;
+
+  /* source: mdn */
+  code {
+    background-color: #555;
+    border-radius: 3px;
+    font-family: courier, monospace;
+    padding: 0 3px;
+  }
+}

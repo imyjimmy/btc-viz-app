@@ -1,0 +1,19 @@
+.magic-bytes-explainer {
+  border-radius: 12px;
+  border: 1px solid white;
+  /* play around w/ height animation */
+  overflow-y: hidden;
+  margin-bottom: 24px;
+}
+
+ul {
+  padding-inline-start: 0px;
+}
+
+ul li {
+  list-style: none;
+}
+
+.magic-bytes-description {
+  margin-bottom: 12px;
+}
