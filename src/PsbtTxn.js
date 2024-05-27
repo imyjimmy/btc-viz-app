@@ -11,15 +11,42 @@ import './Txn.css';
 import './Psbt.scss';
 import { PsbtExplainerStruct } from "./ExplainerStructure/PsbtExplainerStructure";
 
-import { getClassNameAtPosition, findAncestorWithId } from './utils/explainerUtils';
+import { getClassNameAtPosition, findAncestorWithIdAndToggleClass } from './utils/explainerUtils';
 
+  /* Click Outside Detection for textareaRef*/
+  const useOutsideClick = (callback) => {
+    const ref = React.useRef();
+  
+    React.useEffect(() => {
+      const handleClick = (event) => {
+        if (ref.current && !ref.current.contains(event.target)) {
+          callback();
+        }
+      };
+  
+      document.addEventListener('click', handleClick);
+  
+      return () => {
+        document.removeEventListener('click', handleClick);
+      };
+    }, []);
+  
+    return ref;
+  };
+
+  /* */
+  const handleClickOutside = () => {
+    
+  };
+  
 const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   const [txnName, setTxnName] = useState('')
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
   const [markupHtml, setMarkupHtml] = useState()
-  const textareaRef = useRef();
-	const codeRef = useRef();
+  const textareaRef = useOutsideClick(handleClickOutside); //useRef();
+	
+  const codeRef = useRef();
   const explainerRef = useRef();
 
   const onResize = useCallback(() => {
@@ -63,18 +90,18 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
     }
   }
 
-  useEffect(() => {
-    // document.addEventListener('selectstart', onSelectStart);
-    // document.addEventListener('mouseup', onSelectEnd);
-    // return () => {
-    //   document.removeEventListener('selectstart', onSelectStart);
-    //   document.removeEventListener('mouseup', onSelectEnd);
-    // }
-    window.addEventListener('selectionchange', () => {
-      console.log('Selection Changed!')
-      console.log('Selection:', window.getSelection())
-    });
-  }, []);
+  // useEffect(() => {
+  //   // document.addEventListener('selectstart', onSelectStart);
+  //   // document.addEventListener('mouseup', onSelectEnd);
+  //   // return () => {
+  //   //   document.removeEventListener('selectstart', onSelectStart);
+  //   //   document.removeEventListener('mouseup', onSelectEnd);
+  //   // }
+  //   window.addEventListener('selectionchange', () => {
+  //     console.log('Selection Changed!')
+  //     console.log('Selection:', window.getSelection())
+  //   });
+  // }, []);
 
   /* Loads a Txn When Selected Txn from localstorage changes
       problem: it only works once, when currentTxn changes
@@ -246,11 +273,12 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
 
   const handleTextClick = (e) => {
     // console.log('clicked, event:', e, 'selection start: ', e.target.selectionStart, 'coderef: ', codeRef.current.innerHTML)
+    if (inputTxn !== '' && inputTxn !== undefined) {
+      let cn = getClassNameAtPosition(codeRef.current.innerHTML, e.target.selectionStart)
+      console.log('className: ', cn, ' explainer ref: ', explainerRef.current)
 
-    let cn = getClassNameAtPosition(codeRef.current.innerHTML, e.target.selectionStart)
-    console.log('className: ', cn, ' explainer ref: ', explainerRef.current)
-
-    findAncestorWithId(explainerRef, cn, "test")
+      findAncestorWithIdAndToggleClass(explainerRef, cn, "test")
+    }
   }
 
   return (

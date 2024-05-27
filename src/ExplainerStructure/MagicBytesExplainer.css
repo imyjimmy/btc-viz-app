@@ -6,6 +6,10 @@
   margin-bottom: 24px;
 }
 
+.magic-bytes-explainer h3 {
+  margin-left: 16px;
+}
+
 ul {
   padding-inline-start: 0px;
 }
@@ -15,5 +19,6 @@ ul li {
 }
 
 .magic-bytes-description {
+  margin-left: 16px;
   margin-bottom: 12px;
 }

@@ -14,7 +14,17 @@ import './PsbtExplainerStructure.css';
  * <keypair> := <key> <value>
  * <key> := <keylen> <keytype> <keydata>
  * <value> := <valuelen> <valuedata>
+ * 
  */
+
+/* 
+<div class="psbt-explainer">
+  <div id="magic-explainer" class="magic-bytes-explainer"></div>
+  <div id="global-maps-explainer" class="global-maps-explainer"></div>
+  <div id="input-maps-explainer" class="input-maps-explainer"></div>
+  <div id="output-maps-explainer" class="out-maps-explainer"></div>
+</div>
+*/
 
 const PsbtExplainerStruct = forwardRef(({ json }, ref) => {
   

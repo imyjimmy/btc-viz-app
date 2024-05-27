@@ -29,25 +29,39 @@ function getClassNameAtPosition(innerHTML, position) {
   return null;
 }
 
-function findAncestorWithId(ref, className, newClass) {
+function escapeClassName(className) {
+  return className.replace(/([!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, '\\$1');
+}
+
+function findAncestorWithIdAndToggleClass(ref, className, newClass) {
   if (!ref.current) return null;
 
+  // Escape the className for querySelector
+  const escapedClassName = escapeClassName(className);
+
   // Find the element with the specified className
-  const targetElement = ref.current.querySelector(`.${className}`);
+  const targetElement = ref.current.querySelector(`.${escapedClassName}`);
   if (!targetElement) return null;
 
   // Traverse up the DOM tree to find the ancestor with an id attribute
   let ancestor = targetElement.parentElement;
   while (ancestor) {
-      if (ancestor.id) {
-          ancestor.classList.add(newClass);
-          return ancestor;
-      }
-      ancestor = ancestor.parentElement;
+    if (ancestor.id) {
+      ancestor.classList.add(newClass);
+
+      // Remove the new class from other top-level divs in ref.current
+      Array.from(ref.current.children).forEach(child => {
+        if (child !== ancestor && child.classList.contains(newClass)) {
+          child.classList.remove(newClass);
+        }
+      });
+      return ancestor;
+    }
+    ancestor = ancestor.parentElement;
   }
 
   return null;
 }
 
 
-export { getClassNameAtPosition, findAncestorWithId }
+export { getClassNameAtPosition, findAncestorWithIdAndToggleClass }
