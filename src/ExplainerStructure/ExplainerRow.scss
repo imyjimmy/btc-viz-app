@@ -5,8 +5,8 @@
 }
 
 .explainer-hex-value {
-  font-size: 15pt;
-  font-family: monospace;
+  font-size: 12pt;
+  font-family: courier, monospace;
 
   margin: 4px 8px;
   justify-self: end;
@@ -31,4 +31,10 @@
     font-family: courier, monospace;
     padding: 0 3px;
   }
+}
+
+.key-name {
+  font-size: 12pt;
+  font-family: courier, monospace;
+  margin: 4px 8px;
 }

@@ -1,0 +1,15 @@
+
+.hex-value-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.stuff {
+  /* border: 1px solid red; */
+  max-width: 800px;
+  font-family: monospace;
+  font-size: 12pt;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  margin-left: 16px;
+}

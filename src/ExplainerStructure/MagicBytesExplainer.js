@@ -1,5 +1,5 @@
 import './MagicBytesExplainer.css';
-import { ExplainerRow } from '../ExplainerComponents/ExplainerRow';
+import { ExplainerRow } from './ExplainerRow';
 
 /* 
 expected json: {
@@ -16,7 +16,7 @@ expected json: {
 }
 */
 
-const MagicExplainer = ({ id, json }) => {
+const MagicBytesExplainer = ({ id, json }) => {
   console.log('magic: ', json)
   return (
   <div id={id} className="magic-bytes-explainer">
@@ -26,12 +26,11 @@ const MagicExplainer = ({ id, json }) => {
     </div>
     <ul>
     { Object.keys(json).map((key) => { 
-      console.log('in map, key: ', key)
-      return <li><ExplainerRow keyName={key} colorCode={`psbt-magic-${key}`} hex={json[key].hex}  entry={json[key]} /></li>
+      return <li><ExplainerRow keyName={key} colorCode={`psbt-magic-${key}`} hex={json[key].hex} entry={json[key]} /></li>
     })}
     </ul>
     
   </div>)
 }
 
-export { MagicExplainer }
+export { MagicBytesExplainer }

@@ -1,5 +1,5 @@
-import { ExplainerRow } from '../ExplainerComponents/ExplainerRow';
-
+import { ExplainerRow } from './ExplainerRow';
+import { KVEntryExplainer } from './KVEntryExplainer';
 /**
  * expected json:
  * {
@@ -40,19 +40,26 @@ const GlobalMapsExplainer = ({ id, json }) => {
   console.log('global-bytes: ', json)
 
   return ( 
-    <div id={id} className="global-map-explainer">
-    <h3>Global Map</h3>
-    <div className="global-map-description">
+    <div id={id} className="global-maps-explainer">
+      <h3>Global Map</h3>
+      <div className="global-map-description">
+      </div>
+      <ul>
+        <div className="psbt-global-type-b'\x00'-key-len"></div>
+      { Object.keys(json).map((key) => { 
+        console.log('in map, key: ', key, key.startsWith("b'\\") )
+        if (key.startsWith("b'\\") || key.startsWith("b\"\\")) {
+          return (<li><KVEntryExplainer colorCode={`psbt-global-type-${key}`} json={json[key]}/></li>)
+        } else { /* key="separator" */
+          return (
+            <li>
+              <ExplainerRow keyName={key} colorCode={`psbt-global-${key}`} hex={json[key].hex}  entry={json[key]} />
+            </li>
+          )
+        }
+      })}
+      </ul>
     </div>
-    <ul>
-      <div className="psbt-global-type-b'\x00'-key-len">lol</div>
-    {/* { Object.keys(json).map((key) => { 
-      console.log('in map, key: ', key)
-      return <li><ExplainerRow keyName={key} colorCode={`psbt-global-map-${key}`} hex={json[key].hex}  entry={json[key]} /></li>
-    })} */}
-    </ul>
-    
-  </div>
   );
 }
  

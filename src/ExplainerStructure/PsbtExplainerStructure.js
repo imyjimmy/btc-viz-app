@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { MagicExplainer } from './MagicExplainer';
+import { MagicBytesExplainer } from './MagicBytesExplainer';
 import { GlobalMapsExplainer } from './GlobalMapsExplainer';
 import { InputMapsExplainer } from './InputMapsExplainer';
 import { OutputMapsExplainer } from './OutputMapsExplainer';
@@ -28,7 +28,7 @@ import './PsbtExplainerStructure.css';
 
 const PsbtExplainerStruct = forwardRef(({ json }, ref) => {
   
-  const magic = json.magic ? <MagicExplainer id={'magic-explainer'} json={json.magic} /> : <></>
+  const magic = json.magic ? <MagicBytesExplainer id={'magic-explainer'} json={json.magic} /> : <></>
   const globalMaps = json['global'] ? <GlobalMapsExplainer id={'global-maps-explainer'} json={json['global']} /> : <></>
   const inputMaps = json['input-maps'] ? <InputMapsExplainer id={'input-maps-explainer'} json={json['input-maps']} /> : <></>
   const outputMaps = json['output-maps'] ? <OutputMapsExplainer id={'output-maps-explainer'} json={json['output-maps']} /> : <></>

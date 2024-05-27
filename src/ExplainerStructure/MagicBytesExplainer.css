@@ -1,4 +1,8 @@
-.magic-bytes-explainer {
+/* 
+[class$=explainer] 
+*/
+
+.magic-bytes-explainer, .global-maps-explainer {
   border-radius: 12px;
   border: 1px solid white;
   /* play around w/ height animation */
@@ -6,7 +10,11 @@
   margin-bottom: 24px;
 }
 
-.magic-bytes-explainer h3 {
+.magic-bytes-explainer h3, .global-maps-explainer h3 {
+  margin-left: 16px;
+}
+
+.magic-bytes-explainer h4, .global-maps-explainer h4 {
   margin-left: 16px;
 }
 
