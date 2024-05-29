@@ -6,7 +6,7 @@ import './HexValueExplainer.css'
 const HexValueExplainer = ({ colorCode, hex, json }) => {
   return ( 
   <div className="hex-value-container">
-    <div className={`${colorCode} stuff explainer-val`}>
+    <div className={`${colorCode} stuff`}>
       {hex}
     </div>
     <div className={`stuff explainer-val`}>

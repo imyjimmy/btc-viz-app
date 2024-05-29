@@ -49,17 +49,25 @@ const KVEntryExplainer = ({colorCode, json}) => {
       </li>
     </ul>
 
-    <h4>Value: <code className={`${colorCode}-val`}>{json.val.hex.length > 16 ? (json.val.hex.substring(0,32)+'...') : (json.val.hex)}</code></h4>
-    <ul>
-      <li> {/* length */}
-        <ExplainerRow keyName={'length'} colorCode={`${colorCode}-val-len`} hex={json.val.len.hex} entry={json.val.len} />
-      </li>
-        {/* <li><ExplainerRow keyName={'hex'} colorCode={`${colorCode}-val`} hex={json.val.hex} entry={json.val} /></li> */}
-      <li>
-        <HexValueExplainer colorCode={`${colorCode}-val`} hex={json.val.hex} json={json.val}/>
-      </li>
-    </ul>
-  </div> );
-}
+    {/* problem: hex could be undefined*/}
+    { json.val ? (
+    <>
+      {console.log('json: ', json.val, json.val.hex)}
+      <h4>Value: <code className={`${colorCode}-val`}>{json.val.hex.length > 16 ? (json.val.hex.substring(0,32)+'...') : (json.val.hex)}</code></h4>
+      <ul>
+        <li> {/* length */}
+          <ExplainerRow keyName={'length'} colorCode={`${colorCode}-val-len`} hex={json.val.len.hex} entry={json.val.len} />
+        </li>
+          {/* <li><ExplainerRow keyName={'hex'} colorCode={`${colorCode}-val`} hex={json.val.hex} entry={json.val} /></li> */}
+        <li>
+          <HexValueExplainer colorCode={`${colorCode}-val`} hex={json.val.hex} json={json.val}/>
+        </li>
+      </ul>
+    </>
+    )
+    :(<div>empty value</div>)}
+  </div>
+  
+)}
  
 export { KVEntryExplainer };
