@@ -65,7 +65,7 @@ const KVEntryExplainer = ({colorCode, json}) => {
       </ul>
     </>
     )
-    :(<div>empty value</div>)}
+    :(<div className="empty-value-explanation">empty value</div>)}
   </div>
   
 )}

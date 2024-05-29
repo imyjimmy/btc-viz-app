@@ -47,7 +47,6 @@ const GlobalMapsExplainer = ({ id, json }) => {
       <ul>
         <div className="psbt-global-type-b'\x00'-key-len"></div>
       { Object.keys(json).map((key) => { 
-        console.log('in map, key: ', key, key.startsWith("b'\\") )
         if (key.startsWith("b'\\") || key.startsWith("b\"\\")) {
           return (<li><KVEntryExplainer colorCode={`psbt-global-type-${json[key].key.type}`} json={json[key]}/></li>)
         } else { /* key="separator" */

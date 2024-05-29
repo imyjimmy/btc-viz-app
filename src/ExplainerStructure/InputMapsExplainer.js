@@ -37,8 +37,6 @@ import { KVEntryExplainer } from './KVEntryExplainer';
  */
 
 const InputMapsExplainer = ({ id, json }) => {
-  console.log('input-bytes: ', json)
-
   return ( 
     <div id={id} className="input-maps-explainer">
       <h3>Input Map</h3>
@@ -47,24 +45,21 @@ const InputMapsExplainer = ({ id, json }) => {
       <h4>Inputs</h4>
       <ul>
         <div className="psbt-input-maps-type-b'\x00'-key-len"></div>
-      { Object.keys(json).map((key) => { {/* key is index of input map */}
-        console.log('in input map, key: ', key, json[key], Object.keys(json[key]) )
-        return Object.keys(json[key]).map((entry) => {
-          if (entry.startsWith("b'\\") || entry.startsWith("b\"\\")) {
-            console.log('here: ', json[key][entry])
-            return (<li><KVEntryExplainer colorCode={`psbt-input-maps--type-${json[key][entry].key.type}`} json={json[key][entry]}/></li>)
-          } 
-          /* key="separator" */
-          else { 
-            return (
-              <li>
-                { console.log('input entry: ', json[key][entry])}
-                <ExplainerRow keyName={entry} colorCode={`psbt-input-maps--${entry}`} hex={json[key][entry].hex}  entry={json[key][entry]} />
-              </li>
-            )
-          }
-        })
-      })}
+        { Object.keys(json).map((key) => { {/* key is index of input map */}
+          return Object.keys(json[key]).map((entry) => {
+            if (entry.startsWith("b'\\") || entry.startsWith("b\"\\")) {
+              return (<li><KVEntryExplainer colorCode={`psbt-input-maps--type-${json[key][entry].key.type}`} json={json[key][entry]}/></li>)
+            } 
+            /* key="separator" */
+            else { 
+              return (
+                <li>
+                  <ExplainerRow keyName={entry} colorCode={`psbt-input-maps--${entry}`} hex={json[key][entry].hex}  entry={json[key][entry]} />
+                </li>
+              )
+            }
+          })
+        })}
       </ul>
     </div>
   );
