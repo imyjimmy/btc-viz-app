@@ -51,7 +51,7 @@ const OutputMapsExplainer = ({ id, json }) => {
         if (json[key] != null) {
           return Object.keys(json[key]).map((entry) => {
             if (entry.startsWith("b'\\") || entry.startsWith("b\"\\")) {
-              return (<li><KVEntryExplainer colorCode={`psbt-output-maps--type-${json[key][entry].key.type}`} json={json[key][entry]}/></li>)
+              return (<li><KVEntryExplainer colorCode={`psbt-output-maps-${json[key][entry].key.type ? (`-type-${json[key][entry].key.type}`):('')}`} json={json[key][entry]}/></li>)
             } 
             /* key="separator" */
             else { 

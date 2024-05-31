@@ -1,5 +1,6 @@
 import "./ExplainerRow.scss";
 
+// explainer-hex-value psbt-output-maps--type-undefined-key-len
 const ExplainerRow = ({ colorCode, hex, keyName, entry }) => {
   return ( 
     hex && (<div className="explainer-row">

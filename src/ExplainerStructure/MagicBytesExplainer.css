@@ -40,6 +40,16 @@
   margin-left: 16px;
 }
 
+.collapse {
+  height: 6px;
+  margin-bottom: 4px;
+}
+
+.expand {
+  height: 100%;
+  margin-bottom: 24px;
+}
+
 ul {
   padding-inline-start: 0px;
 }
