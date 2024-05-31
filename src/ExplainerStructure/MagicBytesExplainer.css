@@ -16,6 +16,7 @@
   border-radius: 12px;
   /* border: 1px solid white; */
   /* play around w/ height animation */
+  /* source: https://codyhouse.co/nuggets/beautiful-css-shadows */
   box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.1),
               /* 2. shadow ring 👇 */
               0 0 0 1px hsla(230, 13%, 9%, 0.075),
@@ -25,7 +26,6 @@
               0 3.5px 6px hsla(230, 13%, 9%, 0.09);
   
   background-color: var(--color-bg-dark);
-
   overflow-y: hidden;
   margin-left: auto;
   margin-right: auto;
