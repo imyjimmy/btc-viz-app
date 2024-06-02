@@ -46,20 +46,22 @@ const InputMapsExplainer = ({ id, json }) => {
       <ul>
         <div className="psbt-input-maps-type-b'\x00'-key-len"></div>
         { Object.keys(json).map((key) => { {/* key is index of input map */}
-          return Object.keys(json[key]).map((entry) => {
-            if (entry.startsWith("b'\\") || entry.startsWith("b\"\\")) {
-              return (<li><KVEntryExplainer colorCode={`psbt-input-maps-${json[key][entry].key.type ? (`-type-${json[key][entry].key.type}`):('')}`} json={json[key][entry]}/></li>)
-            } 
-            /* key="separator" */
-            else { 
-              return (
-                <li>
-                  <ExplainerRow keyName={entry} colorCode={`psbt-input-maps--${entry}`} hex={json[key][entry].hex}  entry={json[key][entry]} />
-                </li>
-              )
-            }
-          })
-        })}
+          if (json[key] != null) {
+            return Object.keys(json[key]).map((entry) => {
+              if (entry.startsWith("b'\\") || entry.startsWith("b\"\\")) {
+                return (<li><KVEntryExplainer colorCode={`psbt-input-maps-${json[key][entry].key.type ? (`-type-${json[key][entry].key.type}`):('')}`} json={json[key][entry]}/></li>)
+              } 
+              /* key="separator" */
+              else { 
+                return (
+                  <li>
+                    <ExplainerRow keyName={entry} colorCode={`psbt-input-maps--${entry}`} hex={json[key][entry].hex}  entry={json[key][entry]} />
+                  </li>
+                )
+              }
+            })
+          }})
+        }
       </ul>
     </div>
   );
