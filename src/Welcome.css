@@ -6,11 +6,11 @@
   }
 
   .welcome-message p {
-    font-size: .9em;
+    font-size: 1em;
   }
 
   .welcome-message li {
-    font-size: .9em;
+    font-size: 1em;
   }
 
 }
@@ -39,6 +39,25 @@
 
 .welcome-message {
   margin-top: 250px;
+}
+
+ul li {
+  margin-bottom: 12px;
+}
+
+.how-to li {
+  list-style: inside;
+}
+
+ul li div.example-hex {
+  max-width: 800px;
+}
+
+.welcome-message {
+  code {
+    /* border: 1px solid red; */
+    overflow-wrap: anywhere;
+  }
 }
 
 .up-arrow {
