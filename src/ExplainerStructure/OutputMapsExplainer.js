@@ -37,8 +37,6 @@ import { KVEntryExplainer } from './KVEntryExplainer';
  */
 
 const OutputMapsExplainer = ({ id, json }) => {
-  console.log('ouput-bytes: ', json)
-
   return ( 
     <div id={id} className="output-maps-explainer">
       <h3>Output Map</h3>
@@ -46,7 +44,6 @@ const OutputMapsExplainer = ({ id, json }) => {
       </div>
       <h4>Outputs</h4>
       <ul>
-        <div className="psbt-output-maps-type-b'\x00'-key-len"></div>
         { Object.keys(json).map((key) => { {/* key is index of input map */}
           if (json[key] != null) {
             return Object.keys(json[key]).map((entry) => {

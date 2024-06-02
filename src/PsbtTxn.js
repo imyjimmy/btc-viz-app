@@ -165,18 +165,15 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
 	}
 
   useEffect(() => {
-    // console.log('parsedTxn changed, updating matchers')
     let resultArr = []
     let strArr = ['psbt']
     traverseJson(parsedTxn, '', resultArr, strArr)
-    console.log('after traversing json: ', resultArr, strArr)
     let _matchers = updateMatchers(resultArr)
 		// let _matchers = updateMatchers(parsedTxn, 'psbt');
     if (_matchers.length > 0) { 
       let matchers = [];
       Object.assign(matchers, _matchers) // _matchers will eventually be consumed to 0 in format function
       setMatchers(matchers);
-      // console.log('calling format from parsedTxn change. matchers: ', matchers)
       format(codeRef.current.innerText, _matchers, setMarkupHtml)
     }
     
@@ -264,20 +261,15 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
 		codeRef.current.innerHTML = e.target.value
     
     // codeRef.current.scrollTop = textareaRef.current.scrollTop;
-    // console.log('codearea scrolltop:', codeRef)
-    console.log('changeInput, formatting: ', codeRef.current.innerText, matchers)
     let _matchers = []
     Object.assign(_matchers, matchers)
     format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef
 	}
 
   const handleTextClick = (e) => {
-    // console.log('clicked, event:', e, 'selection start: ', e.target.selectionStart, 'coderef: ', codeRef.current.innerHTML)
     if (inputTxn !== '' && inputTxn !== undefined) {
-      let cn = getClassNameAtPosition(codeRef.current.innerHTML, e.target.selectionStart)
-      console.log('className: ', cn, ' explainer ref: ', explainerRef.current)
-
-      updateExpandCollapsedDivs(explainerRef, cn, "test")
+      let cn = getClassNameAtPosition(codeRef.current.innerHTML, e.target.selectionStart)      
+      findAncestorWithIdAndToggleClass(explainerRef, cn)
     }
   }
 
