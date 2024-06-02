@@ -39,6 +39,7 @@ const KVEntryExplainer = ({colorCode, json}) => {
         <ExplainerRow keyName={'length'} colorCode={`${colorCode}-key-len`} hex={json.key.len.hex} entry={json.key.len} />
       </li>
       <li>
+        { /* key hex is causing output map div to be wider than others*/}
         <ExplainerRow keyName={'hex'} colorCode={`${colorCode}-key`} hex={json.key.hex} entry={json.key} />
       </li>
       <li>

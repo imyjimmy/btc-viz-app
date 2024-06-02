@@ -34,7 +34,7 @@ function escapeClassName(className) {
 }
 
 function findAncestorWithIdAndToggleClass(ref, className) {
-  if (!ref.current) return null;
+  if (!ref.current || className == null) return null;
 
   // Escape the className for querySelector
   const escapedClassName = escapeClassName(className);
@@ -48,13 +48,14 @@ function findAncestorWithIdAndToggleClass(ref, className) {
   let ancestor = targetElement.parentElement;
   while (ancestor) {
     if (ancestor.id) {
-      ancestor.classList.add('expand');
+      ancestor.classList.remove('collapse');
+      // ancestor.classList.add('expand');
 
       // Add 'collapsed' class to other top-level divs in ref.current
       Array.from(ref.current.children).forEach(child => {
         if (child !== ancestor) {
           child.classList.add('collapse');
-          child.classList.remove('expand');
+          // child.classList.remove('expand');
         }
       });
       return ancestor;
@@ -65,5 +66,10 @@ function findAncestorWithIdAndToggleClass(ref, className) {
   return null;
 }
 
+function updateExpandCollapsedDivs(ref, className) {
+  const toToggle = findAncestorWithIdAndToggleClass(ref, className)
+  console.log('toggle: ', toToggle);
+  return toToggle
+}
 
-export { getClassNameAtPosition, findAncestorWithIdAndToggleClass }
+export { getClassNameAtPosition, findAncestorWithIdAndToggleClass, updateExpandCollapsedDivs }

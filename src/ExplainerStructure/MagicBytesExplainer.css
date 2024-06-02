@@ -30,6 +30,7 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 24px;
+  /* height: 100px; */
 }
 
 .magic-bytes-explainer h3, .global-maps-explainer h3, .input-maps-explainer h3, .output-maps-explainer h3 {
@@ -41,14 +42,16 @@
 }
 
 .collapse {
-  height: 6px;
+  height: 4px;
   margin-bottom: 4px;
+  transition: height 1000ms, margin-bottom 300ms;
 }
 
-.expand {
+/* .expand {
   height: 100%;
   margin-bottom: 24px;
-}
+  transition: height 1000ms;
+} */
 
 ul {
   padding-inline-start: 0px;

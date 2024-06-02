@@ -11,7 +11,7 @@ import './Txn.css';
 import './Psbt.scss';
 import { PsbtExplainerStruct } from "./ExplainerStructure/PsbtExplainerStructure";
 
-import { getClassNameAtPosition, findAncestorWithIdAndToggleClass } from './utils/explainerUtils';
+import { getClassNameAtPosition, findAncestorWithIdAndToggleClass, updateExpandCollapsedDivs } from './utils/explainerUtils';
 
   /* Click Outside Detection for textareaRef*/
   const useOutsideClick = (callback) => {
@@ -277,7 +277,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
       let cn = getClassNameAtPosition(codeRef.current.innerHTML, e.target.selectionStart)
       console.log('className: ', cn, ' explainer ref: ', explainerRef.current)
 
-      findAncestorWithIdAndToggleClass(explainerRef, cn, "test")
+      updateExpandCollapsedDivs(explainerRef, cn, "test")
     }
   }
 
