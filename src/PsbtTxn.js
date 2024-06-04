@@ -216,6 +216,8 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
     
     let maxChars = Math.floor(width / newLineRatio); // width - total padding
     if (width % newLineRatio < 1) { maxChars -= 1 } // edge case bug
+    // maybe it needs to be 1 * (width % newLineRatio) ?
+    if (width % newLineRatio > 11) { maxChars += 1 }
 
     var chars = 0;
     if (outputHtml) {
