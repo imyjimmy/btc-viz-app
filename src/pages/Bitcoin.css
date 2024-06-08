@@ -209,14 +209,3 @@ nav {
   height: 24px;
   width: 24px;
 }
-
-/* Overall container has sidebar-nav and <Txn />*/
-.container {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-}
-
-.details-column {
-  width: 20%
-}
