@@ -58,10 +58,25 @@ ul li {
     overflow-wrap: anywhere;
     font-size: larger;
   }
+
+  .example-hex.explainer-val {
+    button {
+      background: #323232;
+      margin: 8px 4px;
+      border-radius: 4px;
+    }
+  }
 }
 
 .up-arrow {
   width: 45px;
   height: 45px;
   /* fill: white; */
+}
+
+.copy-icon {
+  width: 16px;
+  height: 16px;
+  margin: 2px;
+  fill: #ddd;
 }
