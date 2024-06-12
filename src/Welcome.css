@@ -71,6 +71,7 @@ ul li {
 .up-arrow {
   width: 45px;
   height: 45px;
+	display: inline;
   /* fill: white; */
 }
 
