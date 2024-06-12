@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { Page } from '../Layout/Page';
 import { PsbtTxn } from '../PsbtTxn';
-import "./PSBT.css";
+import "./PSBT.module.css";
 import { TransactionIcon } from '../TxnIcon';
 
 const PSBT = ({}) => {

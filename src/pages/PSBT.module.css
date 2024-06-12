@@ -7,6 +7,26 @@ body {
 
 * { box-sizing: border-box; }
 
+/* App Stuff */
+.App {
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
 /* 282c34 */
 /* .App-header {
   background-color: #191920; 
@@ -44,26 +64,6 @@ body {
   z-index: 1;
 }
 
-/* Header stuff */
-nav {
-  display: flex;
-  align-items: center;
-  color: white;
-  margin-bottom: 16px;
-  padding-right: 32px;
-  justify-content: space-between;
-}
-
-.header-links {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-}
-
-* a {
-  color: white;
-}
-
 /* Footer Stuff */
 .footer {
   display: flex;
@@ -83,32 +83,19 @@ nav {
 }
 
 /* TODO width 319 and lower */
-@media screen and (max-width: 319px) {
-  .nav .nav-title {
-    font-size: .8em;
-    margin-block-start: 0.33em;
-    margin-block-end: 0.33em;
-  }
-}
-
 @media screen and (min-width: 320px) {
   body:has(.sidebar-item > input:checked) .nav-right {
     width: 6.2rem;
   }
-
-  nav {
-    padding-right: 8px;
-  }
-
-  .nav-right h4, .header-links h4 {
+  .nav-right h4 {
     font-size: small;
   }
 
   .App {
-    padding: 24px 4px 24px 4px;
+    padding: 24px 24px 24px 4px;
   }
 
-  .nav .nav-title {
+  .nav h1 {
     font-size: 1em;
     margin-block-start: 0.43em;
     margin-block-end: 0.43em;
@@ -117,20 +104,11 @@ nav {
 
 @media screen and (min-width: 641px) {
   .App {
-    padding: 24px 12px 24px 12px;
+    padding: 24px 24px 24px 12px;
   }
 
-  nav {
-    padding-right: 16px;
-  }
-
-  .nav-right h4, .header-links h4 {
-    font-size: medium;
-  }
-
-  .nav .nav-title {
+  .nav h1 {
     font-size: 1.2em;
-    font-weight: bold;
     margin-block-start: 0.63em;
     margin-block-end: 0.63em;
   }
@@ -138,41 +116,28 @@ nav {
   body:has(.sidebar-item > input:checked) .nav-right {
     width: 7rem;
   }
-  
+  .nav-right h4 {
+    font-size: medium;
+  }
 }
 
 @media screen and (min-width: 961px) {
   .App {
     padding: 24px 24px 24px 24px;
   }
-
-  nav {
-    padding-right: 32px;
-  }
   
   body:has(.sidebar-item > input:checked) .nav-right {
     width: 8rem;
   }
-  .nav-right h4, .header-links h4 {
+  .nav-right h4 {
     font-size: medium;
   }
 
-  .nav .nav-title {
+  .nav h1 {
     font-size: 1.5em;
-    font-weight: bold;
     margin-block-start: 0.83em;
     margin-block-end: 0.83em;
   }
-}
-
-@media screen and (min-width: 1025px) {
-  /* 
-  nav .nav-title {
-    font-size: 1.5em; 
-    margin-block-start: 0.83em;
-    margin-block-end: 0.83em;
-  } 
-  */
 }
 
 .nav-right {
@@ -224,8 +189,4 @@ nav {
   fill: #dddddd;
   height: 24px;
   width: 24px;
-}
-
-.details-column {
-  width: 20%
 }

@@ -7,9 +7,8 @@ import {
 
 import { PSBT } from './pages/PSBT';
 import { Bitcoin } from './pages/Bitcoin';
-import Test from './Test';
-// import { Txn } from './BtcTxn';
-import "./App.css";
+import Typography from "./pages/Typography";
+import "./App.module.css";
 
 // import { TransactionIcon } from './TxnIcon';
 
@@ -30,10 +29,10 @@ function App() {
       path: "/psbt/:psbt?",
       element: <PSBT />,
     },
-    {
-      path: "/test/",
-      element: <Test />,
-    }
+		{
+			path: "/typography",
+			element: <Typography />
+		},
   ])
 
 	return (

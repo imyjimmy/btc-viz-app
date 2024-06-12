@@ -64,25 +64,6 @@ body {
   z-index: 1;
 }
 
-/* Header stuff */
-nav {
-  display: flex;
-  color: white;
-  margin-bottom: 16px;
-  padding-right: 32px;
-  justify-content: space-between;
-}
-
-.header-links {
-  display: flex;
-  flex-direction: row;
-  gap: 16px;
-}
-
-* a {
-  color: white;
-}
-
 /* Footer Stuff */
 .footer {
   display: flex;

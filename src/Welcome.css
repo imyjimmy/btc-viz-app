@@ -1,4 +1,4 @@
-@media screen and (min-width: 320px) {
+/* @media screen and (min-width: 320px) {
   .welcome-message h2 {
     font-size: .95em;
     margin-block-start: 0.43em;
@@ -34,7 +34,7 @@
 
 @media screen and (min-width: 1025px) {
 
-}
+} */
 
 .welcome-message {
   margin-top: 250px;
