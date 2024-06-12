@@ -44,7 +44,12 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   /* Loads a Txn When Selected Txn from localstorage changes*/
   useEffect(() => {
     async function fetchData() {
-      const resp = await conditionalFetch(inputTxn)
+      const resp = await conditionalFetch(inputTxn, 'data')
+      if (resp !== undefined) {
+        setParsedTxn(resp.data.tx)
+      }
+
+      const newResp = await conditionalFetch(inputTxn, 'btc')
       if (resp !== undefined) {
         setParsedTxn(resp.data.tx)
       }
@@ -90,9 +95,9 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   * input hex is an even number (1 byte == 2 hexes)
   * 
   */
-	const conditionalFetch = async (inputTxn) => {
+	const conditionalFetch = async (inputTxn, endpoint) => {
 		return inputTxn && inputTxn.length % 2 === 0 ? await fetch(
-      `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/data?txn=` + inputTxn, {
+      `${process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BE_URL : ''}/${endpoint}?txn=` + inputTxn, {
           method: 'GET',
           headers: { 'Authorization': `Token ${process.env.REACT_APP_PUBLIC_BE_TOKEN}`}
         }).then((resp) => { if (!resp.ok) { 
@@ -104,10 +109,12 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
 
 	const fetchTxn = async (e) => {
     if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart !== 0) { // dont fire on text selection, address special case of highlighting all and delete text
-      const resp = await conditionalFetch(inputTxn)
+      const resp = await conditionalFetch(inputTxn, 'data')
       if (resp !== undefined) {
         setParsedTxn(resp.data.tx)
       }
+
+      const newResp = await conditionalFetch(inputTxn, 'btc')
     }
 	}
 
