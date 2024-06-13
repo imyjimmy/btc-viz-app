@@ -1,0 +1,27 @@
+.accordion {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.accordion-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+	align-items: center;
+}
+
+.accordion-title:hover {
+}
+
+.accordion-title,
+.accordion-content {
+}
+
+.accordion-content {
+}
+
+@media screen and (max-width: 700px) {
+  .accordion {
+    width: 90%;
+  }
+}

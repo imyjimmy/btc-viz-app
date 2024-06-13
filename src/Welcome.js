@@ -3,6 +3,7 @@ import "./Welcome.css";
 import { UpArrowIcon } from './UpArrowIcon';
 import { CopyIcon } from './CopyIcon';
 import { copyToClipboard } from './utils/copyToClipboard';
+import Accordion from './Accordion';
 
 const Welcome = ({}) => {
   const example = '01000000000101ea76fb6b9b97e1856110ad73d5b2df0d7c2ea0dda460ce02bd9996ae894b3fdc0000000000ffffffff02da8706000000000017a91401d997ebb7a0a6fbb11ade2656370e5ab169ad888739f3050000000000160014f19d552e7a71e77b0554fdc20b51d8119ce2984902483045022100f44f7d2f9e4cd332a8acb5cf8a84ac9ddf156686013de4d2ed29a5478011d79c022003190e0be7145e364813926420b1851a0eef7b34256d8b95a36516b7aa67dcd7012103170023b110c257e8ae1bca2d568323538ad31ac6b494fd3eac4c7b4b410e496400000000';
@@ -24,42 +25,53 @@ const Welcome = ({}) => {
         <br />
         <button onClick={(e) => copyToClipboard(example)}><CopyIcon className="copy-icon"/></button>
       </div>
-      <h3>More Example Transactions</h3>
-      <ul>
+			<h3>More Example Transactions</h3>
+			
+			<ul>
         <li>
-          <div className="text">
-            Here's one example of a <a href="https://mempool.space/api/tx/dc896171bc94c44dc0b775fdfe4f81b1137773d1e929ec40a3d05260f5d238da/hex">coinbase</a> transaction:
-          </div>
-        <div className="example-hex explainer-val">
-          <code>
-          {coinbase}
-          </code>
-          <br />
-        <button onClick={(e) => copyToClipboard(coinbase)}><CopyIcon className="copy-icon"/></button>
-      </div>
+					<Accordion titleNode={<h5>Coinbase</h5>}>
+						<div className="text">
+							Here's one example of a <a href="https://mempool.space/api/tx/dc896171bc94c44dc0b775fdfe4f81b1137773d1e929ec40a3d05260f5d238da/hex">coinbase</a> transaction:
+						</div>
+						<div className="example-hex explainer-val">
+							<code>
+							{coinbase}
+							</code>
+							<br />
+						<button onClick={(e) => copyToClipboard(coinbase)}><CopyIcon className="copy-icon"/></button>
+						</div>
+					</Accordion>
         </li>
         <li>
-          <div className="text">
-            Here's a <a href="https://mempool.space/api/tx/695f958743c12ac8b3844d38afbe2d63479298fa31dabda11f0ac44040008b77/hex">multisig</a> transaction:
-          </div>
-          <div className="example-hex explainer-val">
-            <code>
-            {multisig}
-            </code>
-            <br />
-          <button onClick={(e) => copyToClipboard(multisig)}><CopyIcon className="copy-icon"/></button>
-          </div>
+					<Accordion titleNode={<h5>Multisig</h5>}>
+						<div className="text">
+							Here's a <a href="https://mempool.space/api/tx/695f958743c12ac8b3844d38afbe2d63479298fa31dabda11f0ac44040008b77/hex">multisig</a> transaction:
+						</div>
+						<div className="example-hex explainer-val">
+							<code>
+							{multisig}
+							</code>
+							<br />
+						<button onClick={(e) => copyToClipboard(multisig)}><CopyIcon className="copy-icon"/></button>
+						</div>
+					</Accordion>
         </li>
-        <li><div className="text">Example of an <a href="https://mempool.space/api/tx/0a9bb1113577002d5af01df3c345b60f8a1c2adcd41ba2f62c738dad15430790/hex">inscription</a> transaction:</div>
-          <div className="example-hex explainer-val">
-            <code>
-              {inscription}
-            </code>
-            <br />
-            <button onClick={(e) => copyToClipboard(inscription)}><CopyIcon className="copy-icon"/></button>
-          </div>
+        <li>
+					<Accordion titleNode={<h5>Inscription</h5>}>
+						<div className="text">Example of an <a href="https://mempool.space/api/tx/0a9bb1113577002d5af01df3c345b60f8a1c2adcd41ba2f62c738dad15430790/hex">inscription</a> transaction:</div>
+						<div className="example-hex explainer-val">
+							<code>
+								{inscription}
+							</code>
+							<br />
+							<button onClick={(e) => copyToClipboard(inscription)}><CopyIcon className="copy-icon"/></button>
+						</div>
+					</Accordion>
         </li>
       </ul>
+
+      {/*  */}
+      
     </div>
   )
 }

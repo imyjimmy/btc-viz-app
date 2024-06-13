@@ -64,13 +64,6 @@ body {
   z-index: 1;
 }
 
-/* Footer Stuff */
-.footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
 .node-env {
   color: gray;
   margin: auto 4px;
