@@ -10,6 +10,23 @@
 	align-items: center;
 }
 
+.accordion-title h3 {
+  margin: 0;
+}
+
+.accordion-item {
+  /* border: 1px solid #ccc; */
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
 .accordion-title:hover {
 }
 
