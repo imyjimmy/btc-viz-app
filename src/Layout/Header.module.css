@@ -1,0 +1,18 @@
+/* Header stuff */
+nav {
+  display: flex;
+  align-items: center;
+  color: white;
+  margin: 32px;
+  justify-content: space-between;
+}
+
+.header-links {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+* a {
+  color: white;
+}

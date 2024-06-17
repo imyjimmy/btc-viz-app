@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  background-color: #191920; /* #282c34; */
+  font-size: medium; /*calc(10px + 2vmin); */
+  color: white;
+}
+
+* { box-sizing: border-box; }
+
+/* 282c34 */
+/* .App-header {
+  background-color: #191920; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+} */
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.menubutton span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: #dddddd;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.node-env {
+  color: gray;
+  margin: auto 4px;
+  font-weight: bold;
+}
+
+/* Sliding Sidebar */
+.sidebar-item>input {
+  display: none;
+}
+
+.nav-right {
+  width: 1px;
+  transition: width 300ms;
+  overflow-x: hidden;
+}
+
+.nav-right h4 {
+  margin: 4px 8px;
+}
+
+.nav-right > div {
+  /* border: 1px solid red; */
+  margin-left: 16px;
+}
+
+.nav-right > div > button {
+  background: transparent;
+  color: white;
+  padding: 0px;
+  border: 0px;
+  font-size: medium;
+  white-space: nowrap;
+}
+
+.sidebar-nav {
+  transition: width 300ms;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar-item {
+  display: flex;
+  flex-direction: column;
+  margin: 12px 0px;
+}
+
+.sidebar-item:first-child {
+  margin-top: 0px;
+  margin-bottom: 12px;
+}
+
+.sidebar-item-name {
+  font-size: 10px;
+}
+
+.txnIcon {
+  fill: #dddddd;
+  height: 24px;
+  width: 24px;
+}
+
+.details-column {
+  width: 20%
+}

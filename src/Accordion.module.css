@@ -1,0 +1,44 @@
+.accordion {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.accordion-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+	align-items: center;
+}
+
+.accordion-title h3 {
+  margin: 0;
+}
+
+.accordion-item {
+  /* border: 1px solid #ccc; */
+  margin-bottom: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-content {
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-title:hover {
+}
+
+.accordion-title,
+.accordion-content {
+}
+
+.accordion-content {
+}
+
+@media screen and (max-width: 700px) {
+  .accordion {
+    width: 90%;
+  }
+}
