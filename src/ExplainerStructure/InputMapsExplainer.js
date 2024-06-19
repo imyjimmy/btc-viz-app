@@ -1,5 +1,7 @@
 import { ExplainerRow } from './ExplainerRow';
 import { KVEntryExplainer } from './KVEntryExplainer';
+// import styles from './MagicBytesExplainer.module.css';
+
 /**
  * expected json:
  * {
@@ -39,10 +41,10 @@ import { KVEntryExplainer } from './KVEntryExplainer';
 const InputMapsExplainer = ({ id, json }) => {
   return ( 
     <div id={id} className="input-maps-explainer">
-      <h3>Input Map</h3>
+      <h4>Input Map</h4>
       <div className="input-map-description">
       </div>
-      <h4>Inputs</h4>
+      <h5>Inputs</h5>
       <ul>
         <div className="psbt-input-maps-type-b'\x00'-key-len"></div>
         { Object.keys(json).map((key) => { {/* key is index of input map */}

@@ -3,7 +3,7 @@ import { MagicBytesExplainer } from './MagicBytesExplainer';
 import { GlobalMapsExplainer } from './GlobalMapsExplainer';
 import { InputMapsExplainer } from './InputMapsExplainer';
 import { OutputMapsExplainer } from './OutputMapsExplainer';
-import './PsbtExplainerStructure.css';
+import styles from './PsbtExplainerStructure.module.css';
 /**
  * a PSBT (from spec):
  * <psbt> := <magic> <global-map> <input-map>* <output-map>*
@@ -34,7 +34,7 @@ const PsbtExplainerStruct = forwardRef(({ json }, ref) => {
   const outputMaps = json['output-maps'] ? <OutputMapsExplainer id={'output-maps-explainer'} json={json['output-maps']} /> : <></>
 
   return (
-    <div ref={ref} className="psbt-explainer">
+    <div ref={ref} className={styles["psbt-explainer"]}>
       {magic}
       {globalMaps}
       {inputMaps}

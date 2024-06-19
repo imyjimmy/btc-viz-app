@@ -33,7 +33,7 @@ const KVEntryExplainer = ({colorCode, json}) => {
   return ( 
   <div>
     {/* Explain Key */}
-    <h4>Key: <code className={`${colorCode}-key`}>{json.key.hex}</code></h4>
+    <h6>Key: <code className={`${colorCode}-key`}>{json.key.hex}</code></h6>
     <ul>
       <li> {/* length */}
         <ExplainerRow keyName={'length'} colorCode={`${colorCode}-key-len`} hex={json.key.len.hex} entry={json.key.len} />
@@ -54,7 +54,7 @@ const KVEntryExplainer = ({colorCode, json}) => {
     { json.val ? (
     <>
       {console.log('json: ', json.val, json.val.hex)}
-      <h4>Value: <code className={`${colorCode}-val`}>{json.val.hex.length > 16 ? (json.val.hex.substring(0,32)+'...') : (json.val.hex)}</code></h4>
+      <h6>Value: <code className={`${colorCode}-val`}>{json.val.hex.length > 16 ? (json.val.hex.substring(0,32)+'...') : (json.val.hex)}</code></h6>
       <ul>
         <li> {/* length */}
           <ExplainerRow keyName={'length'} colorCode={`${colorCode}-val-len`} hex={json.val.len.hex} entry={json.val.len} />

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { Page } from '../Layout/Page';
 import { PsbtTxn } from '../PsbtTxn';
-import "./PSBT.module.css";
+import styles from "./PSBT.module.css";
 import { TransactionIcon } from '../TxnIcon';
 
 const PSBT = ({}) => {
@@ -48,17 +48,17 @@ const PSBT = ({}) => {
 
 	return (
 		<Page>
-			<div className="sidebar-nav">
-				<div className="nav-left"> {/* "left" side of sidebar */}
-					<div className="sidebar-item">
+			<div className={styles["sidebar-nav"]}>
+				<div className={styles["nav-left"]}> {/* "left" side of sidebar */}
+					<div className={styles["sidebar-item"]}>
 						<input type='checkbox' id='menubuttoninput'/>
 						<label htmlFor='menubuttoninput'>
-							<TransactionIcon className="txnIcon" />	
-							<div className="sidebar-item-name">Txn</div>
+							<TransactionIcon className={styles["txnIcon"]} />	
+							<div className={styles["sidebar-item-name"]}>Txn</div>
 						</label>
 					</div>
 				</div>
-				<div className="nav-right"> {/* "right" side of sidebar */}
+				<div className={styles["nav-right"]}> {/* "right" side of sidebar */}
 					<h4>Transactions</h4>
 					{ Object.keys(txns).map(key => <div><button onClick={selectTxn(key)}>{key}</button></div>) }
 				</div>

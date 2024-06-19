@@ -27,18 +27,19 @@
   
   background-color: var(--color-bg-dark);
   overflow-y: hidden;
-  margin-left: auto;
+  /* margin-left: auto; */
   margin-right: auto;
   margin-bottom: 24px;
   /* height: 100px; */
 }
 
-.magic-bytes-explainer h3, .global-maps-explainer h3, .input-maps-explainer h3, .output-maps-explainer h3 {
+/* .magic-bytes-explainer h3, .global-maps-explainer h3, .input-maps-explainer h3, .output-maps-explainer h3 {
   margin-left: 16px;
-}
+} */
 
-.magic-bytes-explainer h4, .global-maps-explainer h4, .input-maps-explainer h4, .output-maps-explainer h4 {
-  margin-left: 16px;
+h3, h4, h5, h6 {
+	margin-left: 16px;
+	margin-top: 16px;
 }
 
 .collapse {

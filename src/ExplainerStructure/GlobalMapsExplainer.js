@@ -1,5 +1,7 @@
 import { ExplainerRow } from './ExplainerRow';
 import { KVEntryExplainer } from './KVEntryExplainer';
+import './MagicBytesExplainer.css';
+
 /**
  * expected json:
  * {
@@ -38,10 +40,9 @@ import { KVEntryExplainer } from './KVEntryExplainer';
 
 const GlobalMapsExplainer = ({ id, json }) => {
   console.log('global-bytes: ', json)
-
   return ( 
     <div id={id} className="global-maps-explainer">
-      <h3>Global Map</h3>
+      <h4>Global Map</h4>
       <div className="global-map-description">
       </div>
       <ul>
