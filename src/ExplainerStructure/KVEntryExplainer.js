@@ -1,6 +1,6 @@
 import { ExplainerRow } from './ExplainerRow';
 import { HexValueExplainer } from './HexValueExplainer';
-
+import './KVEntryExplainer.css';
 /**
  * expected json example:
  * {
@@ -40,13 +40,13 @@ const KVEntryExplainer = ({colorCode, json}) => {
       </li>
       <li>
         { /* key hex is causing output map div to be wider than others*/}
-        <ExplainerRow keyName={'hex'} colorCode={`${colorCode}-key`} hex={json.key.hex} entry={json.key} />
+        { json.key.hex && json.key.hex.length <= 8 ? (<ExplainerRow keyName={'hex'} colorCode={`${colorCode}-key`} hex={json.key.hex} entry={json.key} />) : (<HexValueExplainer colorCode={`${colorCode}-key`} hex={json.key.hex} json={json.key}/>) }
       </li>
       <li>
-        <ExplainerRow keyName={'type'} colorCode={`${colorCode}-type`} hex={json.key.type} entry={json.key} />
+        <ExplainerRow keyName={'type'} colorCode={`${colorCode}-type`} hex={json.key.type} entry={json.key.type} />
       </li>
       <li>
-      <ExplainerRow keyName={'data'} colorCode={`${colorCode}-data`} hex={json.key.data} entry={{}} />
+      <ExplainerRow keyName={'data'} colorCode={`${colorCode}-data`} hex={json.key.data} entry={json.key.data} />
       </li>
     </ul>
 

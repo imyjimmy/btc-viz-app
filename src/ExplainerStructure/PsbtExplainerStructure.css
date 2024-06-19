@@ -1,3 +1,14 @@
+:root {
+  --color-bg: hsl(0, 0%, 100%);
+  --color-bg-light: hsl(0, 0%, 100%);
+  --color-bg-dark: hsl(233, 8%, 19%);
+}
+
+[data-theme="dark"] {
+  --color-bg: hsl(232, 11%, 15%);
+  --color-bg-light: hsl(233, 8%, 19%);
+}
+
 .psbt-explainer {
   margin-top: 250px;
   display: flex;

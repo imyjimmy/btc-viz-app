@@ -44,7 +44,6 @@ const InputMapsExplainer = ({ id, json }) => {
       </div>
       <h4>Inputs</h4>
       <ul>
-        <div className="psbt-input-maps-type-b'\x00'-key-len"></div>
         { Object.keys(json).map((key) => { {/* key is index of input map */}
           if (json[key] != null) {
             return Object.keys(json[key]).map((entry) => {
