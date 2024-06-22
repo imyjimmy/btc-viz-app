@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
-import { TxnExplainer } from './TxnExplainer';
-import { Welcome } from './Welcome';
+// import { TxnExplainer } from './TxnExplainer';
+// import { Welcome } from './Welcome';
 import { useResizeDetector } from 'react-resize-detector';
 
 import { format } from './syntaxHighlighter';
@@ -46,10 +46,41 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   const [markupHtml, setMarkupHtml] = useState()
   const textareaRef = useOutsideClick(handleClickOutside); //useRef();
 	
+	// textarea width info trying to address the stupid text offset bug
+	const [info, setInfo] = useState({ lines: 0, charsPerLine: 0 });
+
+	const calculateTextareaInfo = () => {
+    if (textareaRef.current) {
+      const textarea = textareaRef.current;
+      const text = textarea.value;
+
+      // Count the number of lines
+      const lines = text.split('\n').length;
+			console.log('lines: ', text.split('\n'));
+      // Fixed character width for Source Code Pro at 15pt
+      const charWidth = 12; // Approximate width of a character in Source Code Pro at 15pt
+
+      // Get the computed style to account for padding
+      const style = window.getComputedStyle(textarea);
+      const paddingLeft = parseFloat(style.paddingLeft);
+      const paddingRight = parseFloat(style.paddingRight);
+
+      // Calculate the effective width
+      const textareaWidth = textarea.clientWidth - paddingLeft - paddingRight;
+      const charsPerLine = Math.floor(textareaWidth / charWidth)-1;
+      
+      setInfo({ lines, charsPerLine });
+    }
+  };
+
   const codeRef = useRef();
   const explainerRef = useRef();
 
   const onResize = useCallback(() => {
+		const textarea = textareaRef.current;
+		if (textarea) {
+      calculateTextareaInfo(); 
+		}
     let resultArr = []
     let strArr = ['psbt']
     traverseJson(parsedTxn, '', resultArr, strArr)
@@ -76,7 +107,22 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   /* Cursor and Scroll things */
   // cursor focus to texarea immediately
   useEffect(() => {
-    textareaRef.current.focus()
+		const textarea = textareaRef.current;
+		textarea.focus()
+		if (textarea) {
+      calculateTextareaInfo(); // Initial calculation
+
+      // // Add event listeners
+      // const handleChange = () => calculateTextareaInfo();
+      // textarea.addEventListener('input', handleChange);
+      // textarea.addEventListener('resize', handleChange);
+
+      // // Cleanup event listeners on unmount
+      // return () => {
+      //   textarea.removeEventListener('input', handleChange);
+      //   textarea.removeEventListener('resize', handleChange);
+      // };
+    }
   }, [])
 
   const syncScroll = () => {
@@ -306,6 +352,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
         </pre>
       </div>
       <PsbtExplainerStruct ref={explainerRef} json={parsedTxn}/>
+			{ process.env.NODE_ENV === 'development' ? (<div>lines: {info.lines} charsperline: {info.charsPerLine}</div>) : (<></>)}
     </div>
   )
 }

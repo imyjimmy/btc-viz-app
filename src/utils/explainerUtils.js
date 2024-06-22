@@ -34,7 +34,7 @@ function escapeClassName(className) {
 }
 
 function findAncestorWithIdAndToggleClass(ref, className) {
-  if (!ref.current || className == null) return null;
+  if (!ref.current || className == null || className.length == 0) return null;
 
   // Escape the className for querySelector
   const escapedClassName = escapeClassName(className);

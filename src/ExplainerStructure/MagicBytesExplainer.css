@@ -37,10 +37,15 @@
   margin-left: 16px;
 } */
 
-h3, h4, h5, h6 {
+[class$="-explainer"] h3, [class$="-explainer"] h4, [class$="-explainer"] h5, [class$="-explainer"] h6 {
 	margin-left: 16px;
 	margin-top: 16px;
-}
+}  
+
+/* h3, h4, h5, h6 {
+	margin-left: 16px;
+	margin-top: 16px;
+} */
 
 .collapse {
   height: 4px;
