@@ -1,26 +1,61 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
-import { TxnExplainer } from './TxnExplainer';
 import { Welcome } from './Welcome';
 import { useResizeDetector } from 'react-resize-detector';
-import { format, updateMatchers } from './syntaxHighlighter';
+import { format } from './syntaxHighlighter';
+import { traverseJson, updateMatchers } from "./highlighter/psbtHighlighter";
 import { SaveIcon } from './SaveIcon';
 
 import "./Txn.css";
+// import { TxnExplainer } from './TxnExplainer';
+import { BtcExplainerStruct } from './ExplainerStructure/BtcExplainerStructure';
+
+/* 
+	Click Outside Detection for textareaRef
+	from PsbtTxn.js
+*/
+const useOutsideClick = (callback) => {
+	const ref = React.useRef();
+
+	React.useEffect(() => {
+		const handleClick = (event) => {
+			if (ref.current && !ref.current.contains(event.target)) {
+				callback();
+			}
+		};
+
+		document.addEventListener('click', handleClick);
+
+		return () => {
+			document.removeEventListener('click', handleClick);
+		};
+	}, []);
+
+	return ref;
+};
+
+/* */
+const handleClickOutside = () => {
+	
+};
 
 const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   const [txnName, setTxnName] = useState('')
 	const [parsedTxn, setParsedTxn] = useState({})
 	const [matchers, setMatchers] = useState([])
   const [markupHtml, setMarkupHtml] = useState()
-  const textareaRef = useRef();
-	const codeRef = useRef();
+  const textareaRef = useOutsideClick(handleClickOutside)
+	const codeRef = useRef()
+	const explainerRef = useRef()
 
-  const onResize = useCallback(() => {
-    const matchers = updateMatchers(parsedTxn);
+  const onResize = useCallback(() => {    
+    let resultArr = []
+    let strArr = ['btc']
+    traverseJson(parsedTxn, '', resultArr, strArr)
+    const matchers = updateMatchers(resultArr)
     let _matchers = []
     Object.assign(_matchers, matchers)
     format(codeRef.current.innerText, _matchers, setMarkupHtml)
-  }, [parsedTxn]);
+	}, [parsedTxn]);
 
   const { width, ref } = useResizeDetector({
     handleHeight: false,
@@ -36,10 +71,21 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
     setTxnName(e.target.value)
   }
 
+	/* Cursor and Scroll things */
   // cursor focus to texarea immediately
   useEffect(() => {
     textareaRef.current.focus()
   }, [])
+
+	const syncScroll = () => {
+    /* Scroll result to scroll coords of event - sync with textarea */
+    let result_element = ref.current;
+    // Get and set x and y
+    if (textareaRef && textareaRef.current && textareaRef.current.scrollTop) {
+      result_element.scrollTop = textareaRef.current.scrollTop;
+      result_element.scrollLeft = textareaRef.current.scrollLeft;
+    }
+  }
 
   /* Loads a Txn When Selected Txn from localstorage changes*/
   useEffect(() => {
@@ -63,18 +109,6 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
       format(codeRef.current.innerText, _matchers, setMarkupHtml)
     }
   }, [currentTxn])
-
-  const syncScroll = () => {
-    /* Scroll result to scroll coords of event - sync with textarea */
-    let result_element = ref.current;
-    let codeRef_element = codeRef.current;
-    // Get and set x and y
-    if (textareaRef && textareaRef.current && textareaRef.current.scrollTop) {
-      result_element.scrollTop = textareaRef.current.scrollTop;
-      result_element.scrollLeft = textareaRef.current.scrollLeft;
-      console.log(result_element.scrollTop, textareaRef.current.scrollTop, ref)
-    }
-  }
 
 	// source: https://www.freecodecamp.org/news/javascript-debounce-example/
 	function debounce(func, timeout = 1000){
@@ -109,23 +143,26 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
 
 	const fetchTxn = async (e) => {
     if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart !== 0) { // dont fire on text selection, address special case of highlighting all and delete text
-      const resp = await conditionalFetch(inputTxn, 'data')
+      const resp = await conditionalFetch(inputTxn, 'btc')
       if (resp !== undefined) {
         setParsedTxn(resp.data.tx)
       }
-
-      const newResp = await conditionalFetch(inputTxn, 'btc')
     }
 	}
 
   useEffect(() => {
     // console.log('parsedTxn changed, updating matchers')
-		let _matchers = updateMatchers(parsedTxn);
+    let resultArr = []
+    let strArr = ['btc']
+    traverseJson(parsedTxn, '', resultArr, strArr)
+    console.log('after traversing json: ', resultArr, strArr)
+    let _matchers = updateMatchers(resultArr)
+		// let _matchers = updateMatchers(parsedTxn, 'psbt');
     if (_matchers.length > 0) { 
       let matchers = [];
       Object.assign(matchers, _matchers) // _matchers will eventually be consumed to 0 in format function
       setMatchers(matchers);
-      console.log('calling format from parsedTxn change. matchers: ', matchers)
+      // console.log('calling format from parsedTxn change. matchers: ', matchers)
       format(codeRef.current.innerText, _matchers, setMarkupHtml)
     }
 	}, [parsedTxn])
@@ -219,6 +256,8 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
     format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef
 	}
 
+	/* copy handleTextClick */
+
   return (
     <div className="txn-column">
       <div className="txn-input">
@@ -242,7 +281,7 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           </code>
         </pre>
       </div>
-      {inputTxn ? (<TxnExplainer txn={parsedTxn}/>) : (<Welcome />)}
+      {inputTxn ? (<BtcExplainerStruct ref={explainerRef} json={parsedTxn}/>) : (<Welcome />)}
     </div>
   )
 }

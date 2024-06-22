@@ -1,8 +1,8 @@
 import React, { forwardRef } from 'react';
-import { MagicBytesExplainer } from './MagicBytesExplainer';
-import { GlobalMapsExplainer } from './GlobalMapsExplainer';
-import { InputMapsExplainer } from './InputMapsExplainer';
-import { OutputMapsExplainer } from './OutputMapsExplainer';
+import { MagicBytesExplainer } from './Psbt/MagicBytesExplainer';
+import { GlobalMapsExplainer } from './Psbt/GlobalMapsExplainer';
+import { InputMapsExplainer } from './Psbt/InputMapsExplainer';
+import { OutputMapsExplainer } from './Psbt/OutputMapsExplainer';
 import styles from './PsbtExplainerStructure.module.css';
 /**
  * a PSBT (from spec):

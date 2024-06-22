@@ -1,7 +1,5 @@
-import { ExplainerRow } from './ExplainerRow';
-import { KVEntryExplainer } from './KVEntryExplainer';
-// import styles from './MagicBytesExplainer.module.css';
-
+import { ExplainerRow } from '../ExplainerRow';
+import { KVEntryExplainer } from '../KVEntryExplainer';
 /**
  * expected json:
  * {
@@ -38,26 +36,28 @@ import { KVEntryExplainer } from './KVEntryExplainer';
  * 
  */
 
-const InputMapsExplainer = ({ id, json }) => {
+const OutputMapsExplainer = ({ id, json }) => {
+  console.log('ouput-bytes: ', json)
+
   return ( 
-    <div id={id} className="input-maps-explainer">
-      <h4>Input Map</h4>
-      <div className="input-map-description">
+    <div id={id} className="output-maps-explainer">
+      <h3>Output Map</h3>
+      <div className="output-map-description">
       </div>
-      <h5>Inputs</h5>
+      <h4>Outputs</h4>
       <ul>
-        <div className="psbt-input-maps-type-b'\x00'-key-len"></div>
+        <div className="psbt-output-maps-type-b'\x00'-key-len"></div>
         { Object.keys(json).map((key) => { {/* key is index of input map */}
           if (json[key] != null) {
             return Object.keys(json[key]).map((entry) => {
               if (entry.startsWith("b'\\") || entry.startsWith("b\"\\")) {
-                return (<li><KVEntryExplainer colorCode={`psbt-input-maps-${json[key][entry].key.type ? (`-type-${json[key][entry].key.type}`):('')}`} json={json[key][entry]}/></li>)
+                return (<li><KVEntryExplainer colorCode={`psbt-output-maps-${json[key][entry].key.type ? (`-type-${json[key][entry].key.type}`):('')}`} json={json[key][entry]}/></li>)
               } 
               /* key="separator" */
               else { 
                 return (
                   <li>
-                    <ExplainerRow keyName={entry} colorCode={`psbt-input-maps--${entry}`} hex={json[key][entry].hex}  entry={json[key][entry]} />
+                    <ExplainerRow keyName={entry} colorCode={`psbt-output-maps--${entry}`} hex={json[key][entry].hex} entry={json[key][entry]} />
                   </li>
                 )
               }
@@ -69,4 +69,4 @@ const InputMapsExplainer = ({ id, json }) => {
   );
 }
  
-export { InputMapsExplainer }
+export { OutputMapsExplainer }

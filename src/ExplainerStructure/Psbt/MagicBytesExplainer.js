@@ -1,4 +1,4 @@
-import { ExplainerRow } from './ExplainerRow';
+import { ExplainerRow } from '../ExplainerRow';
 import './MagicBytesExplainer.css';
 
 /* 

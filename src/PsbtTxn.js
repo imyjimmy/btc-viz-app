@@ -4,7 +4,7 @@ import React, { useCallback, useState, useEffect, useRef } from "react";
 import { useResizeDetector } from 'react-resize-detector';
 
 import { format } from './syntaxHighlighter';
-import { traverseJson, updateMatchers } from "./highlighter/psbtHighlighter";
+import { traverseJson, updateMatchers } from './highlighter/psbtHighlighter';
 import { SaveIcon } from './SaveIcon';
 
 import './Txn.css';
@@ -13,31 +13,31 @@ import { PsbtExplainerStruct } from "./ExplainerStructure/PsbtExplainerStructure
 
 import { getClassNameAtPosition, findAncestorWithIdAndToggleClass, updateExpandCollapsedDivs } from './utils/explainerUtils';
 
-  /* Click Outside Detection for textareaRef*/
-  const useOutsideClick = (callback) => {
-    const ref = React.useRef();
-  
-    React.useEffect(() => {
-      const handleClick = (event) => {
-        if (ref.current && !ref.current.contains(event.target)) {
-          callback();
-        }
-      };
-  
-      document.addEventListener('click', handleClick);
-  
-      return () => {
-        document.removeEventListener('click', handleClick);
-      };
-    }, []);
-  
-    return ref;
-  };
+/* Click Outside Detection for textareaRef*/
+const useOutsideClick = (callback) => {
+	const ref = React.useRef();
 
-  /* */
-  const handleClickOutside = () => {
-    
-  };
+	React.useEffect(() => {
+		const handleClick = (event) => {
+			if (ref.current && !ref.current.contains(event.target)) {
+				callback();
+			}
+		};
+
+		document.addEventListener('click', handleClick);
+
+		return () => {
+			document.removeEventListener('click', handleClick);
+		};
+	}, []);
+
+	return ref;
+};
+
+/* */
+const handleClickOutside = () => {
+	
+};
   
 const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   const [txnName, setTxnName] = useState('')
@@ -46,7 +46,10 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   const [markupHtml, setMarkupHtml] = useState()
   const textareaRef = useOutsideClick(handleClickOutside); //useRef();
 	
-	// textarea width info trying to address the stupid text offset bug
+	/* 
+		textarea width experiment
+		textarea width info trying to address the stupid text offset bug 
+	*/
 	const [info, setInfo] = useState({ lines: 0, charsPerLine: 0 });
 
 	const calculateTextareaInfo = () => {
@@ -72,6 +75,9 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
       setInfo({ lines, charsPerLine });
     }
   };
+	/* 
+		end of textarea
+	*/
 
   const codeRef = useRef();
   const explainerRef = useRef();
@@ -99,7 +105,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
 
   const newLineRatio = 12;
 
-  // btc txn name
+  // psbt txn name
   const changeTxnName = (e) => {
     setTxnName(e.target.value)
   }
@@ -128,7 +134,6 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
   const syncScroll = () => {
     /* Scroll result to scroll coords of event - sync with textarea */
     let result_element = ref.current;
-    let codeRef_element = codeRef.current;
     // Get and set x and y
     if (textareaRef && textareaRef.current && textareaRef.current.scrollTop) {
       result_element.scrollTop = textareaRef.current.scrollTop;

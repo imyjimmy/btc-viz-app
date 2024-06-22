@@ -1,6 +1,6 @@
-import { ExplainerRow } from './ExplainerRow';
-import { KVEntryExplainer } from './KVEntryExplainer';
-import './MagicBytesExplainer.css';
+import { ExplainerRow } from '../ExplainerRow';
+import { KVEntryExplainer } from '../KVEntryExplainer';
+// import styles from './MagicBytesExplainer.module.css';
 
 /**
  * expected json:
@@ -38,29 +38,34 @@ import './MagicBytesExplainer.css';
  * 
  */
 
-const GlobalMapsExplainer = ({ id, json }) => {
-  console.log('global-bytes: ', json)
+const InputMapsExplainer = ({ id, json }) => {
   return ( 
-    <div id={id} className="global-maps-explainer">
-      <h4>Global Map</h4>
-      <div className="global-map-description">
+    <div id={id} className="input-maps-explainer">
+      <h4>Input Map</h4>
+      <div className="input-map-description">
       </div>
+      <h5>Inputs</h5>
       <ul>
-        <div className="psbt-global-type-b'\x00'-key-len"></div>
-      { Object.keys(json).map((key) => { 
-        if (key.startsWith("b'\\") || key.startsWith("b\"\\")) {
-          return (<li><KVEntryExplainer colorCode={`psbt-global-type-${json[key].key.type}`} json={json[key]}/></li>)
-        } else { /* key="separator" */
-          return (
-            <li>
-              <ExplainerRow keyName={key} colorCode={`psbt-global-${key}`} hex={json[key].hex}  entry={json[key]} />
-            </li>
-          )
+        { Object.keys(json).map((key) => { {/* key is index of input map */}
+          if (json[key] != null) {
+            return Object.keys(json[key]).map((entry) => {
+              if (entry.startsWith("b'\\") || entry.startsWith("b\"\\")) {
+                return (<li><KVEntryExplainer colorCode={`psbt-input-maps-${json[key][entry].key.type ? (`-type-${json[key][entry].key.type}`):('')}`} json={json[key][entry]}/></li>)
+              } 
+              /* key="separator" */
+              else { 
+                return (
+                  <li>
+                    <ExplainerRow keyName={entry} colorCode={`psbt-input-maps--${entry}`} hex={json[key][entry].hex}  entry={json[key][entry]} />
+                  </li>
+                )
+              }
+            })
+          }})
         }
-      })}
       </ul>
     </div>
   );
 }
  
-export { GlobalMapsExplainer }
+export { InputMapsExplainer }

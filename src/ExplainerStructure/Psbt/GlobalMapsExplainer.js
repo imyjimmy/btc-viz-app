@@ -1,5 +1,7 @@
-import { ExplainerRow } from './ExplainerRow';
-import { KVEntryExplainer } from './KVEntryExplainer';
+import { ExplainerRow } from '../ExplainerRow';
+import { KVEntryExplainer } from '../KVEntryExplainer';
+import './MagicBytesExplainer.css';
+
 /**
  * expected json:
  * {
@@ -36,37 +38,29 @@ import { KVEntryExplainer } from './KVEntryExplainer';
  * 
  */
 
-const OutputMapsExplainer = ({ id, json }) => {
-  console.log('ouput-bytes: ', json)
-
+const GlobalMapsExplainer = ({ id, json }) => {
+  console.log('global-bytes: ', json)
   return ( 
-    <div id={id} className="output-maps-explainer">
-      <h3>Output Map</h3>
-      <div className="output-map-description">
+    <div id={id} className="global-maps-explainer">
+      <h4>Global Map</h4>
+      <div className="global-map-description">
       </div>
-      <h4>Outputs</h4>
       <ul>
-        <div className="psbt-output-maps-type-b'\x00'-key-len"></div>
-        { Object.keys(json).map((key) => { {/* key is index of input map */}
-          if (json[key] != null) {
-            return Object.keys(json[key]).map((entry) => {
-              if (entry.startsWith("b'\\") || entry.startsWith("b\"\\")) {
-                return (<li><KVEntryExplainer colorCode={`psbt-output-maps-${json[key][entry].key.type ? (`-type-${json[key][entry].key.type}`):('')}`} json={json[key][entry]}/></li>)
-              } 
-              /* key="separator" */
-              else { 
-                return (
-                  <li>
-                    <ExplainerRow keyName={entry} colorCode={`psbt-output-maps--${entry}`} hex={json[key][entry].hex} entry={json[key][entry]} />
-                  </li>
-                )
-              }
-            })
-          }})
+        <div className="psbt-global-type-b'\x00'-key-len"></div>
+      { Object.keys(json).map((key) => { 
+        if (key.startsWith("b'\\") || key.startsWith("b\"\\")) {
+          return (<li><KVEntryExplainer colorCode={`psbt-global-type-${json[key].key.type}`} json={json[key]}/></li>)
+        } else { /* key="separator" */
+          return (
+            <li>
+              <ExplainerRow keyName={key} colorCode={`psbt-global-${key}`} hex={json[key].hex}  entry={json[key]} />
+            </li>
+          )
         }
+      })}
       </ul>
     </div>
   );
 }
  
-export { OutputMapsExplainer }
+export { GlobalMapsExplainer }
