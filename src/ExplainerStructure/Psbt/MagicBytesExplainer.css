@@ -30,6 +30,8 @@
   /* margin-left: auto; */
   margin-right: auto;
   margin-bottom: 24px;
+	/* consider using a max-width, set at diff breakpoints */
+	max-width: 800px;
   /* height: 100px; */
 }
 

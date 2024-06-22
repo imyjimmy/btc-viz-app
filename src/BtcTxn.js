@@ -90,12 +90,7 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   /* Loads a Txn When Selected Txn from localstorage changes*/
   useEffect(() => {
     async function fetchData() {
-      const resp = await conditionalFetch(inputTxn, 'data')
-      if (resp !== undefined) {
-        setParsedTxn(resp.data.tx)
-      }
-
-      const newResp = await conditionalFetch(inputTxn, 'btc')
+      const resp = await conditionalFetch(inputTxn, 'btc')
       if (resp !== undefined) {
         setParsedTxn(resp.data.tx)
       }
@@ -256,7 +251,7 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
     format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef
 	}
 
-	/* copy handleTextClick */
+	/* todo: copy handleTextClick */
 
   return (
     <div className="txn-column">

@@ -4,12 +4,15 @@ import "./ExplainerRow.scss";
 const ExplainerRow = ({ colorCode, hex, keyName, entry, explainerVal }) => {
   return ( 
     hex && (<div className="explainer-row">
-      <div className={`explainer-hex-value ${colorCode}`}>{hex.length > 8 ? (hex.substring(0,8)+'...') : (hex)}</div>
+      <div className={`explainer-hex-value`}>
+				{hex.length > 8 ? (
+					<span className={colorCode}>{hex.substring(0,8)+'...'}</span>) : (<span className={colorCode}>{hex}</span>)}</div>
       <div className="explainer-key"><div className="key-name">{keyName}</div></div>
 			{/* todo--this needs more expressiveness */}
       <div className="explainer-val">
-				{ explainerVal ? (<>{explainerVal}</>) : (
+				{ explainerVal != undefined ? (<>{explainerVal}</>) : (
 					<>
+					{ console.log('explainer!!!', explainerVal)}
 						{keyName === 'length' && entry.int ? (<><code>{entry.bytes}</code> <span>=&gt;</span>{entry.int} bytes long</>
 						):(<code>{entry.bytes ?? ''}</code>)}
 					</>
