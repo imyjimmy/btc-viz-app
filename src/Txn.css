@@ -107,8 +107,7 @@ input[type="text"]:focus {
   /* Both elements need the same text and space styling so they are directly on top of each other */
   margin: 12px 5px;
   padding: 2px;
-  border: 0;
-  width: calc(100%);
+  width: calc(100% - 18px);
   height: 220px;
   /* position: absolute;
   top: 20px; */
@@ -146,19 +145,6 @@ input[type="text"]:focus {
 /* style when cursor */
 #editor:focus {
 
-}
-
-.match-inputs-script_sig {
-  background: #6461c0;
-}
-
-.match-inputs-sequence {
-  background: #d474d4;
-  /* background: #d58787; */
-}
-
-[class^="match-witness-"] {
-  background: #2a5fd2;
 }
 
 #highlighting {
