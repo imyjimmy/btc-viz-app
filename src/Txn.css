@@ -148,27 +148,6 @@ input[type="text"]:focus {
 
 }
 
-.match-version {
-  background: #748cab;
-}
-
-.match-segwit {
-  background: #3e5c76;
-}
-
-/* .match-num_inputs {
-  /* background: #283f60; */
-  /* background: #5a49c2; */
-/* }  */
-
-.match-inputs-txid {
-  background: #457b9d;
-}
-
-.match-inputs-vout {
-  background: #1372b6;
-}
-
 .match-inputs-script_sig {
   background: #6461c0;
 }
@@ -180,28 +159,6 @@ input[type="text"]:focus {
 
 [class^="match-witness-"] {
   background: #2a5fd2;
-}
-
-[class*="-num_"], [class*="-length"] {
-  /* background: #362fc1; */
-  background: #5a49c2;
-}
-
-/* .match-num_outputs {
-  background: #d16868;
-} */
-
-.match-outputs-amount {
-  /* background: #68d89b; */
-  background: #3e8853; 
-}
-
-.match-outputs-scriptPubKey {
-  background: #bb9f64;
-}
-
-.match-locktime {
-  background: #85a040;
 }
 
 #highlighting {

@@ -3,7 +3,7 @@ nav {
   display: flex;
   align-items: center;
   color: white;
-  margin: 32px;
+  margin: 16px 32px;
   justify-content: space-between;
 }
 

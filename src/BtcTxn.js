@@ -6,6 +6,7 @@ import { traverseJson, updateMatchers } from "./highlighter/psbtHighlighter";
 import { SaveIcon } from './SaveIcon';
 
 import "./Txn.css";
+import "./SyntaxHighlights.css";
 // import { TxnExplainer } from './TxnExplainer';
 import { BtcExplainerStruct } from './ExplainerStructure/BtcExplainerStructure';
 
@@ -245,7 +246,7 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
     
     // codeRef.current.scrollTop = textareaRef.current.scrollTop;
     // console.log('codearea scrolltop:', codeRef)
-    console.log('changeInput, formatting: ', codeRef.current.innerText, matchers)
+    console.log('BTC changeInput, formatting: ', codeRef.current.innerText, 'matchers: ', matchers)
     let _matchers = []
     Object.assign(_matchers, matchers)
     format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef

@@ -316,7 +316,7 @@ const PsbtTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn, psbtParam}) => {
     
     // codeRef.current.scrollTop = textareaRef.current.scrollTop;
     // console.log('codearea scrolltop:', codeRef)
-    console.log('changeInput, formatting: ', codeRef.current.innerText, matchers)
+    console.log('PSBT, changeInput, formatting: ', codeRef.current.innerText, ' matchers: ', matchers)
     let _matchers = []
     Object.assign(_matchers, matchers)
     format(codeRef.current.innerText, _matchers, setMarkupHtml) // can highlight codeRef

@@ -1,9 +1,8 @@
 import { ExplainerRow } from '../ExplainerRow';
-import '../Psbt/MagicBytesExplainer.css';
+import '../Psbt/MagicBytesExplainer.css'; // compromise for now
 
 const SegwitExplainer = ({ id, json }) => {
-	/* {hex: '0001'} */
-	console.log('Segwit: ', json)
+	/* expected JSON: {hex: '0001'} */
 	return (
 	<div id={id} className="magic-bytes-explainer">
 		<h4>Segwit</h4>
@@ -12,7 +11,7 @@ const SegwitExplainer = ({ id, json }) => {
 		</div>
 		<ul>
 			<li>
-				<ExplainerRow keyName={'version'} colorCode={`btc-version`} hex={json.hex} entry={json} explainerVal={'true'}/>
+				<ExplainerRow keyName={'segwit'} colorCode={`btc-segwit`} hex={json.hex} entry={json} explainerVal={'true'}/>
 			</li>
 		</ul>
 	</div>)

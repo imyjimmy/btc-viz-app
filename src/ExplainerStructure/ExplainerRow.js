@@ -1,5 +1,5 @@
-import "./ExplainerRow.scss";
-
+import "./ExplainerRow.scss"; // should be import style from ... .module.scss 
+import "../SyntaxHighlights.css"
 // explainer-hex-value psbt-output-maps--type-undefined-key-len
 const ExplainerRow = ({ colorCode, hex, keyName, entry, explainerVal }) => {
   return ( 
