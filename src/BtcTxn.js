@@ -15,6 +15,17 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   const textareaRef = useRef();
 	const codeRef = useRef();
 
+  const isMobileDevice = () => {
+    return /Mobi|Android/i.test(navigator.userAgent);
+  };
+
+  // use handlePaste on mobile
+  const handlePaste = (e) => {
+    if (isMobileDevice()) {
+      debounce((e) => {fetchTxn(e)})
+    }
+  }
+
   const onResize = useCallback(() => {
     const matchers = updateMatchers(parsedTxn);
     let _matchers = []
@@ -230,6 +241,7 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           ref={textareaRef}
           onChange={changeInput}
           onKeyUp={debounce((e) => {fetchTxn(e)})}
+          onPaste={handlePaste}
           onScroll={syncScroll}
           value={inputTxn}
           cols="20" 
