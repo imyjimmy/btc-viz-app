@@ -4,6 +4,7 @@ import { Welcome } from './Welcome';
 import { useResizeDetector } from 'react-resize-detector';
 import { format, updateMatchers } from './syntaxHighlighter';
 import { SaveIcon } from './SaveIcon';
+import { isMobile } from 'react-device-detect';
 
 import "./Txn.css";
 
@@ -14,17 +15,6 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
   const [markupHtml, setMarkupHtml] = useState()
   const textareaRef = useRef();
 	const codeRef = useRef();
-
-  const isMobileDevice = () => {
-    return /Mobi|Android/i.test(navigator.userAgent);
-  };
-
-  // use handlePaste on mobile
-  const handlePaste = (e) => {
-    if (isMobileDevice()) {
-      debounce((e) => {fetchTxn(e)})
-    }
-  }
 
   const onResize = useCallback(() => {
     const matchers = updateMatchers(parsedTxn);
@@ -119,7 +109,7 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
 	}
 
 	const fetchTxn = async (e) => {
-    if (e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart !== 0) { // dont fire on text selection, address special case of highlighting all and delete text
+    if ((e.target.selectionStart == e.target.selectionEnd && e.target.selectionStart !== 0) || isMobile) { // dont fire on text selection, address special case of highlighting all and delete text
       const resp = await conditionalFetch(inputTxn, 'data')
       if (resp !== undefined) {
         setParsedTxn(resp.data.tx)
@@ -241,7 +231,7 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           ref={textareaRef}
           onChange={changeInput}
           onKeyUp={debounce((e) => {fetchTxn(e)})}
-          onPaste={handlePaste}
+          onPaste={isMobile ? debounce((e) => {fetchTxn(e)}) : (<></>)}
           onScroll={syncScroll}
           value={inputTxn}
           cols="20" 
