@@ -4,6 +4,8 @@ import { Page } from '../Layout/Page';
 import { BtcTxn } from '../BtcTxn';
 import "./Bitcoin.css";
 import { TransactionIcon } from '../TxnIcon';
+import { isMobile } from 'react-device-detect';
+
 
 const Bitcoin = ({}) => {
 	/* Save Transactions */
@@ -60,7 +62,9 @@ const Bitcoin = ({}) => {
 					{ Object.keys(txns).map(key => <div><button onClick={selectTxn(key)}>{key}</button></div>) }
 				</div>
 			</div>
-			<BtcTxn currentTxn={currentTxn} inputTxn={inputTxn} setInputTxn={setInputTxn} saveTxn={saveTxn} />
+			{ isMobile ? (<div><h3>Not Mobile Compatible</h3><p>For the best user experience, be sure to access this site on a desktop</p></div>) :
+			 (<BtcTxn currentTxn={currentTxn} inputTxn={inputTxn} setInputTxn={setInputTxn} saveTxn={saveTxn} />)
+			}
 		</Page>
 	);
 }

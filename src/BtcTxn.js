@@ -231,7 +231,7 @@ const BtcTxn = ({currentTxn, inputTxn, saveTxn, setInputTxn}) => {
           ref={textareaRef}
           onChange={changeInput}
           onKeyUp={debounce((e) => {fetchTxn(e)})}
-          onPaste={isMobile ? debounce((e) => {fetchTxn(e)}) : (<></>)}
+          onPaste={isMobile ? (e) => {fetchTxn(e)} : (() => {})}
           onScroll={syncScroll}
           value={inputTxn}
           cols="20" 
